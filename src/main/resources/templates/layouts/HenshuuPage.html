@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+	
+ <!-- 見出しが変わります -->
+    <h1>イベント編集</h1>
+    <!-- 登録処理のHTTPメソッドはPOSTにします -->
+    <form th:action="@{/event/henshu/{id}(id=${id})}" th:object="${eventForm}" method="post">
+        <div>
+            <label>イベント名</label>
+        </div>
+        <div>
+            <!-- 商品名はtextにします、th:field属性の値は*{フィールド名}です -->
+            <input type="text" th:field="*{name}" placeholder="イベント名を入力してください">
+        </div>
+        
+        <div>
+            <form>
+				<input type="radio" name="ラベル1" value="室内">室内
+				<input type="radio" name="ラベル1" value="屋外">屋外
+				
+			</form>
+        </div>
+        
+         <div>
+			<select name="ラベル">
+    			<option value="work">仕事</option>
+    			<option value="travel">旅行</option>
+    			<option value="recreation">遊び</option>
+    			<option value="Private">プライベート</option>
+			</select>
+		</div>
+		
+		<div>
+			 <label>
+          			 開始
+           		 <input type="datetime-local">
+       		 </label>
+		</div>
+		<div>
+			 <label>
+          			 終了
+           		 <input type="datetime-local">
+       		 </label>
+		</div>
+		
+        <div>
+            <label>価格</label>
+        </div>
+        <div>
+            <!-- 価格はnumberにします -->
+            <input type="number" th:field="*{price}" placeholder="価格を入力してください">
+        </div>
+        
+        <div>
+            <label>カテゴリ名</label>
+        </div>
+        <div>
+            <!-- itemFormのcategoryIdと一致したcategoryが選択された状態となる -->
+            <select th:field="*{categoryId}">
+                <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+            </select>
+        </div>
+        <div>
+            <input type="submit" name="send" value="完了">
+        </div>
+        <div>
+            <!-- 一覧に戻る -->
+            <a href="/calendar">戻る</a>
+        </div>
+    </form>
+</body>
+</html>

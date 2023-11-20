@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+    <h1>新規イベント</h1>
+    <!-- 登録処理のHTTPメソッドはPOSTにします -->
+    <form th:action="@{/event/toroku}" th:object="${eventForm}" method="post">
+        <div>
+            <label>タイトル</label>
+        </div>
+        <div>
+          
+            <input type="text" th:field="*{name}" placeholder="イベント名を入力してください">
+        </div>
+        <div>
+            <form>
+				<input type="radio" name="ラベル1" value="室内">室内
+				<input type="radio" name="ラベル1" value="屋外">屋外
+				
+			</form>
+			
+        </div>
+        <div>
+			<select name="ラベル">
+    			<option value="work">仕事</option>
+    			<option value="travel">旅行</option>
+    			<option value="recreation">遊び</option>
+    			<option value="Private">プライベート</option>
+			</select>
+		</div>
+		
+		<div>
+			 <label>
+          			 開始
+           		 <input type="datetime-local">
+       		 </label>
+		</div>
+		<div>
+			 <label>
+          			 終了
+           		 <input type="datetime-local">
+       		 </label>
+		</div>
+        <div>
+            <input type="submit" name="send" value="追加する">
+        </div>
+        <div>
+            <!-- 一覧に戻る -->
+            <a href="/calendar">戻る</a>
+        </div>
+    </form>
+</body>
+</html>
