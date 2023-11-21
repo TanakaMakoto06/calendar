@@ -27,7 +27,7 @@ public class Event {
     private LocalDateTime startevent;
     private LocalDateTime endevent;
     private LocalDateTime deletedAt;
-    private int categoryId;
+    
     private int userId;
    
     

@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,10 +10,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.form.EventForm;
+import com.example.entity.Category;
+import com.example.service.CategoryService;
+import com.example.service.EventService;
+
 
 @Controller
 @RequestMapping("/calendar")
 public class EventController {
+	
+	 private EventService eventService;
+	private CategoryService categoryService;
+
+	@Autowired
+	 public EventController(EventService eventService, CategoryService categoryService) {
+	        this.eventService = eventService;
+	        this.categoryService = categoryService; // 追加
+	    }
 
     // カレンダー一覧の表示
     @GetMapping
