@@ -1,41 +1,53 @@
 package com.example.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-/**
- * カテゴリー情報
- */
 @Entity
 @Table(name = "CATEGORIES")
 public class Category {
-	 @Id
-	 @SequenceGenerator(name = "CATEGORIES_ID_GENERATOR", sequenceName = "CATEGORIES_ID_SEQ", allocationSize = 1)
-	 @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CATEGORIES_ID_GENERATOR")
-	 @Column(name = "ID")
-	 private Long id;
 
-	 @Column(name = "NAME", length = 128, nullable = false, unique = true)
-	  private String name;
+    @Id
+    @SequenceGenerator(name = "CATEGORY_ID_GENERATOR", sequenceName = "CATEGORY_ID_SEQ", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CATEGORY_ID_GENERATOR")
+    @Column(name = "ID")
+    private Integer id;
 
-	    public Long getId() {
-	        return id;
-	    }
+    @Column(name = "NAME")
+    private String  name;
 
-	    public void setId(Long id) {
-	        this.id = id;
-	    }
 
-	    public String getName() {
-	        return name;
-	    }
+    public Integer getId() {
+        return this.id;
+    }
 
-	    public void setName(String name) {
-	        this.name = name;
-	    }
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Event> events;
+
+    public List<Event> getEvents() {
+        return this.events;
+    }
+    
 }
