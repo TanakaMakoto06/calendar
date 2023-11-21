@@ -19,7 +19,7 @@ import com.example.service.EventService;
 @RequestMapping("/calendar")
 public class EventController {
 	
-	 private EventService eventService;
+	private EventService eventService;
 	private CategoryService categoryService;
 
 	@Autowired
@@ -28,15 +28,9 @@ public class EventController {
 	        this.categoryService = categoryService; // 追加
 	    }
 
-    // カレンダー一覧の表示
-    @GetMapping
-    public String calendar(Model model) {
-        return "calendar";
-    }
-
     // 新規イベント登録ページ表示用
     @GetMapping("toroku")
-    public String torokuPage(@ModelAttribute("eventForm") EventForm eventForm) {
+    public String torokuPage(@ModelAttribute("eventForm") EventForm eventForm ,Model model) {
         // 処理を追加
         return "event/torokuPage";
     }
@@ -45,6 +39,8 @@ public class EventController {
     @PostMapping("toroku")
     public String toroku(EventForm eventForm) {
         // 処理を追加
+    	this.eventService.save(eventForm);
+        // 一覧ページへリダイレクトします
         return "redirect:/event";
     }
 
@@ -68,7 +64,7 @@ public class EventController {
     @PostMapping("sakujo/{id}")
     public String sakujo(@PathVariable("id") Integer id) {
         // 処理を追加
-        return "redirect:/";
+        return "redirect:/calendar";
     }
 
 }

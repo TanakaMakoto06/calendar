@@ -24,8 +24,11 @@ public class Event {
 
     @Column(name = "NAME")
     private String name;
+    @Column(name = "START_EVENT")
     private LocalDateTime startevent;
+    @Column(name = "END_EVENT")
     private LocalDateTime endevent;
+    
     private LocalDateTime deletedAt;
     
     private int userId;

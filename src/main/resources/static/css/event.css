@@ -2,6 +2,7 @@ h1 {
 	color: deeppink;
 }
 
-body{
-	background-color: aqua;
-}
+form {
+            max-width: 300px;
+            margin: auto;
+        }
