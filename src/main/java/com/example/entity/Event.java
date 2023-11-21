@@ -1,5 +1,7 @@
 package com.example.entity;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,9 +24,13 @@ public class Event {
 
     @Column(name = "NAME")
     private String name;
-
-    @Column(name = "PRICE")
-    private Integer price;
+    private LocalDateTime startevent;
+    private LocalDateTime endevent;
+    private LocalDateTime deletedAt;
+    private int categoryId;
+    private int userId;
+   
+    
 
 
     public Integer getId() {
@@ -42,14 +48,35 @@ public class Event {
     public void setName(String name) {
         this.name = name;
     }
+    
+    public Category getCategory() {
+		 return category;
+	 }
+	 public void setCategory(Category category) {
+		 this.category = category;
+	 }
+	 
+	 public LocalDateTime getDeletedAt() {
+		 return deletedAt;
+	 }
+	 public void setDeletedAt(LocalDateTime deletedAt) {
+		 this.deletedAt = deletedAt;
+	 }
+	 
+	 public LocalDateTime getStartevent() {
+		 return startevent;
+	 }
+	 public void setStartevent(LocalDateTime startevent) {
+		 this.startevent = startevent;
+	 }
+	 
+	 public LocalDateTime getEndevent() {
+		 return endevent;
+	 }
+	 public void setEndevent(LocalDateTime endevent) {
+		 this.endevent = endevent;
+	 }
 
-    public Integer getPrice() {
-        return this.price;
-    }
-
-    public void setPrice(Integer price) {
-        this.price = price;
-    }
     
     @ManyToOne
     @JoinColumn(name = "category_id")
