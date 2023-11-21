@@ -43,6 +43,7 @@ public class Category {
         this.name = name;
     }
     
+    
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Event> events;
 
