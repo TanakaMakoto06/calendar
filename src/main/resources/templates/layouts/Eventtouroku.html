@@ -2,13 +2,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="eventtouroku.css">
+<link th:href="@{/css/eventtouroku.css}" type="text/css" rel="stylesheet">
 <title>Insert title here</title>
 </head>
 <body>
     <h1>新規イベント</h1>
     <!-- 登録処理のHTTPメソッドはPOSTにします -->
-    <form th:action="@{/event/toroku}" th:object="${}" method="post">
+    <form th:action="@{/event/toroku}" th:object="${event}" method="post">
         <div>
             <label>タイトル</label>
         </div>

@@ -14,10 +14,10 @@ import com.example.form.EventForm;
 @RequestMapping("/calendar")
 public class EventController {
 
-    // 商品一覧の表示
+    // カレンダー一覧の表示
     @GetMapping
-    public String index(Model model) {
-        return "item/index";
+    public String calendar(Model model) {
+        return "calendar";
     }
 
     // 新規イベント登録ページ表示用
@@ -50,7 +50,7 @@ public class EventController {
         return "redirect:/event";
     }
 
-    // 商品削除の実行
+    // イベント削除の実行
     @PostMapping("sakujo/{id}")
     public String sakujo(@PathVariable("id") Integer id) {
         // 処理を追加
