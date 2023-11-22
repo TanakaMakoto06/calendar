@@ -1,7 +1,6 @@
 package com.example.form;
 
 
-import java.sql.Date;
 import java.time.LocalDateTime;
 
 public class EventForm {	
@@ -60,21 +59,4 @@ public class EventForm {
 	    public void  setenddatatime(LocalDateTime enddatetime) {
 	         this.enddatetime = enddatetime;
 	    }
-
-
-	public Integer getUserId() {
-		return this.userId;
-	}
-
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
-
-	public Integer getCategoryId() {
-		return this.categoryId;
-	}
-
-	public void setCategoryId(int categoryId) {
-		this.categoryId = categoryId;
-	}
 }
