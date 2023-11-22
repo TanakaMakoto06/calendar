@@ -28,9 +28,11 @@ public class EventService {
         // Entityクラスのインスタンスを生成します
         Event event = new Event();
         // フィールドのセットを行います
-        event.setName(eventForm.getName());  // getNameメソッドを呼び出す
-//        event.setUserId(eventForm.getUserId());
-//        event.setCategoryId(eventForm.getCategoryId());
+        event.setName(eventForm.getName());
+       //event.setCategoryid(eventForm.getCategory());
+        // カテゴリIDをセットする
+       // event.setCategoryid(eventForm.getCategoryId());
+
         
         // repository.saveメソッドを利用してデータの保存を行います
         return this.eventRepository.save(event);

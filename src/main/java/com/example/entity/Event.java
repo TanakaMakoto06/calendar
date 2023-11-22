@@ -1,6 +1,9 @@
 package com.example.entity;
 
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "EVENTS")
@@ -30,6 +35,9 @@ public class Event {
     private LocalDateTime endevent;
     
     private LocalDateTime deletedAt;
+    @Temporal(TemporalType.DATE)
+    private Date date;
+
     
     private int userId;
    
