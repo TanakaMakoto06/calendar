@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.form.EventForm;
 import com.example.entity.Category;
+import com.example.entity.Event;
 import com.example.service.CategoryService;
 import com.example.service.EventService;
 
@@ -27,12 +28,13 @@ public class EventController {
 	        this.eventService = eventService;
 	        this.categoryService = categoryService; // 追加
 	    }
-
+	
+	
     // 新規イベント登録ページ表示用
-    @GetMapping("toroku")
-    public String torokuPage(@ModelAttribute("eventForm") EventForm eventForm ,Model model) {
+    @GetMapping("torokuPage")
+    public String torokuPage(@ModelAttribute("event") EventForm eventForm ,Model model) {
         // 処理を追加
-        return "event/torokuPage";
+        return "torokuPage";
     }
     
 
@@ -42,7 +44,7 @@ public class EventController {
         // 処理を追加
     	this.eventService.save(eventForm);
         // 一覧ページへリダイレクトします
-        return "redirect:/event";
+        return "redirect:/calendar";
     }
 
     // イベント編集ページ
@@ -50,7 +52,7 @@ public class EventController {
     public String henshuPage(@PathVariable("id") Integer id, Model model
                              , @ModelAttribute("eventForm") EventForm eventForm) {
         // 処理を追加
-        return "event/henshuPage";
+        return "calendar/henshuPage";
     }
 
     // イベント編集の実行
@@ -58,7 +60,7 @@ public class EventController {
     public String henshu(@PathVariable("id") Integer id, @ModelAttribute("eventForm") EventForm eventForm) {
         // 処理を追加
 
-        return "redirect:/event";
+        return "redirect:/calendar";
     }
 
     // イベント削除の実行
