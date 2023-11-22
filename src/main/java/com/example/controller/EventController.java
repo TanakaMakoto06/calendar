@@ -34,6 +34,7 @@ public class EventController {
         // 処理を追加
         return "event/torokuPage";
     }
+    
 
     // 新規イベント登録の実行
     @PostMapping("toroku")

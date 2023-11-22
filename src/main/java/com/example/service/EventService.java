@@ -30,7 +30,7 @@ public class EventService {
         Event event = new Event();
         // フィールドのセットを行います
         event.setName(eventForm.getName());
-       // event.setCategoryid(eventForm.getCategory());
+       //event.setCategoryid(eventForm.getCategory());
         // カテゴリIDをセットする
        // event.setCategoryid(eventForm.getCategoryId());
         
