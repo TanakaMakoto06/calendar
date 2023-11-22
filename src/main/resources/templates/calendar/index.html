@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+	<meta charset="UTF-8">
+	<title>基本的なカレンダー</title>
+	<link rel="stylesheet" href="/css/calendar.css">
+</head>
+
+<body>
+	<!-- ここにカレンダーのHTMLコードを挿入 -->
+	<div id="header">
+		<select id="yearSelect"></select>
+		<select id="monthSelect"></select>
+		<span id="currentMonth"></span> <!-- 現在月の取得 -->
+		<button id="searchBtn">検索</button>
+		<input id="searchBar" type="text" placeholder="検索...">
+		<span id="username">ユーザーネーム</span>
+		<button id="addEventBtn">イベント新規登録</button>
+		<button id="logoutBtn">ログアウト</button>
+		<button id="prevMonth">前の月</button>
+		<button id="nextMonth">次の月</button>
+	</div>
+
+	<div id="calendar"></div>
+	<script src="script.js"></script>
+</body>
+
+</html>
