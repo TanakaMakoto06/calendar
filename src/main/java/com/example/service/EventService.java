@@ -30,9 +30,9 @@ public class EventService {
         Event event = new Event();
         // フィールドのセットを行います
         event.setName(eventForm.getName());
-        event.setPrice(eventForm.getPrice());
+       // event.setCategoryid(eventForm.getCategory());
         // カテゴリIDをセットする
-        event.setCategoryId(eventForm.getCategoryId());
+       // event.setCategoryid(eventForm.getCategoryId());
         
         // repository.saveメソッドを利用してデータの保存を行います
         return this.eventRepository.save(event);
