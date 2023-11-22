@@ -27,36 +27,37 @@ public class EventForm {
 	        this.name = name;
 	 }
 	 
-	 public Integer getuserid() {
+	 public Integer getUserid() {
 	        return this.userid;
 	 }
 	 
-	 public void setuserid(int userid) {
+	 public void setUserid(int userid) {
 	        this.userid = userid;
 	 }
 	 
-	 public Integer getcategoryid() {
+	 public Integer getCategoryid() {
 	        return this.categoryid;
 	 }
 	 
-	 public void setcategoryid(int categoryid) {
+	 public void setCategoryid(int categoryid) {
 	        this.categoryid = categoryid;
 	 }
 	 
 	 
-	 public LocalDateTime startdatetime() {
+	 public LocalDateTime getStartdatetime() {
 	        return this.startdatetime;
 	    }
 	    
-	    public void  startdatetime(LocalDateTime startdatetime) {
+	    public void  setStartdatetime(LocalDateTime startdatetime) {
 	         this.startdatetime = startdatetime;
 	    }
 	    
-	    public LocalDateTime getenddatetime() {
+	    public LocalDateTime geteEnddatetime() {
 	        return this.enddatetime;
 	    }
 	    
-	    public void  setenddatatime(LocalDateTime enddatetime) {
+	    public void  setEnddatatime(LocalDateTime enddatetime) {
 	         this.enddatetime = enddatetime;
 	    }
+		
 }

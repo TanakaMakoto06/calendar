@@ -6,7 +6,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-    <h1>新規イベント</h1>
+    <h1 align="center" >新規イベント</h1>
     <!-- 登録処理のHTTPメソッドはPOSTにします -->
     <form th:action="@{/calendar/toroku}" th:object="${event}" method="post">
         <div>
@@ -23,7 +23,7 @@
    			 </form>
 		</div>
         <div>
-    		<label for="eventType">イベントタイプ</label>
+    		<label for="eventType">イベントラベル</label>
     		<select name="ラベル" id="eventType">
         		<option value="work">仕事</option>
         		<option value="travel">旅行</option>

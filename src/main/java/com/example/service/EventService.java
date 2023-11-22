@@ -1,5 +1,6 @@
 package com.example.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,10 @@ public class EventService {
         Event event = new Event();
         // フィールドのセットを行います
         event.setName(eventForm.getName());
-       //event.setCategoryid(eventForm.getCategory());
+        event.setCategory(null);
+       // event.setStartdatetime();
+        //event.setEnddatetime();
+       // event.setCategoryid(eventForm.getCategory());
         // カテゴリIDをセットする
        // event.setCategoryid(eventForm.getCategoryId());
 

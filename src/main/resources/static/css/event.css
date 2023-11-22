@@ -1,8 +1,9 @@
 h1 {
 	color: deeppink;
+	margin: auto;
 }
 
-form {
-            max-width: 300px;
-            margin: auto;
-        }
+div {
+        max-width: 300px;
+        margin: auto;
+}
