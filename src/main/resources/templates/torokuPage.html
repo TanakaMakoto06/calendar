@@ -8,7 +8,7 @@
 <body>
     <h1>新規イベント</h1>
     <!-- 登録処理のHTTPメソッドはPOSTにします -->
-    <form th:action="@{/event/toroku}" th:object="${event}" method="post">
+    <form th:action="@{/calendar/toroku}" th:object="${event}" method="post">
         <div>
             <label>タイトル</label>
         </div>
@@ -17,32 +17,31 @@
             <input type="text" th:field="*{name}" placeholder="イベント名を入力してください">
         </div>
         <div>
-            <form>
-				<input type="radio" name="ラベル1" value="室内">室内
-				<input type="radio" name="ラベル1" value="屋外">屋外
-				
-			</form>
-			
-        </div>
+    		<form>
+       			 <input type="radio" name="ラベル1" th:value="室内">室内
+        		<input type="radio" name="ラベル1" th:value="屋外">屋外
+   			 </form>
+		</div>
         <div>
-			<select name="ラベル">
-    			<option value="work">仕事</option>
-    			<option value="travel">旅行</option>
-    			<option value="recreation">遊び</option>
-    			<option value="Private">プライベート</option>
-			</select>
+    		<label for="eventType">イベントタイプ</label>
+    		<select name="ラベル" id="eventType">
+        		<option value="work">仕事</option>
+        		<option value="travel">旅行</option>
+        		<option value="recreation">遊び</option>
+        		<option value="Private">プライベート</option>
+   			 </select>
 		</div>
 		
 		<div>
 			 <label>
           			 開始
-           		 <input type="datetime-local">
+           		 <input type="datetime-local" name="startTime">
        		 </label>
 		</div>
 		<div>
 			 <label>
           			 終了
-           		 <input type="datetime-local">
+           		 <input type="datetime-local" name="endTime">
        		 </label>
 		</div>
         <div>
@@ -55,4 +54,4 @@
         </div>
     </form>
 </body>
-</tml>
+</html>
