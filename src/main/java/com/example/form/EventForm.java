@@ -1,5 +1,6 @@
 package com.example.form;
 
+
 import java.time.LocalDateTime;
 
 public class EventForm {	
@@ -9,6 +10,12 @@ public class EventForm {
 	 private Integer userid;
 	 
 	 private Integer categoryid;
+	 
+	 private  LocalDateTime startdatetime;
+	 
+	 private  LocalDateTime enddatetime;
+	 
+	 
 	 
 	 
 	 
@@ -36,6 +43,20 @@ public class EventForm {
 	        this.categoryid = categoryid;
 	 }
 	 
-
-
+	 
+	 public LocalDateTime startdatetime() {
+	        return this.startdatetime;
+	    }
+	    
+	    public void  startdatetime(LocalDateTime startdatetime) {
+	         this.startdatetime = startdatetime;
+	    }
+	    
+	    public LocalDateTime getenddatetime() {
+	        return this.enddatetime;
+	    }
+	    
+	    public void  setenddatatime(LocalDateTime enddatetime) {
+	         this.enddatetime = enddatetime;
+	    }
 }
