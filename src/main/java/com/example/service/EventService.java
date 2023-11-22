@@ -1,7 +1,6 @@
 package com.example.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,10 +28,9 @@ public class EventService {
         // Entityクラスのインスタンスを生成します
         Event event = new Event();
         // フィールドのセットを行います
-        event.setName(eventForm.getName());
-        event.setPrice(eventForm.getPrice());
-        // カテゴリIDをセットする
-        event.setCategoryId(eventForm.getCategoryId());
+        event.setName(eventForm.getName());  // getNameメソッドを呼び出す
+//        event.setUserId(eventForm.getUserId());
+//        event.setCategoryId(eventForm.getCategoryId());
         
         // repository.saveメソッドを利用してデータの保存を行います
         return this.eventRepository.save(event);
