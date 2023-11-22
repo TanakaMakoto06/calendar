@@ -54,6 +54,6 @@ public class RegistrationController {
 		// ユーザーの新規登録ロジックをServiceクラスを介して実行
 		userService.registerNewUser(user.getName(), user.getEmail(), user.getPassword(), user.getPrefecture());
 
-		return "redirect:/login";
+		return "redirect:/calendar";
 	}
 }
