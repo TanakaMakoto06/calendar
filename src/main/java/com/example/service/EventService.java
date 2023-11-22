@@ -1,7 +1,6 @@
 package com.example.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +33,7 @@ public class EventService {
        //event.setCategoryid(eventForm.getCategory());
         // カテゴリIDをセットする
        // event.setCategoryid(eventForm.getCategoryId());
+
         
         // repository.saveメソッドを利用してデータの保存を行います
         return this.eventRepository.save(event);
