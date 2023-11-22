@@ -23,6 +23,11 @@ public class CalendarController {
     public CalendarController(CalendarService calendarService) {
         this.calendarService = calendarService;
     }
+    
+    @GetMapping
+    public String Calendar() {
+        return "index";
+    }
 
     @GetMapping("/{year}/{month}")
     public List<Event> getEventsForMonth(@PathVariable int year, @PathVariable int month) {
