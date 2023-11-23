@@ -10,21 +10,21 @@
     <!-- 登録処理のHTTPメソッドはPOSTにします -->
     <form th:action="@{/calendar/toroku}" th:object="${event}" method="post">
         <div>
-            <label>タイトル</label>
+            <label align="center">タイトル</labelalign="center">
         </div>
         <div>
           
-            <input type="text" th:field="*{name}" placeholder="イベント名を入力してください">
+            <input type="text"  th:field="*{name}" placeholder="イベント名を入力してください" >
         </div>
         <div>
     		<form>
-       			 <input type="radio" name="ラベル1" th:value="室内">室内
-        		<input type="radio" name="ラベル1" th:value="屋外">屋外
+       			 <input type="radio" name="ラベル1" th:value="室内" align="center">室内
+        		<input type="radio" name="ラベル1" th:value="屋外" align="center">屋外
    			 </form>
 		</div>
         <div>
-    		<label for="eventType">イベントラベル</label>
-    		<select name="ラベル" id="eventType">
+    		<label for="eventType" align="center">イベントラベル</label>
+    		<select name="ラベル" align="center" id="eventType">
         		<option value="work">仕事</option>
         		<option value="travel">旅行</option>
         		<option value="recreation">遊び</option>
@@ -34,22 +34,22 @@
 		
 		<div>
 			 <label>
-          			 開始
-           		 <input type="datetime-local" name="startTime">
+          			<h2 align="center">開始</h2> 
+           		 <input type="datetime-local" align="center" name="startTime">
        		 </label>
 		</div>
 		<div>
 			 <label>
-          			 終了
-           		 <input type="datetime-local" name="endTime">
+          			 <h2 align="center">終了</h2>
+           		 <input type="datetime-local" align="center"  name="endTime">
        		 </label>
 		</div>
         <div>
-            <input type="submit" name="send" value="追加する">
+            <input type="submit"  align="center" name="send" value="追加する">
         </div>
         <!-- 一覧に戻る -->
         <div>
-			<a class="btn-style-link" href="/calendar">戻る</a>
+			<a class="btn-style-link" align="center"  href="/calendar">戻る</a>
            
         </div>
     </form>
