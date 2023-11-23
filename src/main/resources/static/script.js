@@ -29,7 +29,7 @@ const events = [
 
 
 // OpenWeatherMapのAPIキー
-const apiKey = 'dabc44884d7c9e531aced9b4f9dde802';
+const apiKey = '0ba98d8fb694bf4346615212f28699d1';
 
 // 緯度と経度
 const lat = '35.6895';
@@ -43,7 +43,7 @@ fetch(url)
 	.then(response => response.json())
 	.then(data => {
 		// レスポンスを処理し、カレンダーを生成
-		//		generateCalendar(currentDate, data);
+		generateCalendar(currentDate, data);
 	})
 	.catch(error => {
 		console.error('Error:', error);
@@ -121,10 +121,10 @@ function generateCalendar(date, data) {
 
 		// 日付と天気アイコンを表示するセルを生成し、土曜日や日曜日の場合は 'weekend' クラスを追加
 		calendarHtml += `<td class="${dayOfWeek === 0 || dayOfWeek === 6 ? 'weekend' : ''}${new Date().getDate() ===
-			i && new Date().getMonth() === date.getMonth() && new Date().getFullYear() === date.getFullYear() ? ' today' : ''}"
-    onclick="goToDateCalendar(${date.getFullYear()}, ${date.getMonth()}, ${i})">
-    <span>${i}</span><div class="weather-icon"><img src="http://openweathermap.org/img/w/${weatherIcon}.png"></div>${eventTitle ? `<div class="event" onclick="goToEventDetailPage('${eventTitle}')">${eventTitle}</div>`
+			i && new Date().getMonth() === date.getMonth() && new Date().getFullYear() === date.getFullYear() ? ' today' : ''}">
+<span>${i}</span><div class="weather-icon"><img src="http://openweathermap.org/img/w/${weatherIcon}.png"></div>${eventTitle ? `<div class="event" onclick="goToEventDetailPage('${eventTitle}')">${eventTitle}</div>`
 				: ''}</td>`;
+
 
 
 
