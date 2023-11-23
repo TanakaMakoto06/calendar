@@ -31,7 +31,7 @@ const events = [
 // OpenWeatherMapのAPIキー
 const apiKey = '0ba98d8fb694bf4346615212f28699d1';
 
-// 緯度と経度
+// 緯度と経度(東京の天気)
 const lat = '35.6895';
 const lon = '139.6917';
 
@@ -207,7 +207,7 @@ logoutBtn.addEventListener('click', () => {
 	// ここでログアウト処理を行う
 	// 例えば、セッションストレージをクリアしてログインページにリダイレクトする
 	sessionStorage.clear();
-	window.location.href = "loginForm.html";
+	window.location.href = "loginForm";
 });
 
 // 年のセレクトボックスのオプションを生成
