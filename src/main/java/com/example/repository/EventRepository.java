@@ -15,4 +15,3 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     List<Event> findEventsForMonth(@Param("year") int year, @Param("month") int month);
 
 }
-

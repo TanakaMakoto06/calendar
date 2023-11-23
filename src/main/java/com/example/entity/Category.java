@@ -51,4 +51,8 @@ public class Category {
         return this.events;
     }
     
+    public void setEvents(List<Event> events) {
+        this.events = events;
+    }
+    
 }
