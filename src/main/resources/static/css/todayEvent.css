@@ -1,0 +1,62 @@
+ /* スタイルは必要に応じて変更してください */
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 20px;
+    }
+    #schedule {
+      width: 800px;
+      margin: 20px auto;
+      border: 1px solid #ccc;
+      padding: 20px;
+      overflow-x: auto;
+    }
+    .hour-block {
+      border-bottom: 1px solid #ccc;
+      padding: 10px;
+      display: flex;
+    }
+    .hour-block:first-child {
+      padding-top: 0;
+    }
+    .time-display {
+      width: 80px; /* 時刻表示の幅を広げる */
+      flex-shrink: 0;
+      text-align: center;
+    }
+    .event-container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center; /* イベントを中央揃え */
+      position: relative; /* 相対位置指定 */
+    }
+    .event {
+      margin-right: 4px;
+      background-color: #e0e0e0;
+      padding: 2px 8px;
+      border-radius: 4px;
+      position: absolute;
+      white-space: nowrap;
+    }
+    .title {
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+    .date {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .back-button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
