@@ -50,6 +50,7 @@ public class EventController {
     	
         // 一覧ページへリダイレクトします
         return "redirect:/calendar";
+        
     }
 
     // イベント編集ページ
