@@ -32,7 +32,7 @@ public class EventController {
 	
     // 新規イベント登録ページ表示用
     @GetMapping("torokuPage")
-    public String torokuPage(@ModelAttribute("event") EventForm eventForm ,Model model) {
+    public String torokuPage(@ModelAttribute("eventForm") EventForm eventForm ,Model model) {
         // 処理を追加
         return "torokuPage";
     }

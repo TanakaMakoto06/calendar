@@ -8,7 +8,7 @@
 <body>
     <h1 align="center" >新規イベント</h1>
     <!-- 登録処理のHTTPメソッドはPOSTにします -->
-    <form th:action="@{/calendar/toroku}" th:object="${event}" method="post">
+    <form th:action="@{/calendar/toroku}" th:object="${eventForm}" method="post">
         <div>
             <label align="center">タイトル</labelalign="center">
         </div>
