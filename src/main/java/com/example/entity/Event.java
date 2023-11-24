@@ -2,7 +2,7 @@ package com.example.entity;
 
 
 import java.time.LocalDateTime;
-import java.util.Date;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,8 +35,7 @@ public class Event {
     
     private LocalDateTime deletedAt;
     
-    @Temporal(TemporalType.DATE)
-    private Date date;
+
 
     
     private int userId;
@@ -56,7 +55,7 @@ public class Event {
         return this.name;
     }
 
-    public void setName(String name) {
+    public  void setName(String name) {
         this.name = name;
     }
     

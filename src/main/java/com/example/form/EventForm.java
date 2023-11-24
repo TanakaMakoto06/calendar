@@ -3,6 +3,8 @@ package com.example.form;
 
 import java.time.LocalDateTime;
 
+import com.example.entity.Category;
+
 public class EventForm {	
 	
 	 private String name;
@@ -14,6 +16,8 @@ public class EventForm {
 	 private  LocalDateTime startdatetime;
 	 
 	 private  LocalDateTime enddatetime;
+
+	private Category category;
 	 
 	 
 	 
@@ -35,6 +39,13 @@ public class EventForm {
 	        this.userid = userid;
 	 }
 	 
+	 public Category getCategory() {
+		 return this.category;
+	 }
+	 public void setCategory(Category category) {
+		 this.category = category;
+	 }
+	 
 	 public Integer getCategoryid() {
 	        return this.categoryid;
 	 }
@@ -52,7 +63,7 @@ public class EventForm {
 	         this.startdatetime = startdatetime;
 	    }
 	    
-	    public LocalDateTime geteEnddatetime() {
+	    public LocalDateTime getEnddatetime() {
 	        return this.enddatetime;
 	    }
 	    

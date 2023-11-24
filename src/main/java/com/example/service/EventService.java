@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.entity.Event;
+import com.example.form.EventForm;
 import com.example.repository.EventRepository;
 
 import java.util.List;
@@ -23,7 +24,17 @@ public class EventService {
         return eventRepository.findEventsForMonth(year, month);
     }
 
-    public Event createEvent(Event event) {
+    public Event save(EventForm eventForm) {
+    	Event event = new Event();
+    	
+		// フィールドのセットを行います
+    	event.setName(eventForm.getName());
+    	event.setCategory(eventForm.getCategory());
+    	event.setStartevent(eventForm.getStartdatetime());
+    	event.setEndevent(eventForm.getEnddatetime());
+    	
+    	
+    	
         // EventRepository を使用して、新しいイベントを作成するロジック
         return eventRepository.save(event);
     }
