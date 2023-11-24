@@ -29,11 +29,9 @@ public class EventService {
     	
 		// フィールドのセットを行います
     	event.setName(eventForm.getName());
-    	event.setCategory(eventForm.getCategory());
+    	event.setCategoryId(eventForm.getCategoryId());
     	event.setStartevent(eventForm.getStartdatetime());
-    	event.setEndevent(eventForm.getEnddatetime());
-    	
-    	
+    	event.setEndevent(eventForm.getEnddatetime());	
     	
         // EventRepository を使用して、新しいイベントを作成するロジック
         return eventRepository.save(event);

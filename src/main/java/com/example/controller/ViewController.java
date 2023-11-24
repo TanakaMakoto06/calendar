@@ -11,5 +11,9 @@ public class ViewController {
         return "index";
     }
 
+    @GetMapping("/todayEvent")
+    public String todayEvent() {
+        return "/todayEvent";
+    }
     // 他のビューに関するメソッドもここに追加...
 }

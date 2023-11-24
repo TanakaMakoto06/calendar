@@ -13,8 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+
 
 @Entity
 @Table(name = "EVENTS")
@@ -25,6 +24,9 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "EVENT_ID_GENERATOR")
     @Column(name = "ID")
     private Integer id;
+    
+    @Column(name = "CATEGORY_ID")
+    private Integer categoryId;
 
     @Column(name = "NAME")
     private String name;
@@ -32,14 +34,8 @@ public class Event {
     private LocalDateTime startevent;
     @Column(name = "END_EVENT")
     private LocalDateTime endevent;
-    
-    private LocalDateTime deletedAt;
-    
-
-
-    
-    private int userId;
-   
+    @Column(name = "USER_ID")
+    private Integer userId;
     
 
 
@@ -50,6 +46,15 @@ public class Event {
     public void setId(Integer id) {
         this.id = id;
     }
+    
+
+    public Integer getuserId() {
+        return this.userId;
+    }
+
+    public void setuserId(Integer userid) {
+        this.userId = userid;
+    }
 
     public String getName() {
         return this.name;
@@ -59,19 +64,14 @@ public class Event {
         this.name = name;
     }
     
-    public Category getCategory() {
-		 return category;
-	 }
-	 public void setCategory(Category category) {
-		 this.category = category;
-	 }
+    public Integer getCategoryId() {
+        return this.categoryId;
+    }
+
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
+    }
 	 
-	 public LocalDateTime getDeletedAt() {
-		 return deletedAt;
-	 }
-	 public void setDeletedAt(LocalDateTime deletedAt) {
-		 this.deletedAt = deletedAt;
-	 }
 	 
 	 public LocalDateTime getStartevent() {
 		 return startevent;
@@ -86,9 +86,14 @@ public class Event {
 	 public void setEndevent(LocalDateTime endevent) {
 		 this.endevent = endevent;
 	 }
-
-    
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
+	 
+	 
+	    @ManyToOne
+	    @JoinColumn(name = "category_id", insertable = false, updatable = false)
+	    private Category category;
+	    
+	    public Category getCategory() {
+	        return this.category;
+	    }
+	    
 }

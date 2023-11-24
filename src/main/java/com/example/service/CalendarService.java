@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.entity.Event;
 import com.example.repository.EventRepository;
@@ -24,10 +25,19 @@ public class CalendarService {
         return eventRepository.findEventsForMonth(year, month);
     }
 
+    @Transactional
     public Event createEvent(Event event) {
         // ここで新しいイベントを作成します。
         // 実装はEventRepositoryとデータベースの設計に依存します。
-        return eventRepository.save(event);
+        //return eventRepository.save(event);
+    	try {
+            Event savedEvent = eventRepository.save(event);
+            return savedEvent;
+        } catch (Exception e) {
+            // エラーハンドリング
+            throw new RuntimeException("Event creation failed", e);
+        }
+    	
     }
 
     // 他のメソッドもここに追加...

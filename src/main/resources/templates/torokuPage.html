@@ -8,41 +8,44 @@
 <body>
     <h1 align="center" >新規イベント</h1>
     <!-- 登録処理のHTTPメソッドはPOSTにします -->
-    <form th:action="@{/calendar/toroku}" th:object="${event}" method="post">
+    <form th:action="@{/calendar/toroku}" th:object="${eventForm}" method="post">
         <div>
-            <label align="center">タイトル</labelalign="center">
+            <label align="center">タイトル</label>
         </div>
         <div>
           
             <input type="text"  th:field="*{name}" placeholder="イベント名を入力してください" >
         </div>
         <div>
-    		<form>
-       			 <input type="radio" name="ラベル1" th:value="室内" align="center">室内
-        		<input type="radio" name="ラベル1" th:value="屋外" align="center">屋外
-   			 </form>
+       			<input type="radio" th:field="*{categoryId}" name="categoryId" value="0" align="center" th:checked="${eventForm.categoryId == 0}">室内
+        		<input type="radio" th:field="*{categoryId}"  name="categoryId" value="1" align="center" th:checked="${eventForm.categoryId == 1}">屋外
+   			
 		</div>
-        <div>
-    		<label for="eventType" align="center">イベントラベル</label>
-    		<select name="ラベル" align="center" id="eventType">
-        		<option value="work">仕事</option>
-        		<option value="travel">旅行</option>
-        		<option value="recreation">遊び</option>
-        		<option value="Private">プライベート</option>
-   			 </select>
-		</div>
+<!--		<select th:field="*{categoryId}">-->
+<!--                 カテゴリ一覧から選択できるようする -->
+<!--                <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>-->
+<!--            </select>-->
+<!--        <div>-->
+<!--    		<label for="eventType" align="center">イベントラベル</label>-->
+<!--    		<select name="ラベル" align="center" id="eventType">-->
+<!--        		<option value="work">仕事</option>-->
+<!--        		<option value="travel">旅行</option>-->
+<!--        		<option value="recreation">遊び</option>-->
+<!--        		<option value="Private">プライベート</option>-->
+<!--   			 </select>-->
+<!--		</div>-->
 		
 		<div>
-			 <label>
-          			<h2 align="center">開始</h2> 
-           		 <input type="datetime-local" align="center" name="startTime">
-       		 </label>
+			 <div align="center">
+    			<h2>開始</h2>
+    			<input type="datetime-local"  th:field="*{startdatetime}" name="startTime">
+			</div>
 		</div>
 		<div>
-			 <label>
-          			 <h2 align="center">終了</h2>
-           		 <input type="datetime-local" align="center"  name="endTime">
-       		 </label>
+			 <div align="center">
+          		 <h2>終了</h2>
+           		 <input type="datetime-local"  th:field="*{enddatetime}"  name="endTime">
+       		 </div>
 		</div>
         <div>
             <input type="submit"  align="center" name="send" value="追加する">
