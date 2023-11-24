@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import com.example.entity.Category;
 import com.example.entity.Event;
 import com.example.service.CategoryService;
 import com.example.service.EventService;
+import com.example.service.LoginUser;
 
 
 @Controller
@@ -32,7 +34,7 @@ public class EventController {
 	
     // 新規イベント登録ページ表示用
     @GetMapping("torokuPage")
-    public String torokuPage(@ModelAttribute("event") EventForm eventForm ,Model model) {
+    public String torokuPage(@ModelAttribute("eventForm") EventForm eventForm ,Model model) {
         // 処理を追加
         return "torokuPage";
     }
@@ -40,9 +42,12 @@ public class EventController {
 
     // 新規イベント登録の実行
     @PostMapping("toroku")
-    public String toroku(EventForm eventForm) {
-        // 処理を追加
+    public String toroku(EventForm eventForm,@AuthenticationPrincipal LoginUser loginUser) {
+     
+    	  
     	this.eventService.save(eventForm);
+    	
+    	
         // 一覧ページへリダイレクトします
         return "redirect:/calendar";
     }

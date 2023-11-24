@@ -26,7 +26,9 @@ const events = [
 	},
 ];
 
-
+// ユーザーが新規登録時に選択した都道府県情報を取得
+// この部分は実際のアプリケーションの実装によります
+//const userCity = getUserCity();
 
 // OpenWeatherMapのAPIキー
 const apiKey = '0ba98d8fb694bf4346615212f28699d1';
@@ -48,6 +50,22 @@ fetch(url)
 	.catch(error => {
 		console.error('Error:', error);
 	});
+
+function addCellClickEventListeners() {
+	// カレンダーの各セルにクリックイベントリスナーを追加
+	document.querySelectorAll('#calendar td').forEach(function(cell) {
+		cell.addEventListener('click', function() {
+			// セルがクリックされたときに日表示カレンダーに遷移
+			// クリックされたセルの日付を取得
+			const day = cell.querySelector('span').textContent;
+			// 年と月も取得
+			const year = currentDate.getFullYear();
+			const month = currentDate.getMonth() + 1; // JavaScriptの月は0から始まるため、1を足す
+			// 日付をクエリパラメータとして追加
+			window.location.href = '/todayEvent?year=' + year + '&month=' + month + '&day=' + day;
+		});
+	});
+}
 
 // カレンダーを生成する関数
 function generateCalendar(date, data) {
@@ -150,6 +168,7 @@ function generateCalendar(date, data) {
 	calendarEl.innerHTML = calendarHtml;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// 前月ボタンのクリックイベント
 		prevMonthBtn.addEventListener('click', () => {
 			currentDate.setMonth(currentDate.getMonth() - 1);
@@ -177,6 +196,11 @@ function generateCalendar(date, data) {
 		function goToEventDetailPage(title) {
 			// ここにイベント詳細ページへの遷移処理を記述
 =======
+=======
+	// カレンダーの各セルにクリックイベントリスナーを追加
+	addCellClickEventListeners();
+
+>>>>>>> development
 	// イベント情報をカレンダーに追加
 	events.forEach(event => {
 		if (event.date.getFullYear() === date.getFullYear() && event.date.getMonth() === date.getMonth() && event.date.getDate() === date.getDate()) {

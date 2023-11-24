@@ -3,24 +3,23 @@ package com.example.form;
 
 import java.time.LocalDateTime;
 
-import com.example.entity.Category;
+
 
 public class EventForm {	
 	
 	 private String name;
 	 
-	 private Integer userid;
+	 //private Integer userid;
 	 
-	 private Integer categoryid;
+	 //private Integer categoryId;
 	 
 	 private  LocalDateTime startdatetime;
 	 
 	 private  LocalDateTime enddatetime;
 
-	private Category category;
-	 
-	 
-	 
+	 private Integer categoryId;
+
+	
 	 
 	 
 
@@ -31,27 +30,27 @@ public class EventForm {
 	        this.name = name;
 	 }
 	 
-	 public Integer getUserid() {
-	        return this.userid;
+//	 public Integer getUserid() {
+//	        return this.userid;
+//	 }
+//	 
+//	 public void setUserid(int userid) {
+//	        this.userid = userid;
+//	 }
+//	 
+//	 public Category getCategory() {
+//		 return this.category;
+//	 }
+//	 public void setCategory(Category category) {
+//		 this.category = category;
+//	 }
+	 
+	 public Integer getCategoryId() {
+	        return this.categoryId;
 	 }
 	 
-	 public void setUserid(int userid) {
-	        this.userid = userid;
-	 }
-	 
-	 public Category getCategory() {
-		 return this.category;
-	 }
-	 public void setCategory(Category category) {
-		 this.category = category;
-	 }
-	 
-	 public Integer getCategoryid() {
-	        return this.categoryid;
-	 }
-	 
-	 public void setCategoryid(int categoryid) {
-	        this.categoryid = categoryid;
+	 public void setCategoryId(Integer categoryId) {
+	        this.categoryId = categoryId;
 	 }
 	 
 	 
