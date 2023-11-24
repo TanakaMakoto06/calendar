@@ -133,19 +133,6 @@
 		});
 
 
-		// イベント新規登録ボタンのクリックイベント
-		addEventBtn.addEventListener('click', () => {
-			// イベント新規登録処理をここに記述
-			// ここでイベント新規登録フォームを表示する
-			// 例えば、プロンプトを使用してユーザーにイベントの詳細を入力させる
-			const eventTitle = prompt("Please enter the event title");
-			const eventDate = prompt("Please enter the event date (YYYY-MM-DD)");
-			// そして、新しいイベントをイベントの配列に追加する
-			events.push({title: eventTitle, date: new Date(eventDate)});
-			// 最後にカレンダーを再生成する
-			generateCalendar(currentDate);
-		});
-
 		// イベント詳細ページへの遷移
 		function goToEventDetailPage(title) {
 			// ここにイベント詳細ページへの遷移処理を記述
