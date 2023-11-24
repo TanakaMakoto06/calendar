@@ -25,8 +25,7 @@ public class Event {
     @Column(name = "ID")
     private Integer id;
     
-    @ManyToOne
-    @JoinColumn(name = "CATEGORY_ID")
+    @Column(name = "CATEGORY_ID")
     private Integer categoryId;
 
     @Column(name = "NAME")
@@ -87,4 +86,14 @@ public class Event {
 	 public void setEndevent(LocalDateTime endevent) {
 		 this.endevent = endevent;
 	 }
+	 
+	 
+	    @ManyToOne
+	    @JoinColumn(name = "category_id", insertable = false, updatable = false)
+	    private Category category;
+	    
+	    public Category getCategory() {
+	        return this.category;
+	    }
+	    
 }
