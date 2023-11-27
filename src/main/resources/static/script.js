@@ -167,46 +167,14 @@ function generateCalendar(date, data) {
 	calendarHtml += '</tbody></table>';
 	calendarEl.innerHTML = calendarHtml;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-		// 前月ボタンのクリックイベント
-		prevMonthBtn.addEventListener('click', () => {
-			currentDate.setMonth(currentDate.getMonth() - 1);
-			generateCalendar(currentDate);
-		});
-
-
-		// 次月ボタンのクリックイベント
-		nextMonthBtn.addEventListener('click', () => {
-			currentDate.setMonth(currentDate.getMonth() + 1);
-			generateCalendar(currentDate);
-		});
-
-		// 検索ボタンのクリックイベント
-		searchBtn.addEventListener('click', () => {
-			const searchText = searchBar.value;
-			searchBar.style.display = searchBar.style.display === 'none' ? 'block' : 'none';
-			const filteredEvents = events.filter(event => event.title.includes(searchText));
-			// そして、結果を何らかの方法で表示する
-			displayEvents(filteredEvents);
-		});
-
-
-		// イベント詳細ページへの遷移
-		function goToEventDetailPage(title) {
-			// ここにイベント詳細ページへの遷移処理を記述
-=======
-=======
 	// カレンダーの各セルにクリックイベントリスナーを追加
 	addCellClickEventListeners();
 
->>>>>>> development
 	// イベント情報をカレンダーに追加
 	events.forEach(event => {
 		if (event.date.getFullYear() === date.getFullYear() && event.date.getMonth() === date.getMonth() && event.date.getDate() === date.getDate()) {
 			const dayCell = calendarEl.querySelector(`td`);
 			dayCell.innerHTML += `<div>${event.title}</div>`;
->>>>>>> development
 		}
 	});
 }

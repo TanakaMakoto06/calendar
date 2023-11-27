@@ -10,9 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.entity.User;
 import com.example.form.EventForm;
-import com.example.entity.Category;
-import com.example.entity.Event;
 import com.example.service.CategoryService;
 import com.example.service.EventService;
 import com.example.service.LoginUser;
@@ -43,9 +42,15 @@ public class EventController {
     // 新規イベント登録の実行
     @PostMapping("toroku")
     public String toroku(EventForm eventForm,@AuthenticationPrincipal LoginUser loginUser) {
+    	
+        // ログインユーザー情報を取得
+        User user = loginUser.getUser();
+        
+        // イベントに関連するユーザー情報を設定
+        eventForm.setUserid(user.getId());
      
     	  
-    	this.eventService.save(eventForm);
+    	this.eventService.save(eventForm, user);
     	
     	
         // 一覧ページへリダイレクトします

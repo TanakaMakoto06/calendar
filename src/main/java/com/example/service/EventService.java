@@ -1,13 +1,14 @@
 package com.example.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.entity.Event;
+import com.example.entity.User;
 import com.example.form.EventForm;
 import com.example.repository.EventRepository;
-
-import java.util.List;
 
 @Service
 public class EventService {
@@ -24,12 +25,13 @@ public class EventService {
         return eventRepository.findEventsForMonth(year, month);
     }
 
-    public Event save(EventForm eventForm) {
+    public Event save(EventForm eventForm, User loginUser) {
     	Event event = new Event();
     	
 		// フィールドのセットを行います
     	event.setName(eventForm.getName());
     	event.setCategoryId(eventForm.getCategoryId());
+    	event.setUser(loginUser);  // ログインユーザーを設定する
     	event.setStartevent(eventForm.getStartdatetime());
     	event.setEndevent(eventForm.getEnddatetime());	
     	
