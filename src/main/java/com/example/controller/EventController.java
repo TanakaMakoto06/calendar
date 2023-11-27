@@ -1,5 +1,8 @@
 package com.example.controller;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -24,6 +27,7 @@ public class EventController {
 	
 	private EventService eventService;
 	private CategoryService categoryService;
+	private CharSequence startdatetime;
 
 	@Autowired
 	 public EventController(EventService eventService, CategoryService categoryService) {
@@ -46,6 +50,8 @@ public class EventController {
      
     	  
     	this.eventService.save(eventForm);
+    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+    	LocalDateTime localDateTime = LocalDateTime.parse(startdatetime, formatter);
     	
     	
         // 一覧ページへリダイレクトします
