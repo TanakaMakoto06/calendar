@@ -196,14 +196,13 @@ nextMonthBtn.addEventListener('click', () => {
 searchBtn.addEventListener('click', function() {
 	// 検索バーの値を取得
 	const name = searchBar.value;
-	// 検索バーの表示状態を切り替える
-//	searchBar.style.display = searchBar.style.display === 'none' ? 'block' : 'none';
 
 	// /searchエンドポイントにリクエストを送る
 	fetch('/calendar/searchEvent?name=' + name)
 		.then(response => response.json())
 		.then(events => {
 			console.log(events);  // ここで検索結果をコンソールに出力
+
 			// ポップアップを作成
 			const popup = document.createElement('div');
 			popup.id = 'popup';
@@ -214,6 +213,12 @@ searchBtn.addEventListener('click', function() {
 				link.href = '/calendar/eventsyousai' + event.id;  // イベントの詳細ページへのリンク
 				link.textContent = event.name;  // イベントのタイトル
 				popup.appendChild(link);
+
+				// 詳細ページへのリンクを作成
+				const detailLink = document.createElement('a');
+				detailLink.href = '/calendar/eventsyousai' + event.id;  // イベントの詳細ページへのリンク
+				detailLink.textContent = '詳細ページへ';  // リンクのテキスト
+				popup.appendChild(detailLink);
 			});
 			console.log(popup);  // ここでポップアップをコンソールに出力
 
@@ -224,6 +229,16 @@ searchBtn.addEventListener('click', function() {
 			console.error('Error:', error);
 		});
 });
+
+// 日表示カレンダーのイベントデータを取得
+fetch(`/calendar/eventsForDay?year=${currentDate.getFullYear()}&month=${currentDate.getMonth() + 1}&day=${currentDate.getDate()}`)
+	.then(response => response.json())
+	.then(data => {
+		events = data;
+		// ここでカレンダーを更新または再描画します
+		generateCalendar(currentDate);
+	})
+	.catch(error => console.error('Error:', error));
 
 // イベント詳細ページへの遷移
 function goToEventDetailPage(event, title) {
