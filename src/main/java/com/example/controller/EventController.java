@@ -1,7 +1,17 @@
 package com.example.controller;
 
 
+<<<<<<< HEAD
 import java.util.List;// この行を追加(稲本)
+=======
+
+import java.util.List;// この行を追加(稲本)
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+>>>>>>> development
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,24 +38,35 @@ public class EventController {
 
 	private EventService eventService;
 	private CategoryService categoryService;
-	private final EventRepository eventRepository;  // この行を追加(稲本)
+	private final EventRepository eventRepository; // この行を追加(稲本)
 
 	@Autowired
-	public EventController(EventService eventService, CategoryService categoryService, EventRepository eventRepository) {
+	public EventController(EventService eventService, CategoryService categoryService,
+			EventRepository eventRepository) {
 		this.eventService = eventService;
 		this.categoryService = categoryService; // 追加
 		this.eventRepository = eventRepository; // この行を追加(稲本)
-		
+
+	}
+
+	@GetMapping("/eventsForDay")
+	public ResponseEntity<List<Event>> getEventsForDay(@RequestParam int year, @RequestParam int month,
+			@RequestParam int day) {
+		List<Event> events = eventService.getEventsForDay(year, month, day);
+		return ResponseEntity.ok(events);
 	}
 
 	// 新規イベント登録ページ表示用
 	@GetMapping("torokuPage")
 	public String torokuPage(@ModelAttribute("eventForm") EventForm eventForm, Model model) {
 		// 処理を追加
+		Event event = new Event();
+		
 		return "torokuPage";
 	}
 
 	// 新規イベント登録の実行
+<<<<<<< HEAD
 	@PostMapping("toroku")
 	public String toroku(EventForm eventForm, @AuthenticationPrincipal LoginUser loginUser) {
 		
@@ -54,7 +75,17 @@ public class EventController {
 		// 一覧ページへリダイレクトします
 		return "redirect:/calendar";
 	}
+=======
+		@PostMapping("toroku")
+		public String toroku(EventForm eventForm, @AuthenticationPrincipal LoginUser loginUser) {
+			
+			this.eventService.save(eventForm, loginUser.getUser());
+>>>>>>> development
 
+			// 一覧ページへリダイレクトします
+			return "redirect:/calendar";
+		}
+	
 	// イベント編集ページ
 	@GetMapping("henshu/{id}")
 	public String henshuPage(@PathVariable("id") Integer id, Model model,

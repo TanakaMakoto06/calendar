@@ -3,6 +3,7 @@ package com.example.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 
 import com.example.entity.Event;
@@ -20,9 +21,9 @@ public class EventService {
         this.eventRepository = eventRepository;
     }
 
-    public List<Event> getEventsForMonth(int year, int month) {
-        // EventRepository を使用して、指定された年と月のイベントを取得するロジック
-        return eventRepository.findEventsForMonth(year, month);
+    public List<Event> getEventsForDay(int year, int month, int day) { // 稲本記述追加
+        // EventRepository を使用して、指定された年、月、日のイベントを取得するロジック
+        return eventRepository.findEventsForDay(year, month, day); // 稲本記述追加
     }
 
     public Event save(EventForm eventForm, User loginUser) {
@@ -38,7 +39,4 @@ public class EventService {
         // EventRepository を使用して、新しいイベントを作成するロジック
         return eventRepository.save(event);
     }
-
-
-   
 }
