@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.entity.Event;
@@ -33,6 +34,11 @@ public class CalendarController {
     @PostMapping("/event")
     public Event createEvent(@RequestBody Event event) {
         return calendarService.createEvent(event);
+    }
+    
+    @GetMapping("/searchCalendar")
+    public List<Event> searchEvents(@RequestParam String name) {
+        return calendarService.searchEvents(name);
     }
 
     // 他のエンドポイントもここに追加...
