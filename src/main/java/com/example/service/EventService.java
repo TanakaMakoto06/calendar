@@ -39,8 +39,8 @@ public class EventService {
     	event.setName(eventForm.getName());
     	event.setCategoryId(eventForm.getCategoryId());
     	event.setUserId(loginUser.getId()); // loginUser.getId()を使用
-    	event.setStartevent(eventForm.getStartdatetime());
-    	event.setEndevent(eventForm.getEnddatetime());	
+    	event.setStartevent(eventForm.getStartevent());
+    	event.setEndevent(eventForm.getEndevent());	
     	
         // EventRepository を使用して、新しいイベントを作成するロジック
         return eventRepository.save(event);
@@ -63,8 +63,8 @@ public class EventService {
         event.setName(eventForm.getName());
         event.setCategoryId(eventForm.getCategoryId());
     	event.setUserId(loginUser.getId()); // loginUser.getId()を使用
-    	event.setStartevent(eventForm.getStartdatetime());
-    	event.setEndevent(eventForm.getEnddatetime());
+    	event.setStartevent(eventForm.getStartevent());
+    	event.setEndevent(eventForm.getEndevent());
         
        
         // repository.saveメソッドを利用してデータの保存を行います

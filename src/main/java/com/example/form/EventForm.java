@@ -16,10 +16,10 @@ public class EventForm {
 	 //private Integer categoryId;
 	 
 	 @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-	 private  LocalDateTime startdatetime;
+	 private  LocalDateTime startevent;
 	 
 	 @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-	 private  LocalDateTime enddatetime;
+	 private  LocalDateTime endevent;
 
 	 private Integer categoryId;
 
@@ -38,7 +38,7 @@ public class EventForm {
 	        return this.userid;
 	 }
 	 
-	 public void setUserid(int userid) {
+	 public void setUserid(Integer userid) {
 	        this.userid = userid;
 	 }
 //	 
@@ -58,20 +58,20 @@ public class EventForm {
 	 }
 	 
 	 
-	 public LocalDateTime getStartdatetime() {
-	        return this.startdatetime;
+	 public LocalDateTime getStartevent() {
+	        return this.startevent;
 	    }
 	    
-	    public void  setStartdatetime(LocalDateTime startdatetime) {
-	         this.startdatetime = startdatetime;
+	    public void  setStartevent(LocalDateTime startevent) {
+	         this.startevent = startevent;
 	    }
 	    
-	    public LocalDateTime getEnddatetime() {
-	        return this.enddatetime;
+	    public LocalDateTime getEndevent() {
+	        return this.endevent;
 	    }
 	    
-	    public void  setEnddatetime(LocalDateTime enddatetime) {
-	         this.enddatetime = enddatetime;
+	    public void  setEndevent(LocalDateTime endevent) {
+	         this.endevent = endevent;
 	    }
 		
 }

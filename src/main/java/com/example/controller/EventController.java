@@ -66,13 +66,15 @@ public class EventController {
 	@GetMapping("hensyuPage/{id}")
 	public String henshuPage(@PathVariable("id") Integer id, Model model, LoginUser loginUser,
 			@ModelAttribute("eventForm") EventForm eventForm) {
-		 Event event = this.eventService.findById(id);
+		// Event event = this.eventService.findById(id);
+		 Event event = eventService.findById(id);
 		 
-//		 event.setName(eventForm.getName());
-//	     event.setCategoryId(eventForm.getCategoryId());
-//	     event.setUserId(loginUser.getId()); // loginUser.getId()を使用
-//	     event.setStartevent(eventForm.getStartdatetime());
-//	     event.setEndevent(eventForm.getEnddatetime());
+		 
+		 eventForm.setName(event.getName());
+	     eventForm.setCategoryId(event.getCategoryId());
+	     //eventForm.setUserid(loginUser.getId()); // loginUser.getId()を使用
+	     eventForm.setStartevent(event.getStartevent());
+	     eventForm.setEndevent(event.getEndevent());
 		 model.addAttribute("eventForm", eventForm);
 		// 処理を追加
 		return "hensyuPage";
