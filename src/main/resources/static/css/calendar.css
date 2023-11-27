@@ -22,7 +22,25 @@
 			align-items: center;
 			padding: 10px;
 			background-color: #f3f3f3;
-			width: 100%;
+			width: 100vw;
+		}
+
+		#header button {
+			width: 80px;
+			/* 幅を80pxに設定 */
+			height: 30px;
+			/* 高さを30pxに設定 */
+			font-size: 12px;
+			/* フォントサイズを12pxに設定 */
+		}
+
+		#searchBar {
+			width: 100px;
+			/* 幅を100pxに設定 */
+			height: 20px;
+			/* 高さを20pxに設定 */
+			font-size: 12px;
+			/* フォントサイズを12pxに設定 */
 		}
 
 		/* カレンダーのスタイル */
@@ -98,9 +116,10 @@
 		}
 
 		/* 検索バーの初期非表示スタイル */
-		#searchBar {
-			display: none;
-		}
+				#searchBar {
+					   z-index: 5;  /* 他の要素の前面に表示 */
+/*					display: none;*/
+				}
 
 		/* 前月と翌月の日付のスタイル */
 		#calendar .prev-month,
@@ -150,4 +169,3 @@
 			color: blue;
 			cursor: pointer;
 		}
-

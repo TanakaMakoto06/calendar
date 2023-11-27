@@ -24,6 +24,10 @@ public class CalendarService {
         // 実装はEventRepositoryとデータベースの設計に依存します。
         return eventRepository.findEventsForMonth(year, month);
     }
+    
+    public List<Event> searchEvents(String name) {
+        return eventRepository.findByNameContains(name);
+    }
 
     @Transactional
     public Event createEvent(Event event) {

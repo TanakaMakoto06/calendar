@@ -1,13 +1,13 @@
 package com.example.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.entity.Event;
 import com.example.form.EventForm;
 import com.example.repository.EventRepository;
-
-import java.util.List;
 
 @Service
 public class EventService {

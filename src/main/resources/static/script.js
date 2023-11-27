@@ -1,4 +1,3 @@
-
 //	 カレンダー要素や各種ボタン、セレクトボックスなどの取得
 const calendarEl = document.getElementById('calendar');
 const prevMonthBtn = document.getElementById('prevMonth');
@@ -140,7 +139,7 @@ function generateCalendar(date, data) {
 		// 日付と天気アイコンを表示するセルを生成し、土曜日や日曜日の場合は 'weekend' クラスを追加
 		calendarHtml += `<td class="${dayOfWeek === 0 || dayOfWeek === 6 ? 'weekend' : ''}${new Date().getDate() ===
 			i && new Date().getMonth() === date.getMonth() && new Date().getFullYear() === date.getFullYear() ? ' today' : ''}">
-<span>${i}</span><div class="weather-icon"><img src="http://openweathermap.org/img/w/${weatherIcon}.png"></div>${eventTitle ? `<div class="event" onclick="goToEventDetailPage('${eventTitle}')">${eventTitle}</div>`
+<span>${i}</span><div class="weather-icon"><img src="http://openweathermap.org/img/w/${weatherIcon}.png"></div>${eventTitle ? `<div class="event" onclick="goToEventDetailPage(event, '${eventTitle}')">${eventTitle}</div>`
 				: ''}</td>`;
 
 
@@ -193,19 +192,49 @@ nextMonthBtn.addEventListener('click', () => {
 });
 
 // 検索ボタンのクリックイベント
-searchBtn.addEventListener('click', () => {
-	const searchText = searchBar.value;
-	searchBar.style.display = searchBar.style.display === 'none' ? 'block' : 'none';
-	const filteredEvents = events.filter(event => event.title.includes(searchText));
-	// そして、結果を何らかの方法で表示する
-	displayEvents(filteredEvents);
+// 検索ボタンのクリックイベントをハンドルする
+searchBtn.addEventListener('click', function() {
+	// 検索バーの値を取得
+	const name = searchBar.value;
+	// 検索バーの表示状態を切り替える
+//	searchBar.style.display = searchBar.style.display === 'none' ? 'block' : 'none';
+
+	// /searchエンドポイントにリクエストを送る
+	fetch('/calendar/searchEvent?name=' + name)
+		.then(response => response.json())
+		.then(events => {
+			console.log(events);  // ここで検索結果をコンソールに出力
+			// ポップアップを作成
+			const popup = document.createElement('div');
+			popup.id = 'popup';
+
+			// 各イベントのタイトルと詳細ページへのリンクを追加
+			events.forEach(event => {
+				const link = document.createElement('a');
+				link.href = '/calendar/eventsyousai' + event.id;  // イベントの詳細ページへのリンク
+				link.textContent = event.name;  // イベントのタイトル
+				popup.appendChild(link);
+			});
+			console.log(popup);  // ここでポップアップをコンソールに出力
+
+			// ポップアップを表示
+			document.body.appendChild(popup);
+		})
+		.catch(error => {
+			console.error('Error:', error);
+		});
 });
 
 // イベント詳細ページへの遷移
-function goToEventDetailPage(title) {
+function goToEventDetailPage(event, title) {
+	// ブラウザのデフォルトのクリックイベントの動作をキャンセル
+	event.preventDefault();
+	// イベントの伝播を停止
+	event.stopPropagation();
 	// ここにイベント詳細ページへの遷移処理を記述
+	// イベントタイトルをクエリパラメータとして追加
+	window.location.href = 'eventsyousai?title=' + title;
 }
-
 
 
 // ログアウトボタンのクリックイベント
