@@ -31,7 +31,7 @@ public class EventService {
 		// フィールドのセットを行います
     	event.setName(eventForm.getName());
     	event.setCategoryId(eventForm.getCategoryId());
-    	event.setUser(loginUser);  // ログインユーザーを設定する
+    	event.setUserId(loginUser.getId()); // loginUser.getId()を使用
     	event.setStartevent(eventForm.getStartdatetime());
     	event.setEndevent(eventForm.getEnddatetime());	
     	

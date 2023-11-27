@@ -17,8 +17,8 @@
             <input type="text"  th:field="*{name}" placeholder="イベント名を入力してください" >
         </div>
         <div>
-       			<input type="radio" th:field="*{categoryId}" name="categoryId" value="0" align="center" th:checked="${eventForm.categoryId == 0}">室内
-        		<input type="radio" th:field="*{categoryId}"  name="categoryId" value="1" align="center" th:checked="${eventForm.categoryId == 1}">屋外
+       			<input type="radio" th:field="*{categoryId}" name="categoryId" value="1" align="center" th:checked="${eventForm.categoryId == 0}">室内
+        		<input type="radio" th:field="*{categoryId}"  name="categoryId" value="2" align="center" th:checked="${eventForm.categoryId == 1}">屋外
    			
 		</div>
 <!--		<select th:field="*{categoryId}">-->

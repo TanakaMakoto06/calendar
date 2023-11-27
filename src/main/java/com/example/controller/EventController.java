@@ -1,11 +1,7 @@
 package com.example.controller;
 
 
-import java.util.List;　// この行を追加(稲本)
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
+import java.util.List;// この行を追加(稲本)
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,14 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-<<<<<<< HEAD
-import com.example.entity.User;
-import com.example.form.EventForm;
-=======
 import com.example.entity.Event;
 import com.example.form.EventForm;
 import com.example.repository.EventRepository;
->>>>>>> development
 import com.example.service.CategoryService;
 import com.example.service.EventService;
 import com.example.service.LoginUser;
@@ -47,38 +38,18 @@ public class EventController {
 		
 	}
 
-<<<<<<< HEAD
-    // 新規イベント登録の実行
-    @PostMapping("toroku")
-    public String toroku(EventForm eventForm,@AuthenticationPrincipal LoginUser loginUser) {
-    	
-        // ログインユーザー情報を取得
-        User user = loginUser.getUser();
-        
-        // イベントに関連するユーザー情報を設定
-        eventForm.setUserid(user.getId());
-     
-    	  
-    	this.eventService.save(eventForm, user);
-    	
-    	
-        // 一覧ページへリダイレクトします
-        return "redirect:/calendar";
-    }
-=======
 	// 新規イベント登録ページ表示用
 	@GetMapping("torokuPage")
 	public String torokuPage(@ModelAttribute("eventForm") EventForm eventForm, Model model) {
 		// 処理を追加
 		return "torokuPage";
 	}
->>>>>>> development
 
 	// 新規イベント登録の実行
 	@PostMapping("toroku")
 	public String toroku(EventForm eventForm, @AuthenticationPrincipal LoginUser loginUser) {
-
-		this.eventService.save(eventForm);
+		
+		this.eventService.save(eventForm, loginUser.getUser());
 
 		// 一覧ページへリダイレクトします
 		return "redirect:/calendar";
