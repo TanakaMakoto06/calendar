@@ -54,7 +54,7 @@ public class EventService {
   }
     
     
- // データ更新用のメソッドです
+ // データ更新用のメソッドですgin
     public Event update(Integer id ,EventForm eventForm, User loginUser) {
        
 		// データ１件分のEntityクラスを取得します

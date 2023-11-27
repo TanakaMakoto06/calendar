@@ -12,6 +12,8 @@ public class LoginUser implements UserDetails {
 
     // Userオブジェクト(Entityクラス)
     private final User user;
+    
+	private Integer id;
 
     // コンストラクタ
     public LoginUser(User user) {
@@ -67,9 +69,13 @@ public class LoginUser implements UserDetails {
         return true;
     }
 
-	public Object getId() {
+	public Integer getId() {
 		// TODO 自動生成されたメソッド・スタブ
-		return null;
+		 return this.id;
+	}
+	
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	

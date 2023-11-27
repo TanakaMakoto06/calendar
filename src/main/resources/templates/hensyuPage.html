@@ -10,7 +10,7 @@
  <!-- 見出しが変わります -->
     <h1 align="center">イベント編集</h1>
     <!-- 登録処理のHTTPメソッドはPOSTにします -->
-    <form th:action="@{/event/henshu/{id}(id=${id})}" th:object="${eventForm}" method="post">
+    <form th:action="@{/calendar/henshu/{id}(id=${id})}" th:object="${eventForm}" method="post">
         <div>
             <label align="center">イベント名</label>
         </div>
@@ -50,6 +50,11 @@
         <div>
              <input type="submit"  align="center" name="send" value="完了">
         </div>
+        
+<!--         	<form th:action="@{/event/sakujo/{id}(id=${event.id})}"  method="post">-->
+<!--						 class属性にtbl-btnを追加 -->
+<!--                        <input class="tbl-btn" type="submit" value="削除">-->
+<!--             </form>-->
         <div>
             <!-- 一覧に戻る -->
             <a href="/calendar"  class="btn-style-link"  align="center">戻る</a>

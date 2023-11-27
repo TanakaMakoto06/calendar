@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.entity.Event;
-
+import com.example.entity.User;
 import com.example.form.EventForm;
 import com.example.repository.EventRepository;
 import com.example.service.CategoryService;
@@ -72,7 +72,7 @@ public class EventController {
 		 
 		 eventForm.setName(event.getName());
 	     eventForm.setCategoryId(event.getCategoryId());
-	     //eventForm.setUserid(loginUser.getId()); // loginUser.getId()を使用
+	     eventForm.setUserid(loginUser.getId()); // loginUser.getId()を使用
 	     eventForm.setStartevent(event.getStartevent());
 	     eventForm.setEndevent(event.getEndevent());
 		 model.addAttribute("eventForm", eventForm);
@@ -82,11 +82,11 @@ public class EventController {
 
 	// イベント編集の実行
 	@PostMapping("henshu/{id}")
-	public String henshu(@PathVariable("id") Integer id, Model model,@AuthenticationPrincipal LoginUser loginUser,
-			@ModelAttribute("eventForm") EventForm eventForm) {
+	public String henshu(@PathVariable("id") Integer id,@AuthenticationPrincipal User loginUser,
+				EventForm eventForm) {
 		// 処理を追加
-		this.eventService.update(id, eventForm,loginUser.getUser());
-
+		this.eventService.update(id, eventForm,loginUser);
+		
 		return "redirect:/calendar";
 	}
 
