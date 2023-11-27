@@ -1,6 +1,11 @@
 package com.example.controller;
 
-import java.util.List;
+
+import java.util.List;　// この行を追加(稲本)
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,13 +32,13 @@ public class EventController {
 
 	private EventService eventService;
 	private CategoryService categoryService;
-	private final EventRepository eventRepository;  // この行を追加
+	private final EventRepository eventRepository;  // この行を追加(稲本)
 
 	@Autowired
 	public EventController(EventService eventService, CategoryService categoryService, EventRepository eventRepository) {
 		this.eventService = eventService;
 		this.categoryService = categoryService; // 追加
-		this.eventRepository = eventRepository; // この行を追加
+		this.eventRepository = eventRepository; // この行を追加(稲本)
 		
 	}
 
