@@ -3,7 +3,6 @@ package com.example.entity;
 
 import java.time.LocalDateTime;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -48,11 +47,11 @@ public class Event {
     }
     
 
-    public Integer getuserId() {
+    public Integer getUserId() {
         return this.userId;
     }
 
-    public void setuserId(Integer userid) {
+    public void setUserId(Integer userid) {
         this.userId = userid;
     }
 
@@ -94,6 +93,17 @@ public class Event {
 	    
 	    public Category getCategory() {
 	        return this.category;
+	    }
+	    
+	    @ManyToOne
+	    @JoinColumn(name = "USER_ID", insertable = false, updatable = false)
+	    private User user;
+
+	    public User getUser() {
+	        return this.user;
+	    }
+	    public void setUser(User user) {
+	        this.user = user;
 	    }
 	    
 }

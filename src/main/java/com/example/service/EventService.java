@@ -3,9 +3,11 @@ package com.example.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 
 import com.example.entity.Event;
+import com.example.entity.User;
 import com.example.form.EventForm;
 import com.example.repository.EventRepository;
 
@@ -24,12 +26,13 @@ public class EventService {
         return eventRepository.findEventsForDay(year, month, day); // 稲本記述追加
     }
 
-    public Event save(EventForm eventForm) {
+    public Event save(EventForm eventForm, User loginUser) {
     	Event event = new Event();
     	
 		// フィールドのセットを行います
     	event.setName(eventForm.getName());
     	event.setCategoryId(eventForm.getCategoryId());
+    	event.setUserId(loginUser.getId()); // loginUser.getId()を使用
     	event.setStartevent(eventForm.getStartdatetime());
     	event.setEndevent(eventForm.getEnddatetime());	
     	

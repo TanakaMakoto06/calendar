@@ -1,6 +1,13 @@
 package com.example.controller;
 
-import java.util.List; // この行を追加(稲本)
+
+
+import java.util.List;// この行を追加(稲本)
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -49,19 +56,21 @@ public class EventController {
 	@GetMapping("torokuPage")
 	public String torokuPage(@ModelAttribute("eventForm") EventForm eventForm, Model model) {
 		// 処理を追加
+		Event event = new Event();
+		
 		return "torokuPage";
 	}
 
 	// 新規イベント登録の実行
-	@PostMapping("toroku")
-	public String toroku(EventForm eventForm, @AuthenticationPrincipal LoginUser loginUser) {
+		@PostMapping("toroku")
+		public String toroku(EventForm eventForm, @AuthenticationPrincipal LoginUser loginUser) {
+			
+			this.eventService.save(eventForm, loginUser.getUser());
 
-		this.eventService.save(eventForm);
-
-		// 一覧ページへリダイレクトします
-		return "redirect:/calendar";
-	}
-
+			// 一覧ページへリダイレクトします
+			return "redirect:/calendar";
+		}
+	
 	// イベント編集ページ
 	@GetMapping("henshu/{id}")
 	public String henshuPage(@PathVariable("id") Integer id, Model model,
