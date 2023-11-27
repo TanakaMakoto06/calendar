@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.entity.Event;
+
 import com.example.form.EventForm;
 import com.example.repository.EventRepository;
 import com.example.service.CategoryService;
@@ -62,24 +63,36 @@ public class EventController {
 		}
 	
 	// イベント編集ページ
-	@GetMapping("henshu/{id}")
-	public String henshuPage(@PathVariable("id") Integer id, Model model,
+	@GetMapping("hensyuPage/{id}")
+	public String henshuPage(@PathVariable("id") Integer id, Model model, LoginUser loginUser,
 			@ModelAttribute("eventForm") EventForm eventForm) {
+		 Event event = this.eventService.findById(id);
+		 
+//		 event.setName(eventForm.getName());
+//	     event.setCategoryId(eventForm.getCategoryId());
+//	     event.setUserId(loginUser.getId()); // loginUser.getId()を使用
+//	     event.setStartevent(eventForm.getStartdatetime());
+//	     event.setEndevent(eventForm.getEnddatetime());
+		 model.addAttribute("eventForm", eventForm);
 		// 処理を追加
-		return "calendar/henshuPage";
+		return "hensyuPage";
 	}
 
 	// イベント編集の実行
 	@PostMapping("henshu/{id}")
-	public String henshu(@PathVariable("id") Integer id, @ModelAttribute("eventForm") EventForm eventForm) {
+	public String henshu(@PathVariable("id") Integer id, Model model,@AuthenticationPrincipal LoginUser loginUser,
+			@ModelAttribute("eventForm") EventForm eventForm) {
 		// 処理を追加
+		this.eventService.update(id, eventForm,loginUser.getUser());
 
 		return "redirect:/calendar";
 	}
 
 	// イベント削除の実行
 	@PostMapping("sakujo/{id}")
-	public String sakujo(@PathVariable("id") Integer id) {
+	public String sakujo(@PathVariable("id") Integer id,@AuthenticationPrincipal LoginUser loginUser,
+				@ModelAttribute("eventForm") EventForm eventForm) {
+		//this.eventService.delete(id,eventForm);
 		// 処理を追加
 		return "redirect:/calendar";
 	}
