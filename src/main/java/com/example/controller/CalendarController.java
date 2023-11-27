@@ -26,11 +26,10 @@ public class CalendarController {
     }
     
 
-    @GetMapping("/{year}/{month}")
-    public List<Event> getEventsForMonth(@PathVariable int year, @PathVariable int month) {
-        return calendarService.getEventsForMonth(year, month);
+    @GetMapping("/{year}/{month}/{day}")
+    public List<Event> getEventsForDay(@PathVariable int year, @PathVariable int month, @PathVariable int day) {
+        return calendarService.getEventsForDay(year, month, day);
     }
-
     @PostMapping("/event")
     public Event createEvent(@RequestBody Event event) {
         return calendarService.createEvent(event);
