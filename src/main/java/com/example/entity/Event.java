@@ -52,7 +52,7 @@ public class Event {
     }
 
     public void setUserId(Integer userId) {
-        this.userId = userId;
+         this.userId = userId;
     }
 
     public String getName() {

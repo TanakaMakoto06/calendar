@@ -32,13 +32,13 @@ public class EventService {
         return this.eventRepository.findAll();
     }
 
-    public Event save(EventForm eventForm, User loginUser) {
+    public Event save(EventForm eventForm, User User) {
     	Event event = new Event();
     	
 		// フィールドのセットを行います
     	event.setName(eventForm.getName());
     	event.setCategoryId(eventForm.getCategoryId());
-    	event.setUserId(loginUser.getId()); // loginUser.getId()を使用
+    	event.setUserId(User.getId()); // loginUser.getId()を使用
     	event.setStartevent(eventForm.getStartevent());
     	event.setEndevent(eventForm.getEndevent());	
     	
@@ -55,7 +55,7 @@ public class EventService {
     
     
  // データ更新用のメソッドですgin
-    public Event update(Integer id ,EventForm eventForm, User loginUser) {
+    public Event update(Integer id ,EventForm eventForm, LoginUser loginUser) {
        
 		// データ１件分のEntityクラスを取得します
         Event event = this.findById(id);

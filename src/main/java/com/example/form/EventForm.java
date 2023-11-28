@@ -34,11 +34,11 @@ public class EventForm {
 	        this.name = name;
 	 }
 	 
-	 public Integer getUserid() {
+	 public Integer getUserId() {
 	        return this.userid;
 	 }
 	 
-	 public void setUserid(Integer userid) {
+	 public void setUserId(Integer userid) {
 	        this.userid = userid;
 	 }
 //	 
@@ -73,5 +73,6 @@ public class EventForm {
 	    public void  setEndevent(LocalDateTime endevent) {
 	         this.endevent = endevent;
 	    }
+		
 		
 }
