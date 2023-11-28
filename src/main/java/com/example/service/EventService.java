@@ -53,12 +53,7 @@ public class EventService {
       	return event;
   }
     
-    
-//    public Event findByuserId(Integer userId) {
-//        Optional<Event> optionalEvent = this.eventRepository.findById(userId);
-//        Event event  = optionalEvent.get();
-//        	return event;
-//    }
+
     
  // データ更新用のメソッドですgin
     public Event update(Integer id ,EventForm eventForm, LoginUser loginUser) {

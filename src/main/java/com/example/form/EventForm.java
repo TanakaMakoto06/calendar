@@ -12,8 +12,7 @@ public class EventForm {
 	 private String name;
 	 
 	 private Integer userid;
-	 
-	 //private Integer categoryId;
+	
 	 
 	 @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
 	 private  LocalDateTime startevent;

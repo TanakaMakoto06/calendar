@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet"  href="/css/event.css" >
-<title>Insert title here</title>
+<title>新規イベント登録ページ</title>
 </head>
 <body>
     <h1 align="center" >新規イベント</h1>
@@ -17,7 +17,7 @@
             <input type="text"  th:field="*{name}" placeholder="イベント名を入力してください" >
         </div>
         <div>
-       			<input type="radio" th:field="*{categoryId}" name="categoryId" value="0" align="center" th:checked="${eventForm.categoryId == 0}">室内
+       			<input type="radio" th:field="*{categoryId}" name="categoryId" value="2" align="center" th:checked="${eventForm.categoryId == 2}">室内
         		<input type="radio" th:field="*{categoryId}"  name="categoryId" value="1" align="center" th:checked="${eventForm.categoryId == 1}">屋外
    			
 		</div>

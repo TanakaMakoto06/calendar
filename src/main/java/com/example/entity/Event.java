@@ -87,12 +87,17 @@ public class Event {
 	 }
 	 
 	 
+	 	
+	 
 	    @ManyToOne
-	    @JoinColumn(name = "category_id", insertable = false, updatable = false)
+	    @JoinColumn(name = "CATEGORY_ID", insertable = false, updatable = false)
 	    private Category category;
 	    
 	    public Category getCategory() {
 	        return this.category;
+	    }
+	    public void setCategory(Category category) {
+	        this.category = category;
 	    }
 	    
 	    @ManyToOne

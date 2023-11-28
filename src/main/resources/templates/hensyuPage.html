@@ -20,7 +20,7 @@
         </div>
         
         <div>
-            <input type="radio" th:field="*{categoryId}" name="categoryId" value="0" align="center" th:checked="${eventForm.categoryId == 0}">室内
+            <input type="radio" th:field="*{categoryId}" name="categoryId" value="2" align="center" th:checked="${eventForm.categoryId == 2}">室内
         	<input type="radio" th:field="*{categoryId}"  name="categoryId" value="1" align="center" th:checked="${eventForm.categoryId == 1}">屋外
         </div>
         
@@ -51,7 +51,7 @@
              <input type="submit"  align="center" name="send" value="完了">
         </div>
         
-<!--         	<form th:action="@{/event/sakujo/{id}(id=${event.id})}"  method="post">-->
+<!--         	<form th:action="@{/calendar/henshu/sakujo/{id}(id=${event.id})}"  method="post">-->
 <!--						 class属性にtbl-btnを追加 -->
 <!--                        <input class="tbl-btn" type="submit" value="削除">-->
 <!--             </form>-->
