@@ -7,5 +7,6 @@ import com.example.entity.Category;
 
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Integer> {
-
+	 // 他のメソッドもここに追加...
 }
+

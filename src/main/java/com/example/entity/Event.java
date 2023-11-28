@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 
 @Entity
 @Table(name = "EVENTS")
@@ -23,19 +25,23 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "EVENT_ID_GENERATOR")
     @Column(name = "ID")
     private Integer id;
-    
-    @Column(name = "CATEGORY_ID")
-    private Integer categoryId;
 
     @Column(name = "NAME")
     private String name;
+
     @Column(name = "START_EVENT")
     private LocalDateTime startevent;
+
     @Column(name = "END_EVENT")
     private LocalDateTime endevent;
+
     @Column(name = "USER_ID")
     private Integer userId;
-    
+
+    @ManyToOne
+    @JoinColumn(name = "CATEGORY_ID")
+    @JsonBackReference  // 追加
+    private Category category;
 
 
     public Integer getId() {
@@ -63,12 +69,12 @@ public class Event {
         this.name = name;
     }
     
-    public Integer getCategoryId() {
-        return this.categoryId;
+    public Category getCategory() {
+        return this.category;
     }
 
-    public void setCategoryId(Integer categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 	 
 	 
@@ -88,14 +94,6 @@ public class Event {
 	 
 	 
 	    @ManyToOne
-	    @JoinColumn(name = "category_id", insertable = false, updatable = false)
-	    private Category category;
-	    
-	    public Category getCategory() {
-	        return this.category;
-	    }
-	    
-	    @ManyToOne
 	    @JoinColumn(name = "USER_ID", insertable = false, updatable = false)
 	    private User user;
 
@@ -106,4 +104,4 @@ public class Event {
 	        this.user = user;
 	    }
 	    
-}
+	}
