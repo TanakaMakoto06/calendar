@@ -3,11 +3,6 @@ package com.example.controller;
 
 
 import java.util.List;// この行を追加(稲本)
-import java.util.Optional;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.entity.Event;
-import com.example.entity.User;
 import com.example.form.EventForm;
 import com.example.repository.EventRepository;
 import com.example.service.CategoryService;
@@ -79,7 +73,7 @@ public class EventController {
 		 Event event = this.eventService.findById(id);
 		
 		 eventForm.setName(event.getName());
-	     eventForm.setCategoryId(event.getCategoryId());
+		 eventForm.setCategoryId(event.getCategory().getId());
 	     //eventForm.setUserId(loginUser().getId()); // loginUser.getId()を使用 event.getUserId()
 	     eventForm.setStartevent(event.getStartevent());
 	     eventForm.setEndevent(event.getEndevent());
