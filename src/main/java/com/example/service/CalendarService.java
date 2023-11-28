@@ -6,17 +6,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.entity.Category;
 import com.example.entity.Event;
+import com.example.repository.CategoryRepository;
 import com.example.repository.EventRepository;
 
 @Service
 public class CalendarService {
 
 	private final EventRepository eventRepository;
+	private final CategoryRepository categoryRepository;
 
 	@Autowired
-	public CalendarService(EventRepository eventRepository) {
+	public CalendarService(EventRepository eventRepository, CategoryRepository categoryRepository) {
 		this.eventRepository = eventRepository;
+		this.categoryRepository = categoryRepository;
 	}
 
 	public List<Event> getEventsForDay(int year, int month, int day) {
@@ -31,17 +35,18 @@ public class CalendarService {
 
 	@Transactional
 	public Event createEvent(Event event) {
-		// ここで新しいイベントを作成します。
-		// 実装はEventRepositoryとデータベースの設計に依存します。
-		//return eventRepository.save(event);
-		try {
-			Event savedEvent = eventRepository.save(event);
-			return savedEvent;
-		} catch (Exception e) {
-			// エラーハンドリング
-			throw new RuntimeException("Event creation failed", e);
-		}
+	    // カテゴリが存在することを確認
+	    Category category = categoryRepository.findById(event.getCategory().getId())
+	        .orElseThrow(() -> new RuntimeException("Category not found"));
 
+	    // イベントを作成
+	    try {
+	        Event savedEvent = eventRepository.save(event);
+	        return savedEvent;
+	    } catch (Exception e) {
+	        // エラーハンドリング
+	        throw new RuntimeException("Event creation failed", e);
+	    }
 	}
 
 	// 他のメソッドもここに追加...
