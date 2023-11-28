@@ -12,6 +12,8 @@ public class LoginUser implements UserDetails {
 
     // Userオブジェクト(Entityクラス)
     private final User user;
+    
+	private Integer id;
 
     // コンストラクタ
     public LoginUser(User user) {
@@ -66,11 +68,13 @@ public class LoginUser implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+    
+    // ユーザーのIDを返すメソッド
+    public Integer getId() {
+        return this.user.getId();
+    }
 
-	public Object getId() {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
-	}
+	
 
 	
 }
