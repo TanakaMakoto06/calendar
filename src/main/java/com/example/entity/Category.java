@@ -19,7 +19,9 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Table(name = "CATEGORIES")
 public class Category {
 
-    @Id
+    public static Object DUMMY_CATEGORY_ID;
+
+	@Id
     @SequenceGenerator(name = "CATEGORY_ID_GENERATOR", sequenceName = "CATEGORY_ID_SEQ", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CATEGORY_ID_GENERATOR")
     @Column(name = "ID")

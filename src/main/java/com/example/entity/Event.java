@@ -57,8 +57,8 @@ public class Event {
         return this.userId;
     }
 
-    public void setUserId(Integer userid) {
-        this.userId = userid;
+    public void setUserId(Integer userId) {
+         this.userId = userId;
     }
 
     public String getName() {
@@ -93,6 +93,19 @@ public class Event {
 	 }
 	 
 	 
+	 	
+	 
+	    @ManyToOne
+	    @JoinColumn(name = "CATEGORY_ID", insertable = false, updatable = false)
+	    private Category category;
+	    
+	    public Category getCategory() {
+	        return this.category;
+	    }
+	    public void setCategory(Category category) {
+	        this.category = category;
+	    }
+	    
 	    @ManyToOne
 	    @JoinColumn(name = "USER_ID", insertable = false, updatable = false)
 	    private User user;
