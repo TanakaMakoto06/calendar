@@ -1,5 +1,6 @@
 package com.example.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -74,14 +75,27 @@ public class EventService {
         return this.eventRepository.save(event);
     }
 
-	public void delete(Integer id, EventForm eventForm) {
-		
-		
+//	public void delete(Integer id, EventForm eventForm) {
+//		this.eventRepository.deleteById(id);
+//		
+//		
+//	}
+	public void delete(Integer id) {
+	    this.eventRepository.deleteById(id);
 	}
+	
+//	 public Event delete(Integer id) {
+//    // idから該当のEntityクラスを取得します
+//    //Event event = this.findById(id);
+//    // EntityクラスのdeletedAtフィールドを現在日時で上書きします
+//    event.setDeletedAt(LocalDateTime.now());
+//    // 更新処理
+//    return this.eventRepository.save(event);
+//}
 
 	
 
 	
-
-   
 }
+   
+

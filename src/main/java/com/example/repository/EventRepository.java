@@ -22,4 +22,6 @@ public interface EventRepository extends JpaRepository<Event, Long> {
 
 	Optional<Event> findById(Integer id);
 
+	void deleteById(Integer id);
+
 }

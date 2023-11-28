@@ -2,7 +2,7 @@ package com.example.controller;
 
 
 import java.util.List;// この行を追加(稲本)
-
+import java.util.Optional;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -93,12 +93,24 @@ public class EventController {
 
 	// イベント削除の実行
 	@PostMapping("sakujo/{id}")
-	public String sakujo(@PathVariable("id") Integer id,@AuthenticationPrincipal LoginUser loginUser,
-				@ModelAttribute("eventForm") EventForm eventForm) {
-		this.eventService.delete(id,eventForm);
+	public String sakujo(@PathVariable("id") Integer id,@AuthenticationPrincipal LoginUser loginUser) {
+		this.eventService.delete(id);
 		// 処理を追加
+//		Optional<Event> optionalEvent = this.eventRepository.findById(id);
+//		
+//		Event event = optionalEvent.get();
+//        this.eventRepository.delete(event);
+		this.eventService.delete(id);
+
+		
 		return "redirect:/calendar";
 	}
+	
+//	@PostMapping("/calendar/henshu/sakujo/{id}")
+//	public String deleteEvent(@PathVariable Integer id) {
+//	    eventService.delete(id);
+//	    return "redirect:/calendar"; // 削除後のリダイレクト先を適切なものに変更
+//	}
 
 	//    検索機能の実装
 	@GetMapping("/searchEvent")
