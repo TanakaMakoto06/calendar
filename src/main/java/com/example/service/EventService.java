@@ -25,9 +25,9 @@ public class EventService {
         this.eventRepository = eventRepository;
     }
 
-    public List<Event> getEventsForMonth(int year, int month) {
-        // EventRepository を使用して、指定された年と月のイベントを取得するロジック
-        return eventRepository.findEventsForMonth(year, month);
+    public List<Event> getEventsForDay(int year, int month, int day) { // 稲本記述追加
+        // EventRepository を使用して、指定された年、月、日のイベントを取得するロジック
+        return eventRepository.findEventsForDay(year, month, day); // 稲本記述追加
     }
     public List<Event> findAll() {
         return this.eventRepository.findAll();
@@ -46,6 +46,7 @@ public class EventService {
         // EventRepository を使用して、新しいイベントを作成するロジック
         return eventRepository.save(event);
     }
+
     
     
     public Event findById(Integer id) {
@@ -93,9 +94,6 @@ public class EventService {
 //    return this.eventRepository.save(event);
 //}
 
-	
-
-	
 }
    
 
