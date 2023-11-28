@@ -68,15 +68,13 @@ public class LoginUser implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+    
+    // ユーザーのIDを返すメソッド
+    public Integer getId() {
+        return this.user.getId();
+    }
 
-	public Integer getId() {
-		// TODO 自動生成されたメソッド・スタブ
-		 return this.id;
-	}
 	
-	public void setId(Integer id) {
-		this.id = id;
-	}
 
 	
 }
