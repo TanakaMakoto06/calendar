@@ -10,21 +10,26 @@
 
 <body>
 
-	<h1 align="center">新規イベント</h1>
+	<h1>新規イベント</h1>
 	<!-- 登録処理のHTTPメソッドはPOSTにします -->
 	<form id="eventForm" th:action="@{/calendar/toroku}" th:object="${eventForm}" method="post">
 		<div>
-			<label align="center">タイトル</label>
+			<h2>タイトル</h2>
 		</div>
 		<div>
 
 			<input type="text" th:field="*{name}" placeholder="イベント名を入力してください">
 		</div>
-		<div>
-			<input type="radio" th:field="*{categoryId}" name="categoryId" value="1" align="center"
+		<div align="center">
+			<label>
+			<input type="radio" th:field="*{categoryId}" name="categoryId" value="1"  align="center"
 				th:checked="${eventForm.categoryId == 1}">室内
-			<input type="radio" th:field="*{categoryId}" name="categoryId" value="2" align="center"
+			</label>
+			
+			<label>
+			<input type="radio" th:field="*{categoryId}" name="categoryId" value="2"  align="center"
 				th:checked="${eventForm.categoryId == 2}">屋外
+			</label>
 
 		</div>
 		<!--		<select th:field="*{categoryId}">-->
@@ -54,12 +59,12 @@
            		 <input type="datetime-local"  th:field="*{endevent}"  name="endTime">
        		 </div>
 		</div>
-        <div>
-            <input type="submit"  align="center" name="send" value="追加する">
+        <div align="center">
+            <input type="submit" name="send" value="追加する">
         </div>
         </form>
         <!-- 一覧に戻る -->
-        <div>
+        <div align="center">
 			<form th:action="@{/calendar}" method="get">
     			<input type="submit" value="戻る">
 			</form>
