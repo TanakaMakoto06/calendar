@@ -18,53 +18,54 @@ let events = [];
 
 // サーバーから最新のイベントリストを取得してevents配列を更新する関数
 function updateEvents() {
-    // サーバーにGETリクエストを送信
-    return fetch(`/calendar/eventsForDay?year=${currentDate.getFullYear()}&month=${currentDate.getMonth() + 1}&day=${currentDate.getDate()}`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            // データの確認
-            console.log(data);
-            // レスポンスが配列であることを確認
-            if (Array.isArray(data)) {
-                // events配列を更新
-                events = data.map(event => ({
-                    ...event,
-                    date: new Date(event.startevent)  // starteventフィールドをDateオブジェクトに変換
-                }));
-            } else {
-                console.error('Error: data is not an array');
-            }
-            // events配列の確認
-            console.log(events);  // この行を追加
-        })
-        .catch(error => console.error('Error:', error));
+	// サーバーにGETリクエストを送信
+	return fetch(`/calendar/eventsForDay?year=${currentDate.getFullYear()}&month=${currentDate.getMonth() + 1}&day=${currentDate.getDate()}`)
+		.then(response => {
+			if (!response.ok) {
+				throw new Error(`HTTP error! status: ${response.status}`);
+			}
+			return response.json();
+		})
+		.then(data => {
+			// データの確認
+			console.log(data);
+			// レスポンスが配列であることを確認
+			if (Array.isArray(data)) {
+				// events配列を更新
+				events = data.map(event => ({
+					...event,
+					date: new Date(event.startevent)  // starteventフィールドをDateオブジェクトに変換
+				}));
+			} else {
+				console.error('Error: data is not an array');
+			}
+			// events配列の確認
+			console.log(events);  // この行を追加
+		})
+		.catch(error => console.error('Error:', error));
 }
 
-// OpenWeatherMapのAPIキー
-const apiKey = '0ba98d8fb694bf4346615212f28699d1';
+function fetchWeather(lat, lon) {
+    const apiKey = '0ba98d8fb694bf4346615212f28699d1';
+    const url = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+
+    return fetch(url)
+        .then(response => response.json())
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
 
 // 緯度と経度(東京の天気)
 const lat = '35.6895';
 const lon = '139.6917';
 
-// APIリクエストのURL
-const url = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
-
 // APIリクエストを送信
-fetch(url)
-	.then(response => response.json())
-	.then(data => {
-		// レスポンスを処理し、カレンダーを生成
-		generateCalendar(currentDate, data);
-	})
-	.catch(error => {
-		console.error('Error:', error);
-	});
+fetchWeather(lat, lon)
+    .then(data => {
+        // レスポンスを処理し、カレンダーを生成
+        generateCalendar(currentDate, data);
+    });
 
 function addCellClickEventListeners() {
 	// カレンダーの各セルにクリックイベントリスナーを追加
@@ -218,25 +219,29 @@ function generateCalendar(date, data) {
 
 // 前月ボタンのクリックイベント
 prevMonthBtn.addEventListener('click', () => {
-	app.post('/calendar/toroku', function(req, res) {
-		// 新規イベントのデータを取得
-		var newEvent = req.body.eventForm;
-
-		// 新規イベントのデータをevents配列に追加
-		events.push(newEvent);
-
-		// レスポンスを送信
-		res.send('Event added successfully');
-	});
+	//	app.post('/calendar/toroku', function(req, res) {
+	//		// 新規イベントのデータを取得
+	//		var newEvent = req.body.eventForm;
+	//
+	//		// 新規イベントのデータをevents配列に追加
+	//		events.push(newEvent);
+	//
+	//		// レスポンスを送信
+	//		res.send('Event added successfully');
+	//	});
 	currentDate.setMonth(currentDate.getMonth() - 1);
-	generateCalendar(currentDate);
+	fetchWeather(lat, lon).then(data => {
+		generateCalendar(currentDate, data);
+	});
 });
 
 
 // 次月ボタンのクリックイベント
 nextMonthBtn.addEventListener('click', () => {
 	currentDate.setMonth(currentDate.getMonth() + 1);
-	generateCalendar(currentDate);
+	fetchWeather(lat, lon).then(data => {
+		generateCalendar(currentDate, data);
+	});
 });
 
 // 検索ボタンのクリックイベント
@@ -353,13 +358,17 @@ monthSelect.value = currentDate.getMonth() + 1;
 // 年のセレクトボックスの変更イベント
 yearSelect.addEventListener('change', () => {
 	currentDate.setFullYear(yearSelect.value);
-	generateCalendar(currentDate);
+	fetchWeather(lat, lon).then(data => {
+		generateCalendar(currentDate, data);
+	});
 });
 
 // 月のセレクトボックスの変更イベント
 monthSelect.addEventListener('change', () => {
 	currentDate.setMonth(monthSelect.value - 1);
-	generateCalendar(currentDate);
+	fetchWeather(lat, lon).then(data => {
+		generateCalendar(currentDate, data);
+	});
 });
 
 // 初期表示のカレンダー生成
