@@ -55,10 +55,13 @@
 <!--						 class属性にtbl-btnを追加 -->
                         <input class="tbl-btn" type="submit" value="削除">
              </form>
-        <div>
-            <!-- 一覧に戻る -->
-            <a href="/calendar"  class="btn-style-link"  align="center">戻る</a>
-        </div>
+        
     </form>
+    <div>
+			<form th:action="@{/calendar}" method="get">
+    			<input type="submit" value="戻る">
+			</form>
+			
+        </div>
 </body>
 </html>

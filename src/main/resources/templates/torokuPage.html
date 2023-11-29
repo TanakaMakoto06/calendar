@@ -50,12 +50,14 @@
         <div>
             <input type="submit"  align="center" name="send" value="追加する">
         </div>
+        </form>
         <!-- 一覧に戻る -->
         <div>
-			<a class="back-button" align="center"  href="/calendar">戻る</a>
-<!--			<button class="back-button"  href="/calendar"  align="center">戻る</button>-->
-           
+			<form th:action="@{/calendar}" method="get">
+    			<input type="submit" value="戻る">
+			</form>
+			
         </div>
-    </form>
+    
 </body>
 </html>
