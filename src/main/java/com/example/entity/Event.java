@@ -95,16 +95,21 @@ public class Event {
 	 
 	 	
 	 
-	    @ManyToOne
-	    @JoinColumn(name = "CATEGORY_ID", insertable = false, updatable = false)
-	    private Category category;
-	    
-	    public Category getCategory() {
-	        return this.category;
-	    }
-	    public void setCategory(Category category) {
-	        this.category = category;
-	    }
+//	 下記のコメントアウトについては44,72,76行目の定義内容と被っているためエラーが発生したためコメントアウトしました。
+//	 44行目：category
+//	 72行目：getCategory
+//	 76行目：setCategory(Category category)
+	 
+//	    @ManyToOne
+//	    @JoinColumn(name = "CATEGORY_ID", insertable = false, updatable = false)
+//	    private Category category;
+//	    
+//	    public Category getCategory() {
+//	        return this.category;
+//	    }
+//	    public void setCategory(Category category) {
+//	        this.category = category;
+//	    }
 	    
 	    @ManyToOne
 	    @JoinColumn(name = "USER_ID", insertable = false, updatable = false)
