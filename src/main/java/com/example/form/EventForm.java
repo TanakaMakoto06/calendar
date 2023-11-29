@@ -3,19 +3,22 @@ package com.example.form;
 
 import java.time.LocalDateTime;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 
 
 public class EventForm {	
 	
 	 private String name;
 	 
-	 //private Integer userid;
+	 private Integer userid;
+	
 	 
-	 //private Integer categoryId;
+	 @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+	 private  LocalDateTime startevent;
 	 
-	 private  LocalDateTime startdatetime;
-	 
-	 private  LocalDateTime enddatetime;
+	 @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+	 private  LocalDateTime endevent;
 
 	 private Integer categoryId;
 
@@ -30,13 +33,13 @@ public class EventForm {
 	        this.name = name;
 	 }
 	 
-//	 public Integer getUserid() {
-//	        return this.userid;
-//	 }
-//	 
-//	 public void setUserid(int userid) {
-//	        this.userid = userid;
-//	 }
+	 public Integer getUserId() {
+	        return this.userid;
+	 }
+	 
+	 public void setUserId(Integer userid) {
+	        this.userid = userid;
+	 }
 //	 
 //	 public Category getCategory() {
 //		 return this.category;
@@ -54,20 +57,21 @@ public class EventForm {
 	 }
 	 
 	 
-	 public LocalDateTime getStartdatetime() {
-	        return this.startdatetime;
+	 public LocalDateTime getStartevent() {
+	        return this.startevent;
 	    }
 	    
-	    public void  setStartdatetime(LocalDateTime startdatetime) {
-	         this.startdatetime = startdatetime;
+	    public void  setStartevent(LocalDateTime startevent) {
+	         this.startevent = startevent;
 	    }
 	    
-	    public LocalDateTime getEnddatetime() {
-	        return this.enddatetime;
+	    public LocalDateTime getEndevent() {
+	        return this.endevent;
 	    }
 	    
-	    public void  setEnddatatime(LocalDateTime enddatetime) {
-	         this.enddatetime = enddatetime;
+	    public void  setEndevent(LocalDateTime endevent) {
+	         this.endevent = endevent;
 	    }
+		
 		
 }

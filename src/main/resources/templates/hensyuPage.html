@@ -2,16 +2,17 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet"  href="/css/event.css" >
 <title></title>
 </head>
 <body>
 	
  <!-- 見出しが変わります -->
-    <h1>イベント編集</h1>
+    <h1 align="center">イベント編集</h1>
     <!-- 登録処理のHTTPメソッドはPOSTにします -->
-    <form th:action="@{/event/henshu/{id}(id=${id})}" th:object="${eventForm}" method="post">
+    <form th:action="@{/calendar/henshu/{id}(id=${id})}" th:object="${eventForm}" method="post">
         <div>
-            <label>イベント名</label>
+            <label align="center">イベント名</label>
         </div>
         <div>
             <!-- 商品名はtextにします、th:field属性の値は*{フィールド名}です -->
@@ -19,42 +20,44 @@
         </div>
         
         <div>
-            <form>
-				<input type="radio" name="ラベル1" value="室内">室内
-				<input type="radio" name="ラベル1" value="屋外">屋外
-				
-			</form>
+            <input type="radio" th:field="*{categoryId}" name="categoryId" value="2" align="center" th:checked="${eventForm.categoryId == 2}">室内
+        	<input type="radio" th:field="*{categoryId}"  name="categoryId" value="1" align="center" th:checked="${eventForm.categoryId == 1}">屋外
         </div>
         
-         <div>
-			<select name="ラベル">
-    			<option value="work">仕事</option>
-    			<option value="travel">旅行</option>
-    			<option value="recreation">遊び</option>
-    			<option value="Private">プライベート</option>
-			</select>
-		</div>
+<!--         <div>-->
+<!--			<select name="ラベル">-->
+<!--    			<option value="work">仕事</option>-->
+<!--    			<option value="travel">旅行</option>-->
+<!--    			<option value="recreation">遊び</option>-->
+<!--    			<option value="Private">プライベート</option>-->
+<!--			</select>-->
+<!--		</div>-->
 		
 		<div>
-			 <label>
-          			 開始
-           		 <input type="datetime-local">
-       		 </label>
+			 <div align="center">
+    			<h2>開始</h2>
+    			<input type="datetime-local"  th:field="*{startevent}" name="startTime">
+			</div>
 		</div>
 		<div>
-			 <label>
-          			 終了
-           		 <input type="datetime-local">
-       		 </label>
+			 <div align="center">
+          		 <h2>終了</h2>
+           		 <input type="datetime-local"  th:field="*{endevent}"  name="endTime">
+       		 </div>
 		</div>
 		
        
         <div>
-            <input type="submit" name="send" value="完了">
+             <input type="submit"  align="center" name="send" value="完了">
         </div>
+        
+         	<form th:action="@{/calendar/henshu/sakujo/{id}(id=${id})}"  method="post">
+<!--						 class属性にtbl-btnを追加 -->
+                        <input class="tbl-btn" type="submit" value="削除">
+             </form>
         <div>
             <!-- 一覧に戻る -->
-            <a href="/calendar">戻る</a>
+            <a href="/calendar"  class="btn-style-link"  align="center">戻る</a>
         </div>
     </form>
 </body>
