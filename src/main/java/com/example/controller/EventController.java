@@ -7,12 +7,15 @@ import java.util.List;// この行を追加(稲本)
 
 import java.util.List;// この行を追加(稲本)
 
+<<<<<<< HEAD
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 >>>>>>> development
 
+=======
+>>>>>>> development
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -87,27 +90,54 @@ public class EventController {
 		}
 	
 	// イベント編集ページ
-	@GetMapping("henshu/{id}")
-	public String henshuPage(@PathVariable("id") Integer id, Model model,
+	@GetMapping("hensyuPage/{id}")
+	public String henshuPage(@PathVariable("id") Integer id, Model model, @AuthenticationPrincipal LoginUser loginUser,
 			@ModelAttribute("eventForm") EventForm eventForm) {
+		 Event event = this.eventService.findById(id);
+		
+		 eventForm.setName(event.getName());
+		 eventForm.setCategoryId(event.getCategory().getId());
+	     //eventForm.setUserId(loginUser().getId()); // loginUser.getId()を使用 event.getUserId()
+	     eventForm.setStartevent(event.getStartevent());
+	     eventForm.setEndevent(event.getEndevent());
+		 model.addAttribute("eventForm", eventForm);
 		// 処理を追加
-		return "calendar/henshuPage";
+		return "hensyuPage";
 	}
+
+	
 
 	// イベント編集の実行
 	@PostMapping("henshu/{id}")
-	public String henshu(@PathVariable("id") Integer id, @ModelAttribute("eventForm") EventForm eventForm) {
+	public String henshu(@PathVariable("id") Integer id,@AuthenticationPrincipal LoginUser loginUser,
+				EventForm eventForm) {
+		
 		// 処理を追加
-
+		Event update = this.eventService.update(id, eventForm,loginUser);
+		
 		return "redirect:/calendar";
 	}
 
 	// イベント削除の実行
 	@PostMapping("sakujo/{id}")
-	public String sakujo(@PathVariable("id") Integer id) {
+	public String sakujo(@PathVariable("id") Integer id,@AuthenticationPrincipal LoginUser loginUser) {
+		this.eventService.delete(id);
 		// 処理を追加
+//		Optional<Event> optionalEvent = this.eventRepository.findById(id);
+//		
+//		Event event = optionalEvent.get();
+//        this.eventRepository.delete(event);
+		this.eventService.delete(id);
+
+		
 		return "redirect:/calendar";
 	}
+	
+//	@PostMapping("/calendar/henshu/sakujo/{id}")
+//	public String deleteEvent(@PathVariable Integer id) {
+//	    eventService.delete(id);
+//	    return "redirect:/calendar"; // 削除後のリダイレクト先を適切なものに変更
+//	}
 
 	//    検索機能の実装
 	@GetMapping("/searchEvent")
