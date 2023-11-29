@@ -1,11 +1,8 @@
 package com.example.controller;
 
 
+
 import java.util.List;// この行を追加(稲本)
-import java.util.Optional;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.entity.Event;
-import com.example.entity.User;
 import com.example.form.EventForm;
 import com.example.repository.EventRepository;
 import com.example.service.CategoryService;
@@ -33,14 +29,22 @@ public class EventController {
 
 	private EventService eventService;
 	private CategoryService categoryService;
-	private final EventRepository eventRepository;  // この行を追加(稲本)
+	private final EventRepository eventRepository; // この行を追加(稲本)
 
 	@Autowired
-	public EventController(EventService eventService, CategoryService categoryService, EventRepository eventRepository) {
+	public EventController(EventService eventService, CategoryService categoryService,
+			EventRepository eventRepository) {
 		this.eventService = eventService;
 		this.categoryService = categoryService; // 追加
 		this.eventRepository = eventRepository; // この行を追加(稲本)
-		
+
+	}
+
+	@GetMapping("/eventsForDay")
+	public ResponseEntity<List<Event>> getEventsForDay(@RequestParam int year, @RequestParam int month,
+			@RequestParam int day) {
+		List<Event> events = eventService.getEventsForDay(year, month, day);
+		return ResponseEntity.ok(events);
 	}
 
 	// 新規イベント登録ページ表示用
@@ -69,7 +73,7 @@ public class EventController {
 		 Event event = this.eventService.findById(id);
 		
 		 eventForm.setName(event.getName());
-	     eventForm.setCategoryId(event.getCategoryId());
+		 eventForm.setCategoryId(event.getCategory().getId());
 	     //eventForm.setUserId(loginUser().getId()); // loginUser.getId()を使用 event.getUserId()
 	     eventForm.setStartevent(event.getStartevent());
 	     eventForm.setEndevent(event.getEndevent());

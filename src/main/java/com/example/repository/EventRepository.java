@@ -10,11 +10,12 @@ import org.springframework.data.repository.query.Param;
 import com.example.entity.Event;
 
 public interface EventRepository extends JpaRepository<Event, Long> {
-	
-	
 
-    @Query("SELECT e FROM Event e WHERE YEAR(e.startevent) = :year AND MONTH(e.startevent) = :month")
-    List<Event> findEventsForMonth(@Param("year") int year, @Param("month") int month);
+
+	// 稲本記述追加
+	@Query("SELECT e FROM Event e WHERE YEAR(e.startevent) = :year AND MONTH(e.startevent) = :month AND DAY(e.startevent) = :day")
+	List<Event> findEventsForDay(@Param("year") int year, @Param("month") int month, @Param("day") int day);
+
     
 //    曖昧検索用
     @Query("SELECT e FROM Event e WHERE e.name LIKE %:name%")
