@@ -29,14 +29,14 @@ div label {
   margin-right: 3px;/* ラベル間の余白を調整する場合、必要に応じて設定 */
 }
 
-input[type="text"],
-input[type="datetime-local"],
-input[type="radio"],
-input[type="submit"] {
-    display: inline-block;
-    margin: 30px auto;
+/*input[type="text"],*/
+/*input[type="datetime-local"],*/
+/*input[type="radio"],*/
+/*input[type="submit"] {*/
+/*    display: inline-block;*/
+/*    margin: 30px auto;*/
    
-}
+/*}*/
 
 
 input[type = "text"] {
@@ -63,7 +63,6 @@ input[type="radio"] {
 input[type="submit"] {
     display:inline;
     cursor: pointer;
-    margin: auto;
     background-color: #007bff;
     color: #fff;
     border: none;
@@ -71,12 +70,11 @@ input[type="submit"] {
     font-size: 16px;
     cursor: pointer;
     border-radius: 4px;
-    
+    margin-left: 10px;
 }
 
 input[type="submit"]:hover {
     background-color: cadetblue;
-    margin: auto;
 }
 
 

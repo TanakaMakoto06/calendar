@@ -50,8 +50,6 @@ public class EventController {
 	// 新規イベント登録ページ表示用
 	@GetMapping("torokuPage")
 	public String torokuPage(@ModelAttribute("eventForm") EventForm eventForm, Model model) {
-		// 処理を追加
-		Event event = new Event();
 		
 		return "torokuPage";
 	}
@@ -88,7 +86,6 @@ public class EventController {
 	@PostMapping("henshu/{id}")
 	public String henshu(@PathVariable("id") Integer id,@AuthenticationPrincipal LoginUser loginUser,
 				EventForm eventForm) {
-		
 		// 処理を追加
 		Event update = this.eventService.update(id, eventForm,loginUser);
 		
@@ -96,26 +93,13 @@ public class EventController {
 	}
 
 	// イベント削除の実行
-	@PostMapping("sakujo/{id}")
-	public String sakujo(@PathVariable("id") Integer id,@AuthenticationPrincipal LoginUser loginUser) {
+	@PostMapping("/calendar/henshu/sakujo/{id}")
+	public String sakujo(@PathVariable("id") Integer id) {
 		this.eventService.delete(id);
-		// 処理を追加
-//		Optional<Event> optionalEvent = this.eventRepository.findById(id);
-//		
-//		Event event = optionalEvent.get();
-//        this.eventRepository.delete(event);
-		this.eventService.delete(id);
-
-		
+		// 削除後のリダイレクト
 		return "redirect:/calendar";
 	}
 	
-//	@PostMapping("/calendar/henshu/sakujo/{id}")
-//	public String deleteEvent(@PathVariable Integer id) {
-//	    eventService.delete(id);
-//	    return "redirect:/calendar"; // 削除後のリダイレクト先を適切なものに変更
-//	}
-
 	//    検索機能の実装
 	@GetMapping("/searchEvent")
 	public ResponseEntity<List<Event>> searchEvents(@RequestParam String name) {
