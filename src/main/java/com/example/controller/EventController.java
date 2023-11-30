@@ -95,7 +95,8 @@ public class EventController {
 	// イベント削除の実行
 	@PostMapping("/calendar/henshu/sakujo/{id}")
 	public String sakujo(@PathVariable("id") Integer id) {
-		this.eventService.delete(id);
+		eventService.deleteEventById(id);
+		
 		// 削除後のリダイレクト
 		return "redirect:/calendar";
 	}

@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet"  href="/css/event.css" >
 <title></title>
+
 </head>
 <body>
 	
@@ -59,10 +60,12 @@
         </div>
         
         <div align="center">
-         	<form th:action="@{/calendar/henshu/sakujo/{id}(id=${id})}"  method="post">
+<!--         	<form th:href="@{/calendar/henshu/sakujo/{id}(id=${id})}"  method="post">-->
 <!--						 class属性にtbl-btnを追加 -->
-                        <input class="tbl-btn" type="submit" value="削除">
-             </form>
+<!--                        <input class="tbl-btn" type="submit" value="削除">-->
+<!--             </form>-->
+			<a th:href="@{/calendar/henshu/sakujo/{id}(id=${id})}" class="tbl-btn" onclick="return confirm('本当に削除しますか？')">削除</a>
+<!--             th:href   action-->
          </div>
         
     </form>

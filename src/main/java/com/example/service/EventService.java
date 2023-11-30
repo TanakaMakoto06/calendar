@@ -78,11 +78,15 @@ public class EventService {
 		// repository.saveメソッドを利用してデータの保存を行います
 		return this.eventRepository.save(event);
 	}
+	
 
 	// データ削除用のメソッドです
-	public void delete(Integer id) {
-		this.eventRepository.deleteById(id);
-	}
+    public void deleteEventById(Integer eventid) {
+        eventRepository.deleteById(eventid);
+    }
+
+	
+	
 
 	
 }
