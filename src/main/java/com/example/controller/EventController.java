@@ -1,7 +1,7 @@
 package com.example.controller;
 
 
-import java.util.List;　// この行を追加(稲本)
+import java.util.List;// この行を追加(稲本)
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
