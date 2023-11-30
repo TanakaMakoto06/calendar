@@ -50,8 +50,6 @@ public class EventController {
 	// 新規イベント登録ページ表示用
 	@GetMapping("torokuPage")
 	public String torokuPage(@ModelAttribute("eventForm") EventForm eventForm, Model model) {
-		// 処理を追加
-		Event event = new Event();
 		
 		return "torokuPage";
 	}
@@ -88,34 +86,39 @@ public class EventController {
 	@PostMapping("henshu/{id}")
 	public String henshu(@PathVariable("id") Integer id,@AuthenticationPrincipal LoginUser loginUser,
 				EventForm eventForm) {
-		
 		// 処理を追加
 		Event update = this.eventService.update(id, eventForm,loginUser);
 		
 		return "redirect:/calendar";
 	}
+	
+	// イベント詳細ページ
+	@GetMapping("/syousaiPage/{id}")
+
+	public String syousaiPage(@PathVariable("id") Integer id, Model model, @AuthenticationPrincipal LoginUser loginUser,
+			@ModelAttribute("eventForm") EventForm eventForm) {
+		 Event event = this.eventService.findById(id);
+		
+		 eventForm.setName(event.getName());
+		 eventForm.setCategoryId(event.getCategory().getId());
+	     //eventForm.setUserId(loginUser().getId()); // loginUser.getId()を使用 event.getUserId()
+	     eventForm.setStartevent(event.getStartevent());
+	     eventForm.setEndevent(event.getEndevent());
+		 model.addAttribute("eventForm", eventForm);
+
+	    return "syousaiPage"; // syousaiPage.html への遷移
+	}
+
 
 	// イベント削除の実行
-	@PostMapping("sakujo/{id}")
-	public String sakujo(@PathVariable("id") Integer id,@AuthenticationPrincipal LoginUser loginUser) {
-		this.eventService.delete(id);
-		// 処理を追加
-//		Optional<Event> optionalEvent = this.eventRepository.findById(id);
-//		
-//		Event event = optionalEvent.get();
-//        this.eventRepository.delete(event);
-		this.eventService.delete(id);
-
+	@PostMapping("/calendar/henshu/sakujo/{id}")
+	public String sakujo(@PathVariable("id") Integer id) {
+		eventService.deleteEventById(id);
 		
+		// 削除後のリダイレクト
 		return "redirect:/calendar";
 	}
 	
-//	@PostMapping("/calendar/henshu/sakujo/{id}")
-//	public String deleteEvent(@PathVariable Integer id) {
-//	    eventService.delete(id);
-//	    return "redirect:/calendar"; // 削除後のリダイレクト先を適切なものに変更
-//	}
-
 	//    検索機能の実装
 	@GetMapping("/searchEvent")
 	public ResponseEntity<List<Event>> searchEvents(@RequestParam String name) {
