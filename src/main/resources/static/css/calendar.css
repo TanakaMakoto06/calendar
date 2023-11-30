@@ -131,11 +131,9 @@
 		}
 
 		/* 検索バーの初期非表示スタイル */
-		#searchBar {
-			z-index: 5;
-			/* 他の要素の前面に表示 */
-			display: block;
-		}
+/*		#searchBar {*/
+/*			z-index: 5;*/
+/*		}*/
 
 		/* 前月と翌月の日付のスタイル */
 		#calendar .prev-month,
