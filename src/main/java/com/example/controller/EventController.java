@@ -91,6 +91,24 @@ public class EventController {
 		
 		return "redirect:/calendar";
 	}
+	
+	// イベント詳細ページ
+	@GetMapping("/syousaiPage/{id}")
+
+	public String syousaiPage(@PathVariable("id") Integer id, Model model, @AuthenticationPrincipal LoginUser loginUser,
+			@ModelAttribute("eventForm") EventForm eventForm) {
+		 Event event = this.eventService.findById(id);
+		
+		 eventForm.setName(event.getName());
+		 eventForm.setCategoryId(event.getCategory().getId());
+	     //eventForm.setUserId(loginUser().getId()); // loginUser.getId()を使用 event.getUserId()
+	     eventForm.setStartevent(event.getStartevent());
+	     eventForm.setEndevent(event.getEndevent());
+		 model.addAttribute("eventForm", eventForm);
+
+	    return "syousaiPage"; // syousaiPage.html への遷移
+	}
+
 
 	// イベント削除の実行
 	@PostMapping("/calendar/henshu/sakujo/{id}")
