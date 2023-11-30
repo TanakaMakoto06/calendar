@@ -1,3 +1,14 @@
+//	 カレンダー要素や各種ボタン、セレクトボックスなどの取得
+const logoutBtn = document.getElementById('logoutBtn');
+
+// ログアウトボタンのクリックイベント
+logoutBtn.addEventListener('click', () => {
+	// ログアウト処理をここに記述
+	// ここでログアウト処理を行う
+	// 例えば、セッションストレージをクリアしてログインページにリダイレクトする
+	sessionStorage.clear();
+	window.location.href = "loginForm";
+});
 
 document.addEventListener('DOMContentLoaded', function() {
 	const scheduleContainer = document.getElementById('schedule');
@@ -10,6 +21,21 @@ document.addEventListener('DOMContentLoaded', function() {
 		// 遷移先のURLを設定し、window.location.href を使用して遷移させる
 		window.location.href = '/calendar';
 	});
+	// スクロール時のイベントを追加
+    window.addEventListener('scroll', function() {
+        const distanceFromTop = scheduleContainer.getBoundingClientRect().top;
+        const buttonPosition = distanceFromTop + 20; // ボタンが表示されるトリガーポイントの距離
+
+        if (window.scrollY > buttonPosition) {
+            backButton.style.position = 'fixed';
+            backButton.style.top = '20px';
+            backButton.style.right = '20px';
+        } else {
+            backButton.style.position = 'absolute';
+            backButton.style.top = '20px';
+            backButton.style.right = '20px';
+        }
+    });
 
 	// サンプルのイベントデータ（仮定）
 	const eventData = [
