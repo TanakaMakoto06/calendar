@@ -150,16 +150,9 @@ function generateCalendar(date, data) {
 		// 日付と天気アイコンを表示するセルを生成し、土曜日や日曜日の場合は 'weekend' クラスを追加
 		calendarHtml += `<td class="${dayOfWeek === 0 || dayOfWeek === 6 ? 'weekend' : ''}${new Date().getDate() ===
 			i && new Date().getMonth() === date.getMonth() && new Date().getFullYear() === date.getFullYear() ? ' today' : ''}">
-<<<<<<< HEAD
-<span>${i}</span><div class="weather-icon"><img src="http://openweathermap.org/img/w/${weatherIcon}.png"></div>${eventTitle ? `<div class="event" onclick="goToEventDetailPage('${eventTitle}')">${eventTitle}</div>`
-				: ''}</td>`;
 
-
-
-=======
 <span>${i}</span><div class="weather-icon"><img src="http://openweathermap.org/img/w/${weatherIcon}.png"></div>${eventTitle ? `<div class="event" onclick="goToEventDetailPage(event, '${eventTitle}')">${eventTitle}</div>`
 				: ''}</td>`; // 修正：イベントタイトルをセルに追加
->>>>>>> development
 
 		// 土曜日または月の最後の日の場合、行を終了
 		if (dayOfWeek === 6 || i === daysInMonth) {
@@ -254,14 +247,6 @@ nextMonthBtn.addEventListener('click', () => {
 });
 
 // 検索ボタンのクリックイベント
-<<<<<<< HEAD
-searchBtn.addEventListener('click', () => {
-	const searchText = searchBar.value;
-	searchBar.style.display = searchBar.style.display === 'none' ? 'block' : 'none';
-	const filteredEvents = events.filter(event => event.title.includes(searchText));
-	// そして、結果を何らかの方法で表示する
-	displayEvents(filteredEvents);
-=======
 // 検索ボタンのクリックイベントをハンドルする
 searchBtn.addEventListener('click', function() {
 	// 検索バーの値を取得
@@ -310,7 +295,6 @@ searchBtn.addEventListener('click', function() {
 		.catch(error => {
 			console.error('Error:', error);
 		});
->>>>>>> development
 });
 
 

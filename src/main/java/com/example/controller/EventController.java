@@ -1,21 +1,9 @@
 package com.example.controller;
 
 
-<<<<<<< HEAD
-import java.util.List;// この行を追加(稲本)
-=======
 
 import java.util.List;// この行を追加(稲本)
 
-<<<<<<< HEAD
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
->>>>>>> development
-
-=======
->>>>>>> development
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -69,21 +57,10 @@ public class EventController {
 	}
 
 	// 新規イベント登録の実行
-<<<<<<< HEAD
-	@PostMapping("toroku")
-	public String toroku(EventForm eventForm, @AuthenticationPrincipal LoginUser loginUser) {
-		
-		this.eventService.save(eventForm, loginUser.getUser());
-
-		// 一覧ページへリダイレクトします
-		return "redirect:/calendar";
-	}
-=======
 		@PostMapping("toroku")
 		public String toroku(EventForm eventForm, @AuthenticationPrincipal LoginUser loginUser) {
 			
 			this.eventService.save(eventForm, loginUser.getUser());
->>>>>>> development
 
 			// 一覧ページへリダイレクトします
 			return "redirect:/calendar";
@@ -117,6 +94,24 @@ public class EventController {
 		
 		return "redirect:/calendar";
 	}
+	
+	// イベント詳細ページ
+	@GetMapping("/syousaiPage/{id}")
+
+	public String syousaiPage(@PathVariable("id") Integer id, Model model, @AuthenticationPrincipal LoginUser loginUser,
+			@ModelAttribute("eventForm") EventForm eventForm) {
+		 Event event = this.eventService.findById(id);
+		
+		 eventForm.setName(event.getName());
+		 eventForm.setCategoryId(event.getCategory().getId());
+	     //eventForm.setUserId(loginUser().getId()); // loginUser.getId()を使用 event.getUserId()
+	     eventForm.setStartevent(event.getStartevent());
+	     eventForm.setEndevent(event.getEndevent());
+		 model.addAttribute("eventForm", eventForm);
+
+	    return "syousaiPage"; // syousaiPage.html への遷移
+	}
+
 
 	// イベント削除の実行
 	@PostMapping("sakujo/{id}")

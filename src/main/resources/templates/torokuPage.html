@@ -9,42 +9,9 @@
 </head>
 
 <body>
-<<<<<<< HEAD
-    <h1 align="center" >新規イベント</h1>
-    <!-- 登録処理のHTTPメソッドはPOSTにします -->
-    <form th:action="@{/calendar/toroku}" th:object="${eventForm}" method="post">
-        <div>
-            <label align="center">タイトル</label>
-        </div>
-        <div>
-          
-            <input type="text"  th:field="*{name}" placeholder="イベント名を入力してください" >
-        </div>
-        <div>
-       			<input type="radio" th:field="*{categoryId}" name="categoryId" value="1" align="center" th:checked="${eventForm.categoryId == 0}">室内
-        		<input type="radio" th:field="*{categoryId}"  name="categoryId" value="2" align="center" th:checked="${eventForm.categoryId == 1}">屋外
-   			
-		</div>
-<!--		<select th:field="*{categoryId}">-->
-<!--                 カテゴリ一覧から選択できるようする -->
-<!--                <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>-->
-<!--            </select>-->
-<!--        <div>-->
-<!--    		<label for="eventType" align="center">イベントラベル</label>-->
-<!--    		<select name="ラベル" align="center" id="eventType">-->
-<!--        		<option value="work">仕事</option>-->
-<!--        		<option value="travel">旅行</option>-->
-<!--        		<option value="recreation">遊び</option>-->
-<!--        		<option value="Private">プライベート</option>-->
-<!--   			 </select>-->
-<!--		</div>-->
-		
-=======
-
 	<h1 align="center">新規イベント</h1>
 	<!-- 登録処理のHTTPメソッドはPOSTにします -->
 	<form id="eventForm" th:action="@{/calendar/toroku}" th:object="${eventForm}" method="post">
->>>>>>> development
 		<div>
 			<label align="center">タイトル</label>
 		</div>
