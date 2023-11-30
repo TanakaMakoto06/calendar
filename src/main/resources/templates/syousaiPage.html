@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="/css/eventSyousai.css">
+	<title></title>
+</head>
+
+<body>
+	<div>
+		<h1>イベント詳細</h1>
+	</div>
+	<div>
+		<labe>イベント名</label>
+	</div>
+	<div>
+		<span th:text="${eventForm.name}" align="center"></span>
+	</div>
+
+	<!-- ラジオボタンの選択部分を共通化 -->
+	<div>
+		<span th:if="${eventForm.categoryId == 1}" align="center">室内</span>
+		<span th:if="${eventForm.categoryId == 2}" align="center">屋外</span>
+	</div>
+
+	<div>
+		<div>
+			<h2>開始</h2>
+			<!-- 開始日時を表示する部分をinputからspanに変更 -->
+			<span th:text="${#temporals.format(eventForm.startevent, 'yyyy年MM月dd日 HH:mm')}" align="center"></span>
+		</div>
+	</div>
+	<div>
+		<div>
+			<h2>終了</h2>
+			<!-- 終了日時を表示する部分をinputからspanに変更 -->
+			<span th:text="${#temporals.format(eventForm.endevent, 'yyyy年MM月dd日 HH:mm')}" align="center"></span>
+		</div>
+	</div>
+	<div>
+	<a th:href="@{/calendar/hensyuPage/{id}(id=${id})}">
+			<button id="addEventBtn">イベント編集</button>
+		</a>
+
+	</div>
+	<div>
+		<!-- 削除ボタン -->
+		<input class="tbl-btn" type="submit" value="削除">
+	</div>
+
+	<div>
+		<!-- 一覧に戻る -->
+		<a href="/calendar" class="btn-style-link">戻る</a>
+	</div>
+</body>
+
+</html>

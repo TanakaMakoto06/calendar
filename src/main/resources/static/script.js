@@ -1,3 +1,4 @@
+
 //	 カレンダー要素や各種ボタン、セレクトボックスなどの取得
 const calendarEl = document.getElementById('calendar');
 const prevMonthBtn = document.getElementById('prevMonth');
@@ -158,6 +159,8 @@ function generateCalendar(date, data) {
 		});
 
 		calendarHtml += `</td>`; // 修正：イベントタイトルをセルに追加
+
+
 
 		// 土曜日または月の最後の日の場合、行を終了
 		if (dayOfWeek === 6 || i === daysInMonth) {
@@ -366,15 +369,10 @@ fetch(`/calendar/eventsForDay?year=${currentDate.getFullYear()}&month=${currentD
 	.catch(error => console.error('Error:', error));
 
 // イベント詳細ページへの遷移
-function goToEventDetailPage(event, title) {
-	// ブラウザのデフォルトのクリックイベントの動作をキャンセル
-	event.preventDefault();
-	// イベントの伝播を停止
-	event.stopPropagation();
+function goToEventDetailPage(title) {
 	// ここにイベント詳細ページへの遷移処理を記述
-	// イベントタイトルをクエリパラメータとして追加
-	window.location.href = 'eventsyousai?title=' + title;
 }
+
 
 
 // ログアウトボタンのクリックイベント
