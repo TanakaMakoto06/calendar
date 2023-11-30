@@ -17,13 +17,14 @@
 			display: flex;
 			justify-content: space-around;
 			/* 要素を中央に寄せる */
-			gap: 1px;
+			gap: 5px;
 			/* 要素間のスペースを設定 */
 			align-items: center;
 			padding: 10px;
 			background-color: #f3f3f3;
 			width: 100vw;
 		}
+
 
 		#header .group {
 			display: flex;
@@ -33,6 +34,8 @@
 		#header .group1 {
 			display: flex;
 			justify-content: space-between;
+			width: auto;
+			/* または具体的な幅を指定 */
 		}
 
 
@@ -203,7 +206,8 @@
 		#weather-container {
 			display: flex;
 			justify-content: space-around;
-			align-items: stretch; /* 追加 */
+			align-items: stretch;
+			/* 追加 */
 		}
 
 		#weather-icons {
