@@ -10,27 +10,101 @@
 <body>
 	<!-- ここにカレンダーのHTMLコードを挿入 -->
 	<div id="header">
-		<select id="yearSelect"></select>
-		<select id="monthSelect"></select>
-		<span id="currentYear"></span>
-		<span id="currentMonth"></span> <!-- 現在月の取得 -->
-		<button id="searchBtn">検索</button>
-		<input id="searchBar" type="text" placeholder="検索...">
-		<span id="username">UserName</span> <!--要修正：優先度低め-->
+		<div id="group">
+			<select id="yearSelect"></select>
+			<select id="monthSelect"></select>
+		</div>
+		<div id="group">
+			<span id="currentYear"></span>
+			<span id="currentMonth"></span> <!-- 現在月の取得 -->
+		</div>
+		<div id="group1">
+			<input id="searchBar" type="text" placeholder="検索...">
+			<button id="searchBtn">検索</button>
+		</div>
+		<div id="group">
+			<button id="prevMonth">前の月</button>
+			<button id="nextMonth">次の月</button>
+		</div>
+
 		<a href="/calendar/torokuPage">
 			<button id="addEventBtn">イベント新規登録</button>
 		</a>
-		<button id="logoutBtn">ログアウト</button>
-		<button id="prevMonth">前の月</button>
-		<button id="nextMonth">次の月</button>
+		<div id="group">
+			<span id="username">UserName</span> <!--要修正：優先度低め-->
+			<button id="logoutBtn">ログアウト</button>
+		</div>
 	</div>
-<!--	<div id="popup">-->
-<!--		<button id="closeBtn">×</button>-->
-<!--		 ポップアップの内容 -->
-<!--	</div>-->
+	<!--	<div id="popup">-->
+	<!--		<button id="closeBtn">×</button>-->
+	<!--		 ポップアップの内容 -->
+	<!--	</div>-->
 
 	<div id="calendar"></div>
 	<script src="/script.js"></script>
+
+	<!--天気アイコン説明部分-->
+	<div id="weather-container">
+		<div id="weather-explanation">
+			<div class="explanation">
+				<p>天気説明</p>
+			</div>
+			<div class="explanation">
+				<p>日中</p>
+			</div>
+			<div class="explanation">
+				<p>日没後</p>
+			</div>
+		</div>
+
+		<div id="weather-icons">
+			<div class="icon">
+				<p>快晴・晴天</p>
+				<img src="http://openweathermap.org/img/w/01d.png">
+				<img src="http://openweathermap.org/img/w/01n.png">
+			</div>
+			<div class="icon">
+				<p>ほぼ曇り</p>
+				<img src="http://openweathermap.org/img/w/02d.png">
+				<img src="http://openweathermap.org/img/w/02n.png">
+			</div>
+			<div class="icon">
+				<p>ところにより曇り</p>
+				<img src="http://openweathermap.org/img/w/03d.png">
+				<img src="http://openweathermap.org/img/w/03n.png">
+			</div>
+			<div class="icon">
+				<p>曇り</p>
+				<img src="http://openweathermap.org/img/w/04d.png">
+				<img src="http://openweathermap.org/img/w/04n.png">
+			</div>
+			<div class="icon">
+				<p>にわか雨</p>
+				<img src="http://openweathermap.org/img/w/09d.png">
+				<img src="http://openweathermap.org/img/w/09n.png">
+			</div>
+			<div class="icon">
+				<p>雨</p>
+				<img src="http://openweathermap.org/img/w/10d.png">
+				<img src="http://openweathermap.org/img/w/10n.png">
+			</div>
+			<div class="icon">
+				<p>雷雨</p>
+				<img src="http://openweathermap.org/img/w/11d.png">
+				<img src="http://openweathermap.org/img/w/11n.png">
+			</div>
+			<div class="icon">
+				<p>雪</p>
+				<img src="http://openweathermap.org/img/w/13d.png">
+				<img src="http://openweathermap.org/img/w/13n.png">
+			</div>
+			<div class="icon">
+				<p>霧</p>
+				<img src="http://openweathermap.org/img/w/50d.png">
+				<img src="http://openweathermap.org/img/w/50n.png">
+			</div>
+		</div>
+	</div>
 </body>
 
 </html>
