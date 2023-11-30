@@ -59,17 +59,19 @@
         <div align="center">
              <input type="submit"  name="send" value="完了">
         </div>
+        </form>
         
         <div align="center">
-<!--         	<form th:href="@{/calendar/henshu/sakujo/{id}(id=${id})}"  method="post">-->
-<!--						 class属性にtbl-btnを追加 -->
-<!--                        <input class="tbl-btn" type="submit" value="削除">-->
-<!--             </form>-->
-			<a th:href="@{/calendar/henshu/sakujo/{id}(id=${id})}" class="tbl-btn" onclick="return confirm('本当に削除しますか？')">削除</a>
-<!--             th:href   action-->
+         	<form th:action="@{/calendar/delete/{id}(id=${id})}" th:object="${eventForm}" method="get">
+					<input type="submit" value="削除" class="tbl-btn"></input>
+				 
+                    
+            </form>
+				
+			
          </div>
         
-    </form>
+    
     <div align="center">
 			<form th:action="@{/calendar}" method="get">
     			<input type="submit" value="戻る">
