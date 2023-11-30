@@ -4,24 +4,33 @@
 <meta charset="UTF-8">
 <link rel="stylesheet"  href="/css/event.css" >
 <title></title>
+
 </head>
 <body>
 	
  <!-- 見出しが変わります -->
-    <h1 align="center">イベント編集</h1>
+    <h1>イベント編集</h1>
     <!-- 登録処理のHTTPメソッドはPOSTにします -->
     <form th:action="@{/calendar/henshu/{id}(id=${id})}" th:object="${eventForm}" method="post">
         <div>
-            <label align="center">イベント名</label>
+            <h2>イベント名</h2>
         </div>
         <div>
             <!-- 商品名はtextにします、th:field属性の値は*{フィールド名}です -->
             <input type="text" th:field="*{name}" placeholder="イベント名を入力してください">
         </div>
         
-        <div>
-            <input type="radio" th:field="*{categoryId}" name="categoryId" value="1" align="center" th:checked="${eventForm.categoryId == 1}">室内
-        	<input type="radio" th:field="*{categoryId}"  name="categoryId" value="2" align="center" th:checked="${eventForm.categoryId == 2}">屋外
+        <div align="center">
+			<label>
+            <input type="radio" th:field="*{categoryId}" name="categoryId" value="1" align="center" 
+            th:checked="${eventForm.categoryId == 1}">室内
+            </label>
+            
+            <label>
+        	<input type="radio" th:field="*{categoryId}"  name="categoryId" value="2" align="center"
+        	 th:checked="${eventForm.categoryId == 2}">屋外
+        	 </label>
+       
         </div>
         
 <!--         <div>-->
@@ -46,19 +55,27 @@
        		 </div>
 		</div>
 		
-       
-        <div>
-             <input type="submit"  align="center" name="send" value="完了">
+      <div style="display: flex; justify-content: center;">
+        <div align="center">
+             <input type="submit"  name="send" value="完了">
         </div>
         
-         	<form th:action="@{/calendar/henshu/sakujo/{id}(id=${id})}"  method="post">
+        <div align="center">
+<!--         	<form th:href="@{/calendar/henshu/sakujo/{id}(id=${id})}"  method="post">-->
 <!--						 class属性にtbl-btnを追加 -->
-                        <input class="tbl-btn" type="submit" value="削除">
-             </form>
-        <div>
-            <!-- 一覧に戻る -->
-            <a href="/calendar"  class="btn-style-link"  align="center">戻る</a>
-        </div>
+<!--                        <input class="tbl-btn" type="submit" value="削除">-->
+<!--             </form>-->
+			<a th:href="@{/calendar/henshu/sakujo/{id}(id=${id})}" class="tbl-btn" onclick="return confirm('本当に削除しますか？')">削除</a>
+<!--             th:href   action-->
+         </div>
+        
     </form>
+    <div align="center">
+			<form th:action="@{/calendar}" method="get">
+    			<input type="submit" value="戻る">
+			</form>
+			
+        </div>
+      </div>
 </body>
 </html>

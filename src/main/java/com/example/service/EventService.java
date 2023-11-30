@@ -59,7 +59,7 @@ public class EventService {
 		return event;
 	}
 
-	// データ更新用のメソッドですgin
+	// データ更新用のメソッドです
 	public Event update(Integer id, EventForm eventForm, LoginUser loginUser) {
 
 		// データ１件分のEntityクラスを取得します
@@ -69,27 +69,24 @@ public class EventService {
 		Category category = categoryRepository.findById(eventForm.getCategoryId())
 				.orElseThrow(() -> new RuntimeException("Category not found"));
 		event.setCategory(category);
+		
+		event.setName(eventForm.getName());
+		event.setUserId(loginUser.getId()); // loginUser.getId()を使用
+		event.setStartevent(eventForm.getStartevent()); // getStartdatetimeから変更(稲本)
+		event.setEndevent(eventForm.getEndevent()); 
 
 		// repository.saveメソッドを利用してデータの保存を行います
 		return this.eventRepository.save(event);
 	}
+	
 
-	//	public void delete(Integer id, EventForm eventForm) {
-	//		this.eventRepository.deleteById(id);
-	//		
-	//		
-	//	}
-	public void delete(Integer id) {
-		this.eventRepository.deleteById(id);
-	}
+	// データ削除用のメソッドです
+    public void deleteEventById(Integer eventid) {
+        eventRepository.deleteById(eventid);
+    }
 
-	//	 public Event delete(Integer id) {
-	//    // idから該当のEntityクラスを取得します
-	//    //Event event = this.findById(id);
-	//    // EntityクラスのdeletedAtフィールドを現在日時で上書きします
-	//    event.setDeletedAt(LocalDateTime.now());
-	//    // 更新処理
-	//    return this.eventRepository.save(event);
-	//}
+	
+	
 
+	
 }
