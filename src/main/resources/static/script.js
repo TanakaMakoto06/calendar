@@ -1,3 +1,4 @@
+
 //	 カレンダー要素や各種ボタン、セレクトボックスなどの取得
 const calendarEl = document.getElementById('calendar');
 const prevMonthBtn = document.getElementById('prevMonth');
@@ -149,6 +150,7 @@ function generateCalendar(date, data) {
 		// 日付と天気アイコンを表示するセルを生成し、土曜日や日曜日の場合は 'weekend' クラスを追加
 		calendarHtml += `<td class="${dayOfWeek === 0 || dayOfWeek === 6 ? 'weekend' : ''}${new Date().getDate() ===
 			i && new Date().getMonth() === date.getMonth() && new Date().getFullYear() === date.getFullYear() ? ' today' : ''}">
+
 <span>${i}</span><div class="weather-icon"><img src="http://openweathermap.org/img/w/${weatherIcon}.png"></div>${eventTitle ? `<div class="event" onclick="goToEventDetailPage(event, '${eventTitle}')">${eventTitle}</div>`
 				: ''}</td>`; // 修正：イベントタイトルをセルに追加
 
@@ -313,15 +315,10 @@ fetch(`/calendar/eventsForDay?year=${currentDate.getFullYear()}&month=${currentD
 	.catch(error => console.error('Error:', error));
 
 // イベント詳細ページへの遷移
-function goToEventDetailPage(event, title) {
-	// ブラウザのデフォルトのクリックイベントの動作をキャンセル
-	event.preventDefault();
-	// イベントの伝播を停止
-	event.stopPropagation();
+function goToEventDetailPage(title) {
 	// ここにイベント詳細ページへの遷移処理を記述
-	// イベントタイトルをクエリパラメータとして追加
-	window.location.href = 'eventsyousai?title=' + title;
 }
+
 
 
 // ログアウトボタンのクリックイベント
