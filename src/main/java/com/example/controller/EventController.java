@@ -76,6 +76,7 @@ public class EventController {
 	     eventForm.setStartevent(event.getStartevent());
 	     eventForm.setEndevent(event.getEndevent());
 		 model.addAttribute("eventForm", eventForm);
+		 model.addAttribute("id", id);
 		// 処理を追加
 		return "hensyuPage";
 	}
@@ -83,7 +84,7 @@ public class EventController {
 	
 
 	// イベント編集の実行
-	@PostMapping("henshu/{id}")
+	@PostMapping("hensyu/{id}")
 	public String henshu(@PathVariable("id") Integer id,@AuthenticationPrincipal LoginUser loginUser,
 				EventForm eventForm) {
 		// 処理を追加
@@ -111,10 +112,10 @@ public class EventController {
 
 
 	// イベント削除の実行
-	@PostMapping("/calendar/henshu/sakujo/{id}")
-	public String sakujo(@PathVariable("id") Integer id) {
-		eventService.deleteEventById(id);
-		
+	@GetMapping("/delete/{id}")
+	public String delete(@PathVariable("id") Integer id) {
+		this.eventService.delete(id);
+		System.out.print(id);
 		// 削除後のリダイレクト
 		return "redirect:/calendar";
 	}

@@ -38,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.logout()
 		.logoutUrl("/logout")
 		.logoutSuccessUrl("/loginForm");
-		
+		http.csrf().disable(); // CSRFチェック無効化
 	}
 	
 	@Bean
