@@ -19,8 +19,48 @@ let events = [];
 
 // サーバーから最新のイベントリストを取得してevents配列を更新する関数
 function updateEvents() {
-	// サーバーにGETリクエストを送信
-	return fetch(`/calendar/eventsForDay?year=${currentDate.getFullYear()}&month=${currentDate.getMonth() + 1}&day=${currentDate.getDate()}`)
+    // サーバーにGETリクエストを送信
+    return fetch(`/calendar/eventsForDay?year=${currentDate.getFullYear()}&month=${currentDate.getMonth() + 1}&day=${currentDate.getDate()}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            // データの確認
+            console.log(data);
+            // レスポンスが配列であることを確認
+            if (Array.isArray(data)) {
+                // events配列を更新
+                events = data.map(event => ({
+                    ...event,
+                    date: new Date(event.startevent)  // starteventフィールドをDateオブジェクトに変換
+                }));
+            } else {
+                console.error('Error: data is not an array');
+            }
+            // events配列の確認
+            console.log(events);
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+
+// カレンダーの更新
+updateEvents().then(() => {
+	generateCalendar(currentDate);
+}).catch(error => console.error('Error:', error));
+
+// 緯度と経度(東京の天気)
+const lat = '35.6895';
+const lon = '139.6917';
+
+function fetchWeather(lat, lon) {
+	const apiKey = '0ba98d8fb694bf4346615212f28699d1';
+	const url = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+
+	return fetch(url)
 		.then(response => {
 			if (!response.ok) {
 				throw new Error(`HTTP error! status: ${response.status}`);
@@ -28,45 +68,13 @@ function updateEvents() {
 			return response.json();
 		})
 		.then(data => {
-			// データの確認
-			console.log(data);
-			// レスポンスが配列であることを確認
-			if (Array.isArray(data)) {
-				// events配列を更新
-				events = data.map(event => ({
-					...event,
-					date: new Date(event.startevent)  // starteventフィールドをDateオブジェクトに変換
-				}));
-			} else {
-				console.error('Error: data is not an array');
-			}
-			// events配列の確認
-			console.log(events);  // この行を追加
+			console.log(data);  // APIからのレスポンスをコンソールに出力
+			return data;
 		})
-		.catch(error => console.error('Error:', error));
+		.catch(error => {
+			console.error('Error:', error);
+		});
 }
-
-function fetchWeather(lat, lon) {
-    const apiKey = '0ba98d8fb694bf4346615212f28699d1';
-    const url = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
-
-    return fetch(url)
-        .then(response => response.json())
-        .catch(error => {
-            console.error('Error:', error);
-        });
-}
-
-// 緯度と経度(東京の天気)
-const lat = '35.6895';
-const lon = '139.6917';
-
-// APIリクエストを送信
-fetchWeather(lat, lon)
-    .then(data => {
-        // レスポンスを処理し、カレンダーを生成
-        generateCalendar(currentDate, data);
-    });
 
 function addCellClickEventListeners() {
 	// カレンダーの各セルにクリックイベントリスナーを追加
@@ -133,26 +141,26 @@ function generateCalendar(date, data) {
 		}
 
 		// イベントデータをチェック
-		let eventTitle = '';
-		events.forEach(event => {
-			// イベントデータの確認
-			console.log(event);  // この行を追加
-			// 日付の一致確認
-			console.log(event.date.getFullYear(), event.date.getMonth(), event.date.getDate(), i);  // この行を追加
-			if (event.date.getFullYear() === date.getFullYear() &&
-				event.date.getMonth() === date.getMonth() &&
-				event.date.getDate() === i) {
-				// イベントタイトルを取得
-				eventTitle = event.title;
-			}
-		});
+		// その日のイベントを取得
+		let dailyEvents = events.filter(event =>
+			event.date.getFullYear() === date.getFullYear() &&
+			event.date.getMonth() === date.getMonth() &&
+			event.date.getDate() === i
+		);
 
 		// 日付と天気アイコンを表示するセルを生成し、土曜日や日曜日の場合は 'weekend' クラスを追加
 		calendarHtml += `<td class="${dayOfWeek === 0 || dayOfWeek === 6 ? 'weekend' : ''}${new Date().getDate() ===
 			i && new Date().getMonth() === date.getMonth() && new Date().getFullYear() === date.getFullYear() ? ' today' : ''}">
+<span>${i}</span><div class="weather-icon"><img src="http://openweathermap.org/img/w/${weatherIcon}.png"></div>`;
 
-<span>${i}</span><div class="weather-icon"><img src="http://openweathermap.org/img/w/${weatherIcon}.png"></div>${eventTitle ? `<div class="event" onclick="goToEventDetailPage(event, '${eventTitle}')">${eventTitle}</div>`
-				: ''}</td>`; // 修正：イベントタイトルをセルに追加
+		// その日の各イベントのタイトルをセルに追加
+		dailyEvents.forEach(event => {
+			calendarHtml += `<div class="event" onclick="goToEventDetailPage(event, '${event.name}')">${event.name}</div>`;
+		});
+
+		calendarHtml += `</td>`; // 修正：イベントタイトルをセルに追加
+
+
 
 		// 土曜日または月の最後の日の場合、行を終了
 		if (dayOfWeek === 6 || i === daysInMonth) {
@@ -173,34 +181,34 @@ function generateCalendar(date, data) {
 	}
 
 	// カレンダーの各セルに非同期処理を追加
-	document.querySelectorAll('#calendar td').forEach(function(cell) {
+	document.querySelectorAll('#calendar td').forEach(async function(cell) {
 		// セルの日付を取得
 		const day = cell.querySelector('span').textContent;
 		// 年と月も取得
 		const year = currentDate.getFullYear();
 		const month = currentDate.getMonth() + 1; // JavaScriptの月は0から始まるため、1を足す
 
-		// サーバーからイベントデータを非同期に取得
-		fetch(`/calendarApp/${year}/${month}/${day}`)
-			.then(response => {
-				// レスポンスが正常でない場合はエラーをスロー
-				if (!response.ok) {
-					throw new Error(`HTTP error! status: ${response.status}`);
-				}
-				return response.json();
-			})
-			.then(data => {
-				// イベントデータを元にセルを更新
-				if (Array.isArray(data)) {
-					data.forEach(event => {
-						cell.insertAdjacentHTML('beforeend', `<div>${event.title}</div>`);
-					});
-				} else {
-					console.error('Error: data is not an array');
-				}
-			})
-			.catch(error => console.error('Error:', error));
+		try {
+			// サーバーからイベントデータを非同期に取得
+			const response = await fetch(`/calendarApp/${year}/${month}/${day}`);
+			if (!response.ok) {
+				throw new Error(`HTTP error! status: ${response.status}`);
+			}
+			const data = await response.json();
+
+			// イベントデータを元にセルを更新
+			if (Array.isArray(data)) {
+				data.forEach(event => {
+					cell.insertAdjacentHTML('beforeend', `<div>${event.name}</div>`);
+				});
+			} else {
+				console.error('Error: data is not an array');
+			}
+		} catch (error) {
+			console.error('Error:', error);
+		}
 	});
+
 
 	// カレンダーのHTML構造を完了させる
 	calendarHtml += '</tbody></table>';
@@ -210,33 +218,37 @@ function generateCalendar(date, data) {
 	addCellClickEventListeners();
 
 	// イベント情報をカレンダーに追加
-	events.forEach(event => {
-		if (event.date.getFullYear() === date.getFullYear() && event.date.getMonth() === date.getMonth() && event.date.getDate() === date.getDate()) {
-			const dayCell = calendarEl.querySelector(`td`);
-			dayCell.innerHTML += `<div>${event.title}</div>`;
-		}
-	});
+	//	events.forEach(event => {
+	//		if (event.date.getFullYear() === date.getFullYear() && event.date.getMonth() === date.getMonth()) {
+	//			const dayCell = calendarEl.querySelector(`td:nth-child(${event.date.getDate() + 1})`); // 修正：日付に対応するセルを選択
+	//			if (dayCell) {
+	//				dayCell.innerHTML += `<div>${event.name}</div>`;
+	//			}
+	//		}
+	//	});
 }
 
 
+//	app.post('/calendar/toroku', function(req, res) {
+//		// 新規イベントのデータを取得
+//		var newEvent = req.body.eventForm;
+//
+//		// 新規イベントのデータをevents配列に追加
+//		events.push(newEvent);
+//
+//		// レスポンスを送信
+//		res.send('Event added successfully');
+//	});
+
 // 前月ボタンのクリックイベント
 prevMonthBtn.addEventListener('click', () => {
-	//	app.post('/calendar/toroku', function(req, res) {
-	//		// 新規イベントのデータを取得
-	//		var newEvent = req.body.eventForm;
-	//
-	//		// 新規イベントのデータをevents配列に追加
-	//		events.push(newEvent);
-	//
-	//		// レスポンスを送信
-	//		res.send('Event added successfully');
-	//	});
 	currentDate.setMonth(currentDate.getMonth() - 1);
 	fetchWeather(lat, lon).then(data => {
 		generateCalendar(currentDate, data);
 	});
 });
 
+// とりあえずここまで確認
 
 // 次月ボタンのクリックイベント
 nextMonthBtn.addEventListener('click', () => {
@@ -297,6 +309,45 @@ searchBtn.addEventListener('click', function() {
 		});
 });
 
+// 新規イベント登録の実行
+function toroku(eventForm) {
+	fetch('/calendar/toroku', {
+		method: 'POST',
+		body: JSON.stringify(eventForm),
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	})
+		.then(response => {
+			if (!response.ok) {
+				throw new Error(`HTTP error! status: ${response.status}`);
+			}
+			return response.text();
+		})
+		.then(message => {
+			console.log(message);  // レスポンスメッセージをコンソールに出力
+
+			// イベントが追加された後にカレンダーを更新
+			return updateEvents();
+		})
+		.then(() => {
+			return fetchWeather(lat, lon);
+		})
+		.then(data => {
+			// カレンダーを生成
+			generateCalendar(currentDate, data);
+
+			// 修正：新しいイベントを自動的に表示
+			events.forEach(event => {
+				const dayCell = calendarEl.querySelector(`td:nth-child(${event.date.getDate() + 1})`);
+				if (dayCell) {
+					dayCell.innerHTML += `<div>${event.name}</div>`;
+				}
+			});
+		})
+		.catch(error => console.error('Error:', error));
+}
+
 
 // 日表示カレンダーのイベントデータを取得
 fetch(`/calendar/eventsForDay?year=${currentDate.getFullYear()}&month=${currentDate.getMonth() + 1}&day=${currentDate.getDate()}`)
@@ -306,10 +357,13 @@ fetch(`/calendar/eventsForDay?year=${currentDate.getFullYear()}&month=${currentD
 		data.forEach(event => {
 			// イベントの日付を取得
 			const eventDate = new Date(event.date);
-			// カレンダーの対応するセルを取得
-			const dayCell = calendarEl.querySelector(`td span:contains(${eventDate.getDate()})`).parentElement;
-			// セルにイベントタイトルを追加
-			dayCell.innerHTML += `<div class="event" onclick="goToEventDetailPage(event, '${event.title}')">${event.title}</div>`;
+			// 日付が有効であることを確認
+			if (!isNaN(eventDate.getDate())) {
+				// カレンダーの対応するセルを取得
+				const dayCell = calendarEl.querySelector(`td span:contains(${eventDate.getDate()})`).parentElement;
+				// セルにイベントタイトルを追加
+				dayCell.innerHTML += `<div class="event" onclick="goToEventDetailPage(event, '${event.name}')">${event.name}</div>`;
+			}
 		});
 	})
 	.catch(error => console.error('Error:', error));
@@ -369,6 +423,10 @@ monthSelect.addEventListener('change', () => {
 });
 
 // 初期表示のカレンダー生成
-updateEvents().then(() => {
-	generateCalendar(currentDate);
+fetchWeather(lat, lon).then(data => {
+	updateEvents().then(() => {
+		console.log(events);  // この行を追加
+		generateCalendar(currentDate, data);
+		console.log(events);  // この行を追加
+	});
 });
