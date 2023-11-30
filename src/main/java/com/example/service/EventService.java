@@ -81,8 +81,8 @@ public class EventService {
 	
 
 	// データ削除用のメソッドです
-    public void deleteEventById(Integer eventid) {
-        eventRepository.deleteById(eventid);
+    public void deleteEventById(Integer id) {
+        eventRepository.deleteById(id);
     }
 
 	
