@@ -6,26 +6,26 @@ document.addEventListener('DOMContentLoaded', function() {
 	// 戻るボタンのクリックイベントを追加
 	const backButton = document.querySelector('.back-button');
 	// スクロール時のイベントを追加
-    window.addEventListener('scroll', function() {
-        const distanceFromTop = scheduleContainer.getBoundingClientRect().top;
-        const buttonPosition = distanceFromTop + 20; // ボタンが表示されるトリガーポイントの距離
+	window.addEventListener('scroll', function() {
+		const distanceFromTop = scheduleContainer.getBoundingClientRect().top;
+		const buttonPosition = distanceFromTop + 20; // ボタンが表示されるトリガーポイントの距離
 
-        if (window.scrollY > buttonPosition) {
-            backButton.style.position = 'fixed';
-            backButton.style.top = '20px';
-            backButton.style.right = '20px';
-        } else {
-            backButton.style.position = 'absolute';
-            backButton.style.top = '20px';
-            backButton.style.right = '20px';
-        }
-    });
+		if (window.scrollY > buttonPosition) {
+			backButton.style.position = 'fixed';
+			backButton.style.top = '20px';
+			backButton.style.right = '20px';
+		} else {
+			backButton.style.position = 'absolute';
+			backButton.style.top = '20px';
+			backButton.style.right = '20px';
+		}
+	});
 	backButton.addEventListener('click', function() {
 		// ここにカレンダー一覧画面への遷移処理を記述
 		// 遷移先のURLを設定し、window.location.href を使用して遷移させる
 		window.location.href = '/calendar';
 	});
-	
+
 
 	// サンプルのイベントデータ（仮定）
 	const eventData = [
@@ -91,6 +91,15 @@ document.addEventListener('DOMContentLoaded', function() {
 			scheduleContainer.appendChild(hourBlock);
 		}
 	}
+
+	// ログアウトボタンのクリックイベント
+	logoutBtn.addEventListener('click', () => {
+		// ログアウト処理をここに記述
+		// ここでログアウト処理を行う
+		// 例えば、セッションストレージをクリアしてログインページにリダイレクトする
+		sessionStorage.clear();
+		window.location.href = "loginForm";
+	});
 
 	// タイトルと日付を表示する関数
 	function displayTitleAndDate(date) {
