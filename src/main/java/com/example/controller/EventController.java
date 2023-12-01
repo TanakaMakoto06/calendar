@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -114,15 +113,6 @@ public class EventController {
 
 
 	// イベント削除の実行
-<<<<<<< HEAD
-	@GetMapping("/delete/{id}")
-	public String delete(@PathVariable("id") Integer id) {
-		this.eventService.delete(id);
-		System.out.print(id);
-		// 削除後のリダイレクト
-		return "redirect:/calendar";
-	}
-=======
 		@GetMapping("/delete/{id}")
 		public String delete(@PathVariable("id") Integer id) {
 			this.eventService.delete(id);
@@ -131,7 +121,6 @@ public class EventController {
 			return "redirect:/calendar";
 		}
 		
->>>>>>> development
 	
 	//    検索機能の実装
 	@GetMapping("/searchEvent")

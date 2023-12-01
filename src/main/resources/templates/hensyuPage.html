@@ -56,55 +56,26 @@
 				<input type="datetime-local" th:field="*{endevent}" name="endTime">
 			</div>
 		</div>
-<<<<<<< HEAD
 
-		<div style="display: flex; justify-content: center;">
+		<div class="button" style="display: flex; justify-content: center;">
 			<div align="center">
-				<input type="submit" name="send" value="完了">
+				<input type="submit" class="complete-button" name="send" value="完了">
+			</div>
+
+			<div align="center">
+				<form th:action="@{/calendar}" method="get">
+					<input type="submit" value="戻る" class="back-button">
+				</form>
 			</div>
 
 			<div align="center">
 				<form th:action="@{/calendar/delete/{id}(id=${id})}" th:object="${eventForm}" method="get">
 					<input type="submit" value="削除" class="tbl-btn"></input>
 				</form>
-
 			</div>
 
-	</form>
-	<div align="center">
-		<form th:action="@{/calendar}" method="get">
-			<input type="submit" value="戻る">
-		</form>
-
-	</div>
-	</div>
-=======
-		
-      <div style="display: flex; justify-content: center;">
-        <div align="center">
-             <input type="submit"  name="send" value="完了">
-        </div>
-        </form>
-        
-        <div align="center">
-         	<form th:action="@{/calendar/delete/{id}(id=${id})}" th:object="${eventForm}" method="get">
-					<input type="submit" value="削除" class="tbl-btn"></input>
-				 
-                    
-            </form>
-				
-			
-         </div>
-        
-    
-    <div align="center">
-			<form th:action="@{/calendar}" method="get">
-    			<input type="submit" value="戻る">
-			</form>
-			
-        </div>
-      </div>
->>>>>>> development
+		</div>
+		</div>
 </body>
 
 </html>

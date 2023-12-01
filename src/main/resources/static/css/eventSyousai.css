@@ -12,7 +12,6 @@ h2{
 }
 
 form {
-    width: 50%;
      margin:auto;
     
 }
@@ -55,42 +54,66 @@ input[type="radio"] {
 	
 }
 
-/* ボタンのスタイル */
-input[type="submit"] {
-    background-color: #4CAF50;
-    color: white;
+.button {
+	display: flex;
+	justify-content: center;	
+}
+
+/* イベント編集ボタン */
+.edit-button {
+    width: 200px;
+    margin-right: 10px;
     cursor: pointer;
-    margin: auto;
-    display: block;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 17px 25px;
+    font-size: 16px;
+    border-radius: 4px;
+    margin-left: 10px;
 }
 
-input[type="submit"]:hover {
-    background-color: #45a049;
-    margin: auto;
-}
-
-/* リンクのスタイル */
-.btn-style-link {
-    color: #007bff;
-    text-decoration: none;
-    cursor: pointer;
-    margin: auto;
-    display: block;
-}
-
+/* 戻るボタン */
 .back-button {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background-color: #007bff;
-      color: #fff;
-      border: none;
-      padding: 8px 16px;
-      font-size: 16px;
-      cursor: pointer;
-      border-radius: 4px;
-    }
-
-.btn-style-link:hover {
-    text-decoration: underline;
+    width: 80px;
+    margin-right: 10px;
+    height: 58px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    font-size: 16px;
+    border-radius: 4px;
 }
+
+/* 削除ボタン */
+.tbl-btn {
+    /* ここに削除ボタンのスタイルを追加します */
+    width: 80px;
+    margin-right: 10px;
+    height: 58px;
+    cursor: pointer;
+    background-color: rgb(255, 0, 0);
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    font-size: 16px;
+    border-radius: 4px;
+}
+
+.edit-button:hover {
+	background-color: #1f68b7;
+}
+
+.back-button:hover {
+	background-color: #1f68b7;
+}
+
+/* 削除ボタンホバー時*/
+.tbl-btn:hover {
+    background-color: rgb(227, 28, 87);
+}
+
+
+
