@@ -113,6 +113,23 @@ function generateCalendar(date, data) {
 	// 月の最初の日の曜日を取得
 	const firstDayOfWeek = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
 
+	// 天気予報データを日付ごとに整理
+	let weatherDataByDate = {};
+	if (data && data.list) {
+		data.list.forEach(item => {
+			const forecastDate = new Date(item.dt_txt);
+			forecastDate.setTime(forecastDate.getTime() + (9 * 60 * 60 * 1000)); // UTCをJSTに変換
+			const today = new Date();
+			today.setHours(0, 0, 0, 0);
+			if (forecastDate >= today && forecastDate < new Date(today.getFullYear(), today.getMonth(), today.getDate() + 5)) {
+				const dateKey = `${forecastDate.getFullYear()}-${forecastDate.getMonth()}-${forecastDate.getDate()}`;
+				if (!weatherDataByDate[dateKey] || (forecastDate.getHours() >= 9 && forecastDate.getHours() <= 15)) {
+					weatherDataByDate[dateKey] = item.weather[0].icon;
+				}
+			}
+		});
+	}
+
 	// 各日付をカレンダーに挿入
 	for (let i = 1; i <= daysInMonth; i++) {
 		// その日の曜日を取得
@@ -120,12 +137,7 @@ function generateCalendar(date, data) {
 
 
 		// その日の天気情報を取得
-		let weatherIcon = '';
-		if (data && data.list && data.list[i] && data.list[i].weather && data.list[i].weather[0]) {
-			weatherIcon = data.list[i].weather[0].icon;
-		} else {
-			weatherIcon = ''; // デフォルトのアイコンを設定します。
-		}
+		let weatherIcon = weatherDataByDate[`${date.getFullYear()}-${date.getMonth()}-${i}`] || ''; // 修正しました！！！
 
 		// 月の最初の日の場合、新しい行を開始
 		if (i === 1) {
@@ -147,14 +159,22 @@ function generateCalendar(date, data) {
 		// 日付と天気アイコンを表示するセルを生成し、土曜日や日曜日の場合は 'weekend' クラスを追加
 		calendarHtml += `<td class="${dayOfWeek === 0 || dayOfWeek === 6 ? 'weekend' : ''}${new Date().getDate() ===
 			i && new Date().getMonth() === date.getMonth() && new Date().getFullYear() === date.getFullYear() ? ' today' : ''}">
-<span>${i}</span><div class="weather-icon"><img src="http://openweathermap.org/img/w/${weatherIcon}.png"></div>`;
+<span>${i}</span>`;
+		// 現在の日付から5日後までのみ天気アイコンを表示
+		const today = new Date();
+		today.setHours(0, 0, 0, 0); // 修正しました！！！
+		if (new Date(date.getFullYear(), date.getMonth(), i) >= today && new Date(date.getFullYear(), date.getMonth(), i) < new Date(today.getFullYear(), today.getMonth(), today.getDate() + 5)) {
+			if (weatherIcon !== '') { // 修正しました！！！
+				calendarHtml += `<div class="weather-icon"><img src="http://openweathermap.org/img/w/${weatherIcon}.png"></div>`;
+			}
+		}
 
 		// その日の各イベントのタイトルをセルに追加
 		dailyEvents.forEach(event => {
 			calendarHtml += `<div class="event" onclick="goToEventDetailPage(event, '${event.id}')">${event.name}</div>`;
 		});
 
-		calendarHtml += `</td>`; // 修正：イベントタイトルをセルに追加
+		calendarHtml += `</td>`; //イベントタイトルをセルに追加
 
 
 
@@ -248,7 +268,6 @@ nextMonthBtn.addEventListener('click', () => {
 });
 
 // 検索ボタンのクリックイベント
-// 検索ボタンのクリックイベントをハンドルする
 searchBtn.addEventListener('click', function() {
 	// 検索バーの値を取得
 	const name = searchBar.value;
@@ -277,16 +296,31 @@ searchBtn.addEventListener('click', function() {
 
 			// 各イベントのタイトルと詳細ページへのリンクを追加
 			events.forEach(event => {
-				const link = document.createElement('a');
-				link.href = '/calendar/eventsyousai' + event.id;  // イベントの詳細ページへのリンク
-				link.textContent = event.name;  // イベントのタイトル
-				popup.appendChild(link);
+				const eventContainer = document.createElement('div');
+				eventContainer.style.textAlign = 'center';  // 中央揃えに設定
+				eventContainer.style.border = '1px solid black';  // 黒い枠線を追加
+				eventContainer.style.borderRadius = '5px';  // 枠線の角を丸くする
+				eventContainer.style.marginBottom = '10px';  // 下マージンを追加
+				eventContainer.style.padding = '30px';  //余白を追加
+				eventContainer.style.margin = '10px';  // マージンを追加
+
+				const title = document.createElement('p');
+				title.textContent = event.name;  // イベントのタイトル
+				eventContainer.appendChild(title);
 
 				// 詳細ページへのリンクを作成
 				const detailLink = document.createElement('a');
-				detailLink.href = '/calendar/eventsyousai' + event.id;  // イベントの詳細ページへのリンク
+				detailLink.href = '/calendar/syousaiPage/' + event.id;  // イベントの詳細ページへのリンク
 				detailLink.textContent = '詳細ページへ';  // リンクのテキスト
-				popup.appendChild(detailLink);
+				detailLink.style.display = 'inline-block';  // ブロック要素に設定
+				detailLink.style.backgroundColor = '#4169e1';  // ボタンの色を設定
+				detailLink.style.color = 'black';  // 文字色を設定
+				detailLink.style.padding = '10px';  // パディングを追加
+				detailLink.style.borderRadius = '5px';  // ボタンの角を丸くする
+				detailLink.style.textDecoration = 'none';  // テキストの下線を削除
+				eventContainer.appendChild(detailLink);
+
+				popup.appendChild(eventContainer);
 			});
 			console.log(popup);  // ここでポップアップをコンソールに出力
 
