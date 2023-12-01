@@ -154,7 +154,7 @@ function generateCalendar(date, data) {
 			calendarHtml += `<div class="event" onclick="goToEventDetailPage(event, '${event.id}')">${event.name}</div>`;
 		});
 
-		calendarHtml += `</td>`; // 修正：イベントタイトルをセルに追加
+		calendarHtml += `</td>`; //イベントタイトルをセルに追加
 
 
 
@@ -248,7 +248,6 @@ nextMonthBtn.addEventListener('click', () => {
 });
 
 // 検索ボタンのクリックイベント
-// 検索ボタンのクリックイベントをハンドルする
 searchBtn.addEventListener('click', function() {
 	// 検索バーの値を取得
 	const name = searchBar.value;
@@ -277,16 +276,31 @@ searchBtn.addEventListener('click', function() {
 
 			// 各イベントのタイトルと詳細ページへのリンクを追加
 			events.forEach(event => {
-				const link = document.createElement('a');
-				link.href = '/calendar/eventsyousai' + event.id;  // イベントの詳細ページへのリンク
-				link.textContent = event.name;  // イベントのタイトル
-				popup.appendChild(link);
+				const eventContainer = document.createElement('div');
+				eventContainer.style.textAlign = 'center';  // 中央揃えに設定
+				eventContainer.style.border = '1px solid black';  // 黒い枠線を追加
+				eventContainer.style.borderRadius = '5px';  // 枠線の角を丸くする
+				eventContainer.style.marginBottom = '10px';  // 下マージンを追加
+				eventContainer.style.padding = '30px';  //余白を追加
+				eventContainer.style.margin = '10px';  // マージンを追加
+
+				const title = document.createElement('p');
+				title.textContent = event.name;  // イベントのタイトル
+				eventContainer.appendChild(title);
 
 				// 詳細ページへのリンクを作成
 				const detailLink = document.createElement('a');
-				detailLink.href = '/calendar/eventsyousai' + event.id;  // イベントの詳細ページへのリンク
+				detailLink.href = '/calendar/syousaiPage/' + event.id;  // イベントの詳細ページへのリンク
 				detailLink.textContent = '詳細ページへ';  // リンクのテキスト
-				popup.appendChild(detailLink);
+				detailLink.style.display = 'inline-block';  // ブロック要素に設定
+				detailLink.style.backgroundColor = '#4169e1';  // ボタンの色を設定
+				detailLink.style.color = 'black';  // 文字色を設定
+				detailLink.style.padding = '10px';  // パディングを追加
+				detailLink.style.borderRadius = '5px';  // ボタンの角を丸くする
+				detailLink.style.textDecoration = 'none';  // テキストの下線を削除
+				eventContainer.appendChild(detailLink);
+
+				popup.appendChild(eventContainer);
 			});
 			console.log(popup);  // ここでポップアップをコンソールに出力
 
