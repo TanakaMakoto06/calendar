@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 
 import com.example.entity.Event;
 
-public interface EventRepository extends JpaRepository<Event, Long> {
+public interface EventRepository extends JpaRepository<Event, Integer> {
 
 
 	// 稲本記述追加
@@ -23,6 +23,10 @@ public interface EventRepository extends JpaRepository<Event, Long> {
 
 	Optional<Event> findById(Integer id);
 
-	void deleteById(Integer id);
+	
+	
+	
+	
+	
 
 }

@@ -12,6 +12,8 @@ public class EventForm {
 	 private String name;
 	 
 	 private Integer userid;
+	 
+	 private Integer eventid;
 	
 	 
 	 @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
@@ -72,6 +74,14 @@ public class EventForm {
 	    public void  setEndevent(LocalDateTime endevent) {
 	         this.endevent = endevent;
 	    }
+	    
+	    public Integer getEventId() {
+	        return this.eventid;
+	 }
+	    
+	    public void setEventId(Integer eventid) {
+	        this.eventid = eventid;
+	 }
 		
 		
 }
