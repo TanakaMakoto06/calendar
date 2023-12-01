@@ -8,14 +8,31 @@
     /* ヘッダーのスタイル */
 		#header {
 			display: flex;
-			justify-content: center;
+			justify-content: space-around;
 			/* 要素を中央に寄せる */
-			gap: 10px;
+			gap: 5px;
 			/* 要素間のスペースを設定 */
 			align-items: center;
 			padding: 10px;
 			background-color: #f3f3f3;
 			width: 100vw;
+		}
+		
+		/* ログアウトボタンのスタイル */
+		#logoutBtn {
+			background-color: #800000;
+			/* 背景色を水色に設定 */
+			color: white;
+			/* 文字色を白に設定 */
+			z-index: 1;
+			/* z-indexを設定してテキストを前面に出す */
+			border-radius: 10px;
+			/* 角に丸みを持たせる */
+		}
+		
+		#header .group {
+			display: flex;
+			gap: 5px;
 		}
     
     #schedule {
@@ -63,7 +80,7 @@
       margin-bottom: 20px;
     }
     .back-button {
-      position: fixed; 
+      position: absolute;
       top: 20px;
       right: 20px;
       background-color: #007bff;
@@ -74,21 +91,3 @@
       cursor: pointer;
       border-radius: 4px;
     }
-    
-    /* 宮宇地追加分 */
-	.fixed {
-      position: sticky; /* sticky に変更 */
-      top: 0;
-	}
-	
-	/* ログアウトボタンのスタイル */
-		#logoutBtn {
-			background-color: #800000;
-			/* 背景色を水色に設定 */
-			color: white;
-			/* 文字色を白に設定 */
-			z-index: 1;
-			/* z-indexを設定してテキストを前面に出す */
-			border-radius: 10px;
-			/* 角に丸みを持たせる */
-		}
