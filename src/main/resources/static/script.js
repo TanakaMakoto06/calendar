@@ -28,8 +28,6 @@ function updateEvents() {
 			return response.json();
 		})
 		.then(data => {
-			// データの確認
-			console.log(data);
 			// レスポンスが配列であることを確認
 			if (Array.isArray(data)) {
 				// events配列を更新
@@ -40,8 +38,6 @@ function updateEvents() {
 			} else {
 				console.error('Error: data is not an array');
 			}
-			// events配列の確認
-			console.log(events);
 		})
 		.catch(error => console.error('Error:', error));
 }
@@ -231,29 +227,7 @@ function generateCalendar(date, data) {
 
 	// カレンダーの各セルにクリックイベントリスナーを追加
 	addCellClickEventListeners();
-
-	// イベント情報をカレンダーに追加
-	//	events.forEach(event => {
-	//		if (event.date.getFullYear() === date.getFullYear() && event.date.getMonth() === date.getMonth()) {
-	//			const dayCell = calendarEl.querySelector(`td:nth-child(${event.date.getDate() + 1})`); // 修正：日付に対応するセルを選択
-	//			if (dayCell) {
-	//				dayCell.innerHTML += `<div>${event.name}</div>`;
-	//			}
-	//		}
-	//	});
 }
-
-
-//	app.post('/calendar/toroku', function(req, res) {
-//		// 新規イベントのデータを取得
-//		var newEvent = req.body.eventForm;
-//
-//		// 新規イベントのデータをevents配列に追加
-//		events.push(newEvent);
-//
-//		// レスポンスを送信
-//		res.send('Event added successfully');
-//	});
 
 // 前月ボタンのクリックイベント
 prevMonthBtn.addEventListener('click', () => {
@@ -441,8 +415,6 @@ monthSelect.addEventListener('change', () => {
 // 初期表示のカレンダー生成
 fetchWeather(lat, lon).then(data => {
 	updateEvents().then(() => {
-		console.log(events);  // この行を追加
 		generateCalendar(currentDate, data);
-		console.log(events);  // この行を追加
 	});
 });
