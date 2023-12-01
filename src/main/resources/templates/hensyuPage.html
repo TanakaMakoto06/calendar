@@ -1,83 +1,81 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<link rel="stylesheet"  href="/css/event.css" >
-<title></title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="/css/event.css">
+	<title></title>
 
 </head>
+
 <body>
-	
- <!-- 見出しが変わります -->
-    <h1>イベント編集</h1>
-    <!-- 登録処理のHTTPメソッドはPOSTにします -->
-    <form th:action="@{/calendar/henshu/{id}(id=${id})}" th:object="${eventForm}" method="post">
-        <div>
-            <h2>イベント名</h2>
-        </div>
-        <div>
-            <!-- 商品名はtextにします、th:field属性の値は*{フィールド名}です -->
-            <input type="text" th:field="*{name}" placeholder="イベント名を入力してください">
-        </div>
-        
-        <div align="center">
-			<label>
-            <input type="radio" th:field="*{categoryId}" name="categoryId" value="1" align="center" 
-            th:checked="${eventForm.categoryId == 1}">室内
-            </label>
-            
-            <label>
-        	<input type="radio" th:field="*{categoryId}"  name="categoryId" value="2" align="center"
-        	 th:checked="${eventForm.categoryId == 2}">屋外
-        	 </label>
-       
-        </div>
-        
-<!--         <div>-->
-<!--			<select name="ラベル">-->
-<!--    			<option value="work">仕事</option>-->
-<!--    			<option value="travel">旅行</option>-->
-<!--    			<option value="recreation">遊び</option>-->
-<!--    			<option value="Private">プライベート</option>-->
-<!--			</select>-->
-<!--		</div>-->
-		
+
+	<!-- 見出しが変わります -->
+	<h1>イベント編集</h1>
+	<!-- 登録処理のHTTPメソッドはPOSTにします -->
+	<form th:action="@{/calendar/hensyu/{id}(id=${id})}" th:object="${eventForm}" method="post">
 		<div>
-			 <div align="center">
-    			<h2>開始</h2>
-    			<input type="datetime-local"  th:field="*{startevent}" name="startTime">
+			<h2>イベント名</h2>
+		</div>
+		<div>
+			<!-- 商品名はtextにします、th:field属性の値は*{フィールド名}です -->
+			<input type="text" th:field="*{name}" placeholder="イベント名を入力してください">
+		</div>
+
+		<div align="center">
+			<label>
+				<input type="radio" th:field="*{categoryId}" name="categoryId" value="1" align="center"
+					th:checked="${eventForm.categoryId == 1}">室内
+			</label>
+
+			<label>
+				<input type="radio" th:field="*{categoryId}" name="categoryId" value="2" align="center"
+					th:checked="${eventForm.categoryId == 2}">屋外
+			</label>
+
+		</div>
+
+		<!--         <div>-->
+		<!--			<select name="ラベル">-->
+		<!--    			<option value="work">仕事</option>-->
+		<!--    			<option value="travel">旅行</option>-->
+		<!--    			<option value="recreation">遊び</option>-->
+		<!--    			<option value="Private">プライベート</option>-->
+		<!--			</select>-->
+		<!--		</div>-->
+
+		<div>
+			<div align="center">
+				<h2>開始</h2>
+				<input type="datetime-local" th:field="*{startevent}" name="startTime">
 			</div>
 		</div>
 		<div>
-			 <div align="center">
-          		 <h2>終了</h2>
-           		 <input type="datetime-local"  th:field="*{endevent}"  name="endTime">
-       		 </div>
+			<div align="center">
+				<h2>終了</h2>
+				<input type="datetime-local" th:field="*{endevent}" name="endTime">
+			</div>
 		</div>
-		
-      <div style="display: flex; justify-content: center;">
-        <div align="center">
-             <input type="submit"  name="send" value="完了">
-        </div>
-        </form>
-        
-        <div align="center">
-         	<form th:action="@{/calendar/delete/{id}(id=${id})}" th:object="${eventForm}" method="get">
+
+		<div class="button" style="display: flex; justify-content: center;">
+			<div align="center">
+				<input type="submit" class="complete-button" name="send" value="完了">
+			</div>
+
+			<div align="center">
+				<form th:action="@{/calendar}" method="get">
+					<input type="submit" value="戻る" class="back-button">
+				</form>
+			</div>
+
+			<div align="center">
+				<form th:action="@{/calendar/delete/{id}(id=${id})}" th:object="${eventForm}" method="get">
 					<input type="submit" value="削除" class="tbl-btn"></input>
-				 
-                    
-            </form>
-				
-			
-         </div>
-        
-    
-    <div align="center">
-			<form th:action="@{/calendar}" method="get">
-    			<input type="submit" value="戻る">
-			</form>
-			
-        </div>
-      </div>
+				</form>
+			</div>
+
+		</div>
+		</div>
 </body>
+
 </html>

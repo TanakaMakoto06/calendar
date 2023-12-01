@@ -38,20 +38,24 @@
 			<span th:text="${#temporals.format(eventForm.endevent, 'yyyy年MM月dd日 HH:mm')}" align="center"></span>
 		</div>
 	</div>
-	<div>
-	<a th:href="@{/calendar/hensyuPage/{id}(id=${id})}">
-			<button id="addEventBtn">イベント編集</button>
-		</a>
+	<div class="button">
+		<div>
+			<form th:action="@{/calendar/hensyuPage/{id}(id=${id})}" method="get">
+				<input type="submit" value="イベント編集" class="edit-button">
+			</form>
 
-	</div>
-	<div>
-		<!-- 削除ボタン -->
-		<input class="tbl-btn" type="submit" value="削除">
-	</div>
-
-	<div>
-		<!-- 一覧に戻る -->
-		<a href="/calendar" class="btn-style-link">戻る</a>
+		</div>
+		<div>
+			<!-- 一覧に戻る -->
+			<form th:action="@{/calendar}" method="get">
+				<input type="submit" value="戻る" class="back-button">
+			</form>
+		</div>
+		<div align="center">
+			<form th:action="@{/calendar/delete/{id}(id=${id})}" th:object="${eventForm}" method="get">
+				<input type="submit" value="削除" class="tbl-btn"></input>
+			</form>
+		</div>
 	</div>
 </body>
 

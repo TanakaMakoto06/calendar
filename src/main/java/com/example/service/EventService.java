@@ -3,11 +3,9 @@ package com.example.service;
 import java.util.List;
 import java.util.Optional;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.entity.Category; // 追加
 import com.example.entity.Event;
@@ -17,6 +15,7 @@ import com.example.repository.CategoryRepository;
 import com.example.repository.EventRepository;
 
 @Service
+@Transactional
 public class EventService {
 
 	private final EventRepository eventRepository;
@@ -84,9 +83,7 @@ public class EventService {
 	
 
 	// データ削除用のメソッドです
-	
-
-	public void delete(Integer id) {
+		public void delete(Integer id) {
 		this.eventRepository.deleteById(id);
 	}
 	

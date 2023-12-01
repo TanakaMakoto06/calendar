@@ -15,7 +15,6 @@ h2{
 }
 
 form {
-    width: 50%;
     margin:auto;
     
 }
@@ -61,22 +60,76 @@ input[type="radio"] {
 }
 
 /* ボタンのスタイル */
-input[type="submit"] {
-    display:inline;
+.add-button {
+	width: 120px;
+    margin-right: 10px; /* 右側に10pxの余白を追加 */
     cursor: pointer;
     background-color: #007bff;
     color: #fff;
     border: none;
     padding: 17px 25px;
     font-size: 16px;
-    cursor: pointer;
     border-radius: 4px;
     margin-left: 10px;
 }
 
-input[type="submit"]:hover {
-    background-color: cadetblue;
+.complete-button {
+    width: 80px;
+    margin-right: 10px; /* 右側に10pxの余白を追加 */
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 17px 25px;
+    font-size: 16px;
+    border-radius: 4px;
+    margin-left: 10px;
 }
+
+.back-button {
+    width: 80px;
+    height: 58px;
+    margin-right: 10px; /* 右側に10pxの余白を追加 */
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    font-size: 16px;
+    border-radius: 4px;
+}
+
+.tbl-btn {
+    /* ここに削除ボタンのスタイルを追加します */
+    width: 80px;
+    height: 58px;
+    margin-right: 10px; /* 右側に10pxの余白を追加 */
+    cursor: pointer;
+    background-color: rgb(255, 0, 0);
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    font-size: 16px;
+    border-radius: 4px;
+}
+
+.add-button:hover {
+	background-color: #1f68b7;
+}
+
+.complete-button:hover {
+	background-color: #1f68b7;
+}
+
+.back-button:hover {
+	background-color: #1f68b7;
+}
+
+/* 削除ボタンホバー時*/
+.tbl-btn:hover {
+    background-color: rgb(227, 28, 87);
+}
+
 
 
 

@@ -83,6 +83,7 @@ public class EventController {
 	     eventForm.setStartevent(event.getStartevent());
 	     eventForm.setEndevent(event.getEndevent());
 		 model.addAttribute("eventForm", eventForm);
+		 model.addAttribute("id", id);
 		// 処理を追加
 		return "hensyuPage";
 	}
@@ -90,7 +91,7 @@ public class EventController {
 	
 
 	// イベント編集の実行
-	@PostMapping("henshu/{id}")
+	@PostMapping("hensyu/{id}")
 	public String henshu(@PathVariable("id") Integer id,@AuthenticationPrincipal LoginUser loginUser,
 				EventForm eventForm) {
 		// 処理を追加
