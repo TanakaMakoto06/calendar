@@ -113,6 +113,23 @@ function generateCalendar(date, data) {
 	// 月の最初の日の曜日を取得
 	const firstDayOfWeek = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
 
+	// 天気予報データを日付ごとに整理
+	let weatherDataByDate = {};
+	if (data && data.list) {
+		data.list.forEach(item => {
+			const forecastDate = new Date(item.dt_txt);
+			forecastDate.setTime(forecastDate.getTime() + (9 * 60 * 60 * 1000)); // UTCをJSTに変換
+			const today = new Date();
+			today.setHours(0, 0, 0, 0);
+			if (forecastDate >= today && forecastDate < new Date(today.getFullYear(), today.getMonth(), today.getDate() + 5)) {
+				const dateKey = `${forecastDate.getFullYear()}-${forecastDate.getMonth()}-${forecastDate.getDate()}`;
+				if (!weatherDataByDate[dateKey] || (forecastDate.getHours() >= 9 && forecastDate.getHours() <= 15)) {
+					weatherDataByDate[dateKey] = item.weather[0].icon;
+				}
+			}
+		});
+	}
+
 	// 各日付をカレンダーに挿入
 	for (let i = 1; i <= daysInMonth; i++) {
 		// その日の曜日を取得
@@ -120,12 +137,7 @@ function generateCalendar(date, data) {
 
 
 		// その日の天気情報を取得
-		let weatherIcon = '';
-		if (data && data.list && data.list[i] && data.list[i].weather && data.list[i].weather[0]) {
-			weatherIcon = data.list[i].weather[0].icon;
-		} else {
-			weatherIcon = ''; // デフォルトのアイコンを設定します。
-		}
+		let weatherIcon = weatherDataByDate[`${date.getFullYear()}-${date.getMonth()}-${i}`] || ''; // 修正しました！！！
 
 		// 月の最初の日の場合、新しい行を開始
 		if (i === 1) {
@@ -147,7 +159,15 @@ function generateCalendar(date, data) {
 		// 日付と天気アイコンを表示するセルを生成し、土曜日や日曜日の場合は 'weekend' クラスを追加
 		calendarHtml += `<td class="${dayOfWeek === 0 || dayOfWeek === 6 ? 'weekend' : ''}${new Date().getDate() ===
 			i && new Date().getMonth() === date.getMonth() && new Date().getFullYear() === date.getFullYear() ? ' today' : ''}">
-<span>${i}</span><div class="weather-icon"><img src="http://openweathermap.org/img/w/${weatherIcon}.png"></div>`;
+<span>${i}</span>`;
+		// 現在の日付から5日後までのみ天気アイコンを表示
+		const today = new Date();
+		today.setHours(0, 0, 0, 0); // 修正しました！！！
+		if (new Date(date.getFullYear(), date.getMonth(), i) >= today && new Date(date.getFullYear(), date.getMonth(), i) < new Date(today.getFullYear(), today.getMonth(), today.getDate() + 5)) {
+			if (weatherIcon !== '') { // 修正しました！！！
+				calendarHtml += `<div class="weather-icon"><img src="http://openweathermap.org/img/w/${weatherIcon}.png"></div>`;
+			}
+		}
 
 		// その日の各イベントのタイトルをセルに追加
 		dailyEvents.forEach(event => {
