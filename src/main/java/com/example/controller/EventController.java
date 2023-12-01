@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +23,7 @@ import com.example.repository.EventRepository;
 import com.example.service.CategoryService;
 import com.example.service.EventService;
 import com.example.service.LoginUser;
+
 
 @Controller
 @RequestMapping("/calendar")
@@ -111,13 +113,14 @@ public class EventController {
 
 
 	// イベント削除の実行
-	@PostMapping("/calendar/henshu/sakujo/{id}")
-	public String sakujo(@PathVariable("id") Integer id) {
-		eventService.deleteEventById(id);
+		@GetMapping("/delete/{id}")
+		public String delete(@PathVariable("id") Integer id) {
+			this.eventService.delete(id);
+			System.out.print(id);
+			// 削除後のリダイレクト
+			return "redirect:/calendar";
+		}
 		
-		// 削除後のリダイレクト
-		return "redirect:/calendar";
-	}
 	
 	//    検索機能の実装
 	@GetMapping("/searchEvent")
