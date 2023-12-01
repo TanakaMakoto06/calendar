@@ -1,0 +1,96 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h1 {
+    color: #333;
+}
+h2{
+	 margin:auto;
+	 display: block;
+}
+
+form {
+    width: 50%;
+     margin:auto;
+    
+}
+
+div {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type = "text"] {
+	margin: auto;
+	display: block;
+}
+
+input,
+select {
+    width: 50%;
+    padding: 8px;
+    box-sizing: border-box;
+    margin: auto;
+    display: block;
+    
+    
+}
+
+input[type="datetime-local"] {
+	margin: auto;
+    display: block;
+	
+}
+
+input[type="radio"] {
+	display:inline-block
+	
+}
+
+/* ボタンのスタイル */
+input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    margin: auto;
+    display: block;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+    margin: auto;
+}
+
+/* リンクのスタイル */
+.btn-style-link {
+    color: #007bff;
+    text-decoration: none;
+    cursor: pointer;
+    margin: auto;
+    display: block;
+}
+
+.back-button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+.btn-style-link:hover {
+    text-decoration: underline;
+}

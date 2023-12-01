@@ -5,44 +5,48 @@ body {
 
 h1 {
     color: #333;
+    text-align: center;
 }
+
 h2{
 	 margin:auto;
 	 display: block;
+	 text-align: center;
 }
 
 form {
     width: 50%;
-     margin:auto;
+    margin:auto;
     
 }
 
 div {
     margin-bottom: 15px;
-    
+
 }
 
-label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
+div label {
+  display: inline-block;
+  margin-right: 3px;/* ラベル間の余白を調整する場合、必要に応じて設定 */
 }
+
+/*input[type="text"],*/
+/*input[type="datetime-local"],*/
+/*input[type="radio"],*/
+/*input[type="submit"] {*/
+/*    display: inline-block;*/
+/*    margin: 30px auto;*/
+   
+/*}*/
+
 
 input[type = "text"] {
 	margin: auto;
 	display: block;
+	width: 200px;
 }
 
-input,
-select {
-    width: 50%;
-    padding: 8px;
-    box-sizing: border-box;
-    margin: auto;
-    display: block;
-    
-    
-}
+
 
 input[type="datetime-local"] {
 	margin: auto;
@@ -51,33 +55,30 @@ input[type="datetime-local"] {
 }
 
 input[type="radio"] {
-	display:inline-block
+	display: inline-block;
+    margin: auto;
 	
 }
 
 /* ボタンのスタイル */
 input[type="submit"] {
-    background-color: #4CAF50;
-    color: white;
+    display:inline;
     cursor: pointer;
-    margin: auto;
-    display: block;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 17px 25px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-left: 10px;
 }
 
 input[type="submit"]:hover {
-    background-color: #45a049;
-    margin: auto;
+    background-color: cadetblue;
 }
 
-/* リンクのスタイル */
-.btn-style-link {
-    color: #007bff;
-    text-decoration: none;
-    cursor: pointer;
-    margin: auto;
-    display: block;
-}
 
-.btn-style-link:hover {
-    text-decoration: underline;
-}
+
+
+

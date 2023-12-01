@@ -13,11 +13,15 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "CATEGORIES")
 public class Category {
 
-    @Id
+    public static Object DUMMY_CATEGORY_ID;
+
+	@Id
     @SequenceGenerator(name = "CATEGORY_ID_GENERATOR", sequenceName = "CATEGORY_ID_SEQ", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CATEGORY_ID_GENERATOR")
     @Column(name = "ID")
@@ -45,6 +49,7 @@ public class Category {
     
     
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference  // 追加
     private List<Event> events;
 
     public List<Event> getEvents() {

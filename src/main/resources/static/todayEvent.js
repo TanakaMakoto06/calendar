@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', function() {
 	const scheduleContainer = document.getElementById('schedule');
 	const currentDateElement = document.getElementById('currentDate');
