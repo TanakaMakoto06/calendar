@@ -1,0 +1,119 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h1 {
+    color: #333;
+}
+h2{
+	 margin:auto;
+	 display: block;
+}
+
+form {
+     margin:auto;
+    
+}
+
+div {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type = "text"] {
+	margin: auto;
+	display: block;
+}
+
+input,
+select {
+    width: 50%;
+    padding: 8px;
+    box-sizing: border-box;
+    margin: auto;
+    display: block;
+    
+    
+}
+
+input[type="datetime-local"] {
+	margin: auto;
+    display: block;
+	
+}
+
+input[type="radio"] {
+	display:inline-block
+	
+}
+
+.button {
+	display: flex;
+	justify-content: center;	
+}
+
+/* イベント編集ボタン */
+.edit-button {
+    width: 200px;
+    margin-right: 10px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 17px 25px;
+    font-size: 16px;
+    border-radius: 4px;
+    margin-left: 10px;
+}
+
+/* 戻るボタン */
+.back-button {
+    width: 80px;
+    margin-right: 10px;
+    height: 58px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    font-size: 16px;
+    border-radius: 4px;
+}
+
+/* 削除ボタン */
+.tbl-btn {
+    /* ここに削除ボタンのスタイルを追加します */
+    width: 80px;
+    margin-right: 10px;
+    height: 58px;
+    cursor: pointer;
+    background-color: rgb(255, 0, 0);
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    font-size: 16px;
+    border-radius: 4px;
+}
+
+.edit-button:hover {
+	background-color: #1f68b7;
+}
+
+.back-button:hover {
+	background-color: #1f68b7;
+}
+
+/* 削除ボタンホバー時*/
+.tbl-btn:hover {
+    background-color: rgb(227, 28, 87);
+}
+
+
+

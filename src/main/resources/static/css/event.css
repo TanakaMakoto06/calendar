@@ -1,0 +1,137 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h1 {
+    color: #333;
+    text-align: center;
+}
+
+h2{
+	 margin:auto;
+	 display: block;
+	 text-align: center;
+}
+
+form {
+    margin:auto;
+    
+}
+
+div {
+    margin-bottom: 15px;
+
+}
+
+div label {
+  display: inline-block;
+  margin-right: 3px;/* ラベル間の余白を調整する場合、必要に応じて設定 */
+}
+
+/*input[type="text"],*/
+/*input[type="datetime-local"],*/
+/*input[type="radio"],*/
+/*input[type="submit"] {*/
+/*    display: inline-block;*/
+/*    margin: 30px auto;*/
+   
+/*}*/
+
+
+input[type = "text"] {
+	margin: auto;
+	display: block;
+	width: 200px;
+}
+
+
+
+input[type="datetime-local"] {
+	margin: auto;
+    display: block;
+	
+}
+
+input[type="radio"] {
+	display: inline-block;
+    margin: auto;
+	
+}
+
+/* ボタンのスタイル */
+.add-button {
+	width: 120px;
+    margin-right: 10px; /* 右側に10pxの余白を追加 */
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 17px 25px;
+    font-size: 16px;
+    border-radius: 4px;
+    margin-left: 10px;
+}
+
+.complete-button {
+    width: 80px;
+    margin-right: 10px; /* 右側に10pxの余白を追加 */
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 17px 25px;
+    font-size: 16px;
+    border-radius: 4px;
+    margin-left: 10px;
+}
+
+.back-button {
+    width: 80px;
+    height: 58px;
+    margin-right: 10px; /* 右側に10pxの余白を追加 */
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    font-size: 16px;
+    border-radius: 4px;
+}
+
+.tbl-btn {
+    /* ここに削除ボタンのスタイルを追加します */
+    width: 80px;
+    height: 58px;
+    margin-right: 10px; /* 右側に10pxの余白を追加 */
+    cursor: pointer;
+    background-color: rgb(255, 0, 0);
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    font-size: 16px;
+    border-radius: 4px;
+}
+
+.add-button:hover {
+	background-color: #1f68b7;
+}
+
+.complete-button:hover {
+	background-color: #1f68b7;
+}
+
+.back-button:hover {
+	background-color: #1f68b7;
+}
+
+/* 削除ボタンホバー時*/
+.tbl-btn:hover {
+    background-color: rgb(227, 28, 87);
+}
+
+
+
+
+
+
