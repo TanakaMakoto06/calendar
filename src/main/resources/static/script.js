@@ -19,31 +19,27 @@ let events = [];
 
 // サーバーから最新のイベントリストを取得してevents配列を更新する関数
 function updateEvents() {
-    // サーバーにGETリクエストを送信
-    return fetch(`/calendar/eventsForDay?year=${currentDate.getFullYear()}&month=${currentDate.getMonth() + 1}&day=${currentDate.getDate()}`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            // データの確認
-            console.log(data);
-            // レスポンスが配列であることを確認
-            if (Array.isArray(data)) {
-                // events配列を更新
-                events = data.map(event => ({
-                    ...event,
-                    date: new Date(event.startevent)  // starteventフィールドをDateオブジェクトに変換
-                }));
-            } else {
-                console.error('Error: data is not an array');
-            }
-            // events配列の確認
-            console.log(events);
-        })
-        .catch(error => console.error('Error:', error));
+	// サーバーにGETリクエストを送信
+	return fetch(`/calendar/eventsForDay?year=${currentDate.getFullYear()}&month=${currentDate.getMonth() + 1}&day=${currentDate.getDate()}`)
+		.then(response => {
+			if (!response.ok) {
+				throw new Error(`HTTP error! status: ${response.status}`);
+			}
+			return response.json();
+		})
+		.then(data => {
+			// レスポンスが配列であることを確認
+			if (Array.isArray(data)) {
+				// events配列を更新
+				events = data.map(event => ({
+					...event,
+					date: new Date(event.startevent)  // starteventフィールドをDateオブジェクトに変換
+				}));
+			} else {
+				console.error('Error: data is not an array');
+			}
+		})
+		.catch(error => console.error('Error:', error));
 }
 
 
@@ -155,7 +151,7 @@ function generateCalendar(date, data) {
 
 		// その日の各イベントのタイトルをセルに追加
 		dailyEvents.forEach(event => {
-			calendarHtml += `<div class="event" onclick="goToEventDetailPage(event, '${event.name}')">${event.name}</div>`;
+			calendarHtml += `<div class="event" onclick="goToEventDetailPage(event, '${event.id}')">${event.name}</div>`;
 		});
 
 		calendarHtml += `</td>`; // 修正：イベントタイトルをセルに追加
@@ -208,6 +204,21 @@ function generateCalendar(date, data) {
 			console.error('Error:', error);
 		}
 	});
+	// 石川さん編集
+	document.querySelectorAll('#calendar td').forEach(async function(cell) {
+		const day = cell.querySelector('span').textContent;
+		const tmp = new Date(currentDate.getFullYear, currentDate.getMonth, day, 0, 0, 0, 0);
+		let otherEvents = events.filter(event =>
+			event.date.getFullYear() === tmp.getFullYear() &&
+			event.date.getMonth() === tmp.getMonth() &&
+			event.date.getDate() === i
+		);
+		otherEvents.forEach(o_event => {
+			calendarHtml += `<div class="event" onclick="goToEventDetailPage(event, '${o_event.id}')">${o_event.name}</div>`;
+		});
+
+		calendarHtml += `</td>`; // 修正：イベントタイトルをセルに追加
+	});
 
 
 	// カレンダーのHTML構造を完了させる
@@ -216,29 +227,7 @@ function generateCalendar(date, data) {
 
 	// カレンダーの各セルにクリックイベントリスナーを追加
 	addCellClickEventListeners();
-
-	// イベント情報をカレンダーに追加
-	//	events.forEach(event => {
-	//		if (event.date.getFullYear() === date.getFullYear() && event.date.getMonth() === date.getMonth()) {
-	//			const dayCell = calendarEl.querySelector(`td:nth-child(${event.date.getDate() + 1})`); // 修正：日付に対応するセルを選択
-	//			if (dayCell) {
-	//				dayCell.innerHTML += `<div>${event.name}</div>`;
-	//			}
-	//		}
-	//	});
 }
-
-
-//	app.post('/calendar/toroku', function(req, res) {
-//		// 新規イベントのデータを取得
-//		var newEvent = req.body.eventForm;
-//
-//		// 新規イベントのデータをevents配列に追加
-//		events.push(newEvent);
-//
-//		// レスポンスを送信
-//		res.send('Event added successfully');
-//	});
 
 // 前月ボタンのクリックイベント
 prevMonthBtn.addEventListener('click', () => {
@@ -369,10 +358,11 @@ fetch(`/calendar/eventsForDay?year=${currentDate.getFullYear()}&month=${currentD
 	.catch(error => console.error('Error:', error));
 
 // イベント詳細ページへの遷移
-function goToEventDetailPage(title) {
-	// ここにイベント詳細ページへの遷移処理を記述
+function goToEventDetailPage(event, id) {
+	// イベントのIDをURLに追加
+	window.location.href = '/calendar/syousaiPage/' + id;
+	event.stopPropagation();
 }
-
 
 
 // ログアウトボタンのクリックイベント
@@ -425,8 +415,6 @@ monthSelect.addEventListener('change', () => {
 // 初期表示のカレンダー生成
 fetchWeather(lat, lon).then(data => {
 	updateEvents().then(() => {
-		console.log(events);  // この行を追加
 		generateCalendar(currentDate, data);
-		console.log(events);  // この行を追加
 	});
 });
